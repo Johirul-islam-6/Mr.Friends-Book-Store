@@ -1,0 +1,14 @@
+.footer-bg {
+  border-radius: 16px;
+  background: #0a0a0a;
+}
+
+.footer-logo-bg {
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1c1c1c;
+}
+
+.rounded-blur {
+  filter: blur(140px) !important;
+}

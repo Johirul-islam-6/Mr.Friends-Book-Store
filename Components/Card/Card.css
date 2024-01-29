@@ -1,0 +1,35 @@
+input#number {
+  text-align: center;
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+}
+
+@media (min-width: 765px) {
+  .smDelete-Item {
+    display: none !important;
+  }
+}
+@media (max-width: 765px) {
+  .card-item-list {
+    width: 100% !important;
+  }
+  .total-book-calculation {
+    width: 100%;
+  }
+  input#number {
+    font-size: 12px !important;
+    width: 40px;
+    height: 28px;
+  }
+  .Item-price {
+    width: 100%;
+    padding-top: 5px;
+  }
+  .card-item-delete {
+    display: none !important;
+  }
+}

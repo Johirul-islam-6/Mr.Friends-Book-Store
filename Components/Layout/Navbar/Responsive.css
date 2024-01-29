@@ -1,0 +1,107 @@
+@media (min-width: 901px) {
+  .search-bar {
+    display: flex !important;
+    justify-content: center !important;
+  }
+  .search-bar-container {
+    width: 465px !important;
+  }
+
+  .Last-navbar-containt {
+    display: flex !important;
+  }
+  .sm-last-navbar {
+    display: none !important;
+  }
+  .Menubar {
+    display: none !important;
+  }
+  .profile-image {
+    display: none !important;
+  }
+  .sm-top-discount-text {
+    display: none !important;
+  }
+}
+
+/* ------- 900px down ---- */
+@media (max-width: 900px) {
+  .top-hidden-div {
+    display: none !important;
+  }
+  .search-bar {
+    display: none !important;
+  }
+
+  .Last-navbar-containt {
+    display: none !important;
+  }
+  .sm-last-navbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100%;
+    padding-bottom: 5px !important;
+  }
+  .singIN {
+    display: none !important;
+  }
+  .profile-container {
+    width: 100%;
+  }
+  .sm-top-discount-text {
+    display: none !important;
+  }
+  .sm-hidden-link {
+    display: none !important;
+  }
+}
+
+@media (max-width: 750px) {
+  .top-discount-text {
+    display: none !important;
+  }
+  .sm-top-discount-text {
+    display: block !important;
+    font-size: 12px !important;
+    color: #363636;
+    line-height: 20px;
+    font-weight: 600;
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+}
+/* ----- only search bar responsive ----- */
+
+@media (max-width: 370px) {
+  .sm-top-discount-text {
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 250px) {
+  .bangladesh-flag {
+    display: none !important;
+  }
+}
+
+/* ---- responsive last navbar ---- */
+
+@media (min-width: 900px) and (max-width: 1370px) {
+  .last-navbar-box {
+  }
+
+  .last-nav-link-hidden {
+    display: none !important;
+  }
+  .last-nav-otheres-link-show {
+    display: inline-block !important;
+  }
+}
+@media (min-width: 900px) and (max-width: 960px) {
+  .color-a-tag {
+    color: #363636;
+    line-height: 22px;
+    font-size: 14px !important;
+    font-weight: 600;
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+}

@@ -1,0 +1,6 @@
+.search-fixed {
+  position: fixed;
+  top: 35px;
+  z-index: 100;
+  /* width: 100%; */
+}

@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,300&family=Inter:wght@500&family=Lato:ital@0;1&family=Playfair+Display:wght@500&family=Raleway:wght@100;300;600&family=Roboto:ital,wght@0,300;0,400;1,100&family=Space+Grotesk:wght@700&display=swap");
+
+.diploma-engineer {
+  background-color: #ffffff;
+  height: auto;
+
+  width: 100%;
+}
+.search-fixed {
+  position: fixed;
+  top: 35px;
+  z-index: 100;
+  /* width: 100%; */
+}
+
+.activeBorder {
+  border: 2px solid #573ba2;
+}
+
+.slick-prev,
+.slick-next {
+  background-color: #573ba2 !important;
+  width: 35px !important;
+  height: 45px !important;
+  z-index: 100;
+  /* border-radius: 50%; */
+}
+
+.slick-next {
+  right: 0px !important;
+  border-radius: 20% 0% 0% 20%;
+}
+.slick-prev {
+  left: 0px !important;
+  border-radius: 0% 20% 20% 0%;
+}
+.slick-dots {
+  display: none !important;
+}
+/* ======================== diploma section semester rounded div ================= */
+
+.diploma-semester-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 17px;
+  color: #232323;
+  font-weight: 500;
+  transition: all 1 ease;
+}
+.semester-table :hover .diploma-semester-text {
+  color: #573ba2;
+  font-weight: 600;
+}

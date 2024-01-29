@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,300&family=Inter:wght@500&family=Raleway:wght@100;300;600&family=Roboto:ital,wght@0,300;0,400;1,100&display=swap");
+
+.navbar {
+  background-color: #ffffff;
+}
+
+.fixed {
+  position: fixed !important;
+  top: 0px;
+  z-index: 1000;
+  transition: all 1s ease-in-out;
+  width: 100%;
+}
+.top-discount-text {
+  color: #363636;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.hover-menu {
+  --b: 0.2em;
+  /* the thickness of the line */
+  --c: #009bd6;
+  /* the color */
+
+  color: #0000;
+  padding-block: var(--b);
+  background: linear-gradient(var(--c) 50%, #ffffff 0) 0%
+      calc(100% - var(--_p, 0%)) / 100% 200%,
+    linear-gradient(var(--c) 0 0) 0% var(--_p, 0%) / var(--_p, 0%) var(--b)
+      no-repeat;
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  transition: 0.3s var(--_s, 0s) linear,
+    background-size 0.3s calc(0.3s - var(--_s, 0s));
+}
+
+.hover-menu:hover {
+  --_p: 100%;
+  --_s: 0.3s;
+}
+.color-a-tag {
+  color: #363636;
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.color-a-tag:hover {
+  color: #009bd6 !important;
+}
+.search-input-text {
+  color: #363636;
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.title-department {
+  font-size: 11px !important;
+}
+
+/* ---- dropdown box ----- */
+.dropdown-box {
+  background-color: #fff !important;
+}
