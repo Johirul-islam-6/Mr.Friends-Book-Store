@@ -148,7 +148,7 @@ export const Navbar = () => {
                           <li class="">
                             <Link
                               class="rounded-t  py-2 px-4 block whitespace-no-wrap  color-a-tag text-start"
-                              href=""
+                              href="/diploma/CST"
                             >
                               Computer Technology
                             </Link>
@@ -157,7 +157,7 @@ export const Navbar = () => {
                           <li class="">
                             <Link
                               class="rounded-t  py-2 px-4 block whitespace-no-wrap  color-a-tag text-start"
-                              href=""
+                              href="/diploma/MT"
                             >
                               Mechanical Technology
                             </Link>
@@ -166,7 +166,7 @@ export const Navbar = () => {
                           <li class="">
                             <Link
                               class="rounded-t  py-2 px-4 block whitespace-no-wrap  color-a-tag text-start"
-                              href=""
+                              href="/diploma/ETT"
                             >
                               Electronics Technology
                             </Link>
@@ -175,7 +175,7 @@ export const Navbar = () => {
                           <li class="">
                             <Link
                               class="rounded-t  py-2 ps-3 block whitespace-no-wrap  color-a-tag text-start"
-                              href=""
+                              href="/diploma/EMT"
                             >
                               Electromedical Technology
                             </Link>
@@ -184,7 +184,7 @@ export const Navbar = () => {
                           <li class="">
                             <Link
                               class="rounded-t  py-2 px-4 block whitespace-no-wrap  color-a-tag text-start"
-                              href=""
+                              href="/diploma/PT"
                             >
                               Power Technology
                             </Link>
