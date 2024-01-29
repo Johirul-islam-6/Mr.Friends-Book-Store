@@ -1,18 +1,15 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import img01 from "../../../app/Assets/Product/Diploma/1st/one.webp";
 import "./SingelBookDetail.css";
-import {
-  FaRegCheckCircle,
-  FaShoppingBag,
-  FaStar,
-  FaStarHalfAlt,
-} from "react-icons/fa";
-import { ReviewField } from "../Review/ReviewField";
-import Link from "next/link";
+import { FaRegCheckCircle } from "react-icons/fa";
+
 import { SellerProfile } from "@/Components/SellerProfile/SellerProfile";
 
 export const SingelBookInf = () => {
+  const [showUserProfile, setOpenProfile] = useState(false);
+
   return (
     <>
       <div>
@@ -27,7 +24,7 @@ export const SingelBookInf = () => {
             />
           </div>
 
-          <div className="content-details w-[100%]">
+          <div className="content-details w-[100%] relative">
             <h1 className="DetailsBook-heading GT text-[30px] md:text-[40px] font-[400]  text-[#2c293b]">
               ফিজিক্স-১
             </h1>
@@ -60,13 +57,33 @@ export const SingelBookInf = () => {
               </p>
             </div>
             {/* ----------- if you are show sellar profile ------ */}
-            <button className="mt-10 py-5 px-10 bg-[#563A9F] text-white rounded-sm">
+            <button
+              onClick={() => setOpenProfile(true)}
+              className="mt-10 py-5 px-10 bg-[#563A9F] text-white rounded-sm"
+            >
               বিক্রেতার প্রোফাইল দেখতে চাই
             </button>
-
-            <div className="d">
-              <SellerProfile />
-            </div>
+            {showUserProfile && (
+              <>
+                <div className="w-[100%] py-10 bg-[#000001e4] absolute top-0 rounded-lg">
+                  <SellerProfile />
+                  <div className="flex justify-center gap-5 items-center mt-2">
+                    <button
+                      className="bg-[#bc1f1fb4] hover:bg-red-700 rounded-md p-3 px-5 text-white flex gap-[2px] items-center"
+                      onClick={() => setOpenProfile(false)}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="bg-[#138c59ec] hover:bg-red-700 rounded-md p-3 px-5 text-white flex gap-[2px] items-center"
+                      onClick={() => setOpenProfile(false)}
+                    >
+                      Message
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
