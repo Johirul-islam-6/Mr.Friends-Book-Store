@@ -1,7 +1,7 @@
 "use client";
 
-import { AllBookList } from "@/Components/Department/AllBookList";
-import { DepartmentBanner } from "@/Components/Department/Department";
+import { AllBookList } from "@/Components/DiplomaINengineer/AllBookList";
+import { DepartmentBanner } from "@/Components/DiplomaINengineer/Department";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
 

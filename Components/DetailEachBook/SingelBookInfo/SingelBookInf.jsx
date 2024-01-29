@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { ReviewField } from "../Review/ReviewField";
 import Link from "next/link";
+import { SellerProfile } from "@/Components/SellerProfile/SellerProfile";
 
 export const SingelBookInf = () => {
   return (
@@ -62,6 +63,10 @@ export const SingelBookInf = () => {
             <button className="mt-10 py-5 px-10 bg-[#563A9F] text-white rounded-sm">
               বিক্রেতার প্রোফাইল দেখতে চাই
             </button>
+
+            <div className="d">
+              <SellerProfile />
+            </div>
           </div>
         </div>
       </div>

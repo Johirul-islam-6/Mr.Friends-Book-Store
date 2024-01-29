@@ -1,13 +1,13 @@
 "use client";
-import { ImageCard } from "@/Components/DiplomaINengineer/ImageCard";
-import "./AllBooks.css";
 import React, { useEffect, useState } from "react";
+import { ImageCard } from "./ImageCard";
+import { GoodStudentPackage } from "./GoodStudentPackage";
 
-const AllBooks = () => {
+export const AllBookList = ({ SemesterNumber }) => {
   const [isFixed, setIsFixed] = useState(false);
 
   const handleScroll = () => {
-    if (window.scrollY >= 200) {
+    if (window.scrollY >= 600) {
       setIsFixed(true);
     } else {
       setIsFixed(false);
@@ -21,6 +21,7 @@ const AllBooks = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <div className="max-w-screen-xl mx-auto">
@@ -32,12 +33,12 @@ const AllBooks = () => {
           <div className=" justify-start items-center hidden md:flex">
             <h1 className="text-[18px] text-[#563A9F]">
               {" "}
-              <span className="font-bold ">Searching : </span> All Cetagory
-              books
+              <span className="font-bold ">Searching : </span> Web Mastering
+              book
             </h1>
           </div>
 
-          <div class="flex space-x-4 md:me-12">
+          <div class="flex justify-center space-x-4  md:me-9">
             <div class="flex rounded-md overflow-hidden w-full">
               <input
                 type="text"
@@ -50,10 +51,16 @@ const AllBooks = () => {
             </div>
           </div>
         </div>
+        {SemesterNumber !== "all" && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-3 p-3 md:px-10 mt-5 bg-[#F4F4F4] py-4">
+              <GoodStudentPackage />
+              <GoodStudentPackage />
+            </div>
+          </>
+        )}
 
-        {/* ------ Display all Category Book ---- */}
-
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 gap-y-6 gap-x-5  mt-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-y-6 gap-x-5 mt-2">
           <ImageCard />
           <ImageCard />
           <ImageCard />
@@ -75,4 +82,3 @@ const AllBooks = () => {
     </>
   );
 };
-export default AllBooks;
