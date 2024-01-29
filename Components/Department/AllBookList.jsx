@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ImageCard } from "./ImageCard";
-import { FaChevronDown } from "react-icons/fa";
 import { GoodStudentPackage } from "./GoodStudentPackage";
-import { SearchBar } from "../Layout/Navbar/SearchBar";
 
 export const AllBookList = ({ SemesterNumber }) => {
   const [isFixed, setIsFixed] = useState(false);
