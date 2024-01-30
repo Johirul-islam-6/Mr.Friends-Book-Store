@@ -1,5 +1,4 @@
 "use client";
-
 import { CreateBook } from "@/Components/Profile/CreateBook/CreateBook";
 import { AllSellingBooks } from "@/Components/Profile/SellingBooks/AllSellingBooks";
 import React, { useState } from "react";
@@ -49,16 +48,17 @@ const Profile = () => {
             {/* ------------- Your store ------------- */}
             <div class="col-span-4 sm:col-span-9">
               <div class="bg-white shadow rounded-lg p-6">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-5">
                   <div className="block">
                     <h2 class="md:text-xl font-bold ">My Resale Books</h2>
                     <p className="text-[8px] md:text-[11px]">
                       আপনি সর্বোচ্চ ৩ টি বই পাবলিশ করতে পারবে ।
                     </p>
                   </div>
+
                   <button
                     onClick={() => setModal1(true)}
-                    class="text-[10px] md:text-[14px] flex items-center gap-[2px] md:gap-2 hover:text-[#563A9F] cursor-pointer hover:border-[#563A9F] border-2 p-2 rounded-md px-2 md:px-5 font-bold mb-4"
+                    class="text-[10px] md:text-[14px] flex items-center gap-[2px] md:gap-2 hover:text-[#563A9F] cursor-pointer hover:border-[#563A9F] border-2 p-2 rounded-md px-2 md:px-5 font-bold "
                   >
                     <svg
                       className="block md:hidden"

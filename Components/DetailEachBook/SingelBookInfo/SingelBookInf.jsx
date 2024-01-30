@@ -65,11 +65,11 @@ export const SingelBookInf = () => {
             </button>
             {showUserProfile && (
               <>
-                <div className="w-[100%] py-10 bg-[#000001e4] absolute top-0 rounded-lg">
+                <div className="w-[100%] py-10 bg-[#ffffffe4]  top-0 rounded-lg">
                   <SellerProfile />
-                  <div className="flex justify-center gap-5 items-center mt-2">
+                  <div className="flex  md:justify-start justify-center gap-5 items-center mt-5 md:ps-5">
                     <button
-                      className="bg-[#bc1f1fb4] hover:bg-red-700 rounded-md p-3 px-5 text-white flex gap-[2px] items-center"
+                      className="bg-[#bc1f1fb4] hover:bg-red-700 rounded-md p-3 px-5 text-black flex gap-[2px] items-center"
                       onClick={() => setOpenProfile(false)}
                     >
                       Cancel

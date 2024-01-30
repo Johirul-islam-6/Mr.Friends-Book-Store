@@ -7,9 +7,9 @@ import Link from "next/link";
 export const ImageCard = () => {
   return (
     <>
-      <div className="hover:border-[#573BA2] duration-150 overflow-hidden bg-[#fff] rounded-md p-2 border-2">
+      <div className="hover:border-[#573BA2] duration-150 overflow-hidden bg-[#fff] rounded-md p-2 border-2 bookCard">
         <div className="image relative">
-          <div className="bg-[#0000007b] w-[100%] h-[100%]  absolute rounded-t-md"></div>
+          <div className="bg-[#0000007b] bg-color w-[100%] h-[100%]  absolute rounded-t-md"></div>
           <Image
             width={1424}
             height={450}

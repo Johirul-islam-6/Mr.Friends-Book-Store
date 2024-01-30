@@ -8,6 +8,10 @@
 
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,300&family=Inter:wght@500&family=Lato:ital@0;1&family=Playfair+Display:wght@500&family=Raleway:wght@100;300;600&family=Roboto:ital,wght@0,300;0,400;1,100&family=Space+Grotesk:wght@700&display=swap");
 
+.bookCard:hover .bg-color {
+  background-color: #0000000d;
+}
+
 .card {
   position: relative;
   display: flex;

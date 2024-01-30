@@ -1,11 +1,105 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const CreateBook = () => {
+  const [cetagorybook, setCetagory] = useState();
+
   const publication = ["হক প্রকাশনী", "এস আর প্রকাশনী", "অন্যান্য"];
   const departmental = ["কারিগরি", "জেনারেল", "মেডিকেল", "অন্যান্য"];
+  const technical = [
+    {
+      naem: "কম্পিউটার সাইন্স এন্ড টেকনোলজি",
+      shorcut: "CST",
+    },
+    {
+      naem: "সিভিল টেকনোলজি",
+      shorcut: "CT",
+    },
+    {
+      naem: "ইলেকট্রিক্যাল টেকনোলজি",
+      shorcut: "ET",
+    },
+    {
+      naem: "মেকানিক্যাল টেকনোলজি",
+      shorcut: "MT",
+    },
+    {
+      naem: "ইলেকট্রনিক্স টেকনোলজি",
+      shorcut: "ETT",
+    },
+    {
+      naem: "ইলেকট্রোমেডিক্যাল টেকনোলজি",
+      shorcut: "EMT",
+    },
+    {
+      naem: "পাওয়ার টেকনোলজি",
+      shorcut: "PT",
+    },
+    ,
+  ];
+  const genaral = [
+    {
+      naem: " সাইন্স",
+      shorcut: "science",
+    },
+    {
+      naem: "কমার্স",
+      shorcut: "commerce",
+    },
+    {
+      naem: "আর্টস",
+      shorcut: "arts",
+    },
+    {
+      naem: "অন্যান্য",
+      shorcut: "other",
+    },
 
-  // const BookObject = [bookName,bookImage,subjectCode];
+    ,
+  ];
+  const Medical = [
+    {
+      naem: "Psychology",
+      shorcut: "psychology",
+    },
+    {
+      naem: "Sociology",
+      shorcut: "sociology",
+    },
+    {
+      naem: "Microbiology",
+      shorcut: "microbiology",
+    },
+    {
+      naem: "Epidemiology",
+      shorcut: "epidemiology",
+    },
+    {
+      naem: "Pharmacology",
+      shorcut: "pharmacology",
+    },
+    {
+      naem: "Genetics",
+      shorcut: "genetics",
+    },
+    {
+      naem: "Human anatomy",
+      shorcut: "human-anatomy",
+    },
+    {
+      naem: "Psychophysiology",
+      shorcut: "psychophysiology",
+    },
+    {
+      naem: "Others",
+      shorcut: "other",
+    },
+
+    ,
+  ];
+
+  // const BookObject = [bookName,bookImage,subjectCode,department,mejor-subject, buy-price , sell-price];
 
   return (
     <>
@@ -81,6 +175,7 @@ export const CreateBook = () => {
                 ))}
               </select>
             </div>
+
             {/* ------ field number 04 ------- */}
             <div>
               <label
@@ -90,17 +185,75 @@ export const CreateBook = () => {
                 ডিপার্টমেন্ট বই
               </label>
 
-              <select class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1">
-                <option className="bg-[#E8F0FE]">select</option>
+              <select
+                name="department"
+                onChange={(e) => setCetagory(e.target.value)}
+                className="input block border border-gray-300 focus:border-pitch-black py-2 px-3 w-full focus:outline-none mt-1"
+              >
+                <option value="selectss" className="bg-[#E8F0FE]">
+                  select
+                </option>
                 {departmental?.map((item, index) => (
-                  <>
-                    <option key={index} className="">
-                      {index + 1} {item}
-                    </option>{" "}
-                  </>
+                  <option
+                    className="bg-[#e9e9e9de] text-black "
+                    key={index}
+                    value={item}
+                  >
+                    {item}
+                  </option>
                 ))}
               </select>
             </div>
+            {/* ------ field number 04 ------- */}
+            <div>
+              <label
+                class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                for="phone"
+              >
+                মেজর বিষয়
+              </label>
+
+              <select
+                name="mejor-subject"
+                class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+              >
+                <option className="bg-[#E8F0FE]">select</option>
+                {cetagorybook === "কারিগরি" && (
+                  <>
+                    {technical?.map((item, index) => (
+                      <>
+                        <option key={index} className="">
+                          {index + 1} {item?.naem}
+                        </option>{" "}
+                      </>
+                    ))}
+                  </>
+                )}
+                {cetagorybook === "জেনারেল" && (
+                  <>
+                    {genaral?.map((item, index) => (
+                      <>
+                        <option key={index} className="">
+                          {index + 1} {item?.naem}
+                        </option>{" "}
+                      </>
+                    ))}
+                  </>
+                )}
+                {cetagorybook === "মেডিকেল" && (
+                  <>
+                    {Medical?.map((item, index) => (
+                      <>
+                        <option key={index} className="">
+                          {index + 1} {item?.naem}
+                        </option>{" "}
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+
             {/* ------ field number 06 ------- */}
             <div>
               <label
@@ -126,6 +279,7 @@ export const CreateBook = () => {
                 ক্রয় মূল্য
               </label>
               <input
+                name="buy-price"
                 id="username"
                 type="number"
                 placeholder="Enter Your Full Name"
@@ -143,6 +297,7 @@ export const CreateBook = () => {
               </label>
               <input
                 id="username"
+                name="sell-price"
                 type="number"
                 placeholder="Enter Your Full Name"
                 class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
@@ -159,21 +314,6 @@ export const CreateBook = () => {
                 placeholder="যেমন: মাসকান্দা, টেকনিক্যাল মোড়"
                 type="text"
                 class="input block border border-gray-300 placeholder:font-normal text-[16px] focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
-              />
-            </div>
-            {/* ------ field number 06 ------- */}
-            <div>
-              <label
-                class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
-                for="username"
-              >
-                বই বিবরণ
-              </label>
-              <input
-                id="username"
-                type="text"
-                placeholder="Enter Your Full Name"
-                class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
               />
             </div>
           </div>
