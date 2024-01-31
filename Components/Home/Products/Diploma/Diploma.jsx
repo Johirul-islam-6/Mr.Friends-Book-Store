@@ -23,7 +23,9 @@ export const Diploma = () => {
             src={cetegoryImage}
             alt="diploma image"
           />
-          <h1 className="text-cetegory-heading ps-1">Diploma Engineer Book</h1>
+          <h1 className="text-cetegory-heading ps-1">
+            Diploma Engineer Resell Book
+          </h1>
         </div>
         {/* --- category body--- */}
 
@@ -130,9 +132,11 @@ export const Diploma = () => {
         </div>
 
         <div className="mt-10">
-          <h1 className=" md:ps-12 pb-2 ps-2 text-[20px] text-[#563a9f] IBM font-bold underline">
-            Best Sell Book list
-          </h1>
+          <Link className="cursor-pointer" href={"/allBooks"}>
+            <h1 className=" md:ps-12 pb-2 ps-2 text-[20px] text-[#563a9f] IBM font-bold underline">
+              New Book lists
+            </h1>
+          </Link>
           <DiplomaBookSlider />
         </div>
       </div>

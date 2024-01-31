@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap");
+:root {
+  --d: 700ms;
+  --e: cubic-bezier(0.19, 1, 0.22, 1);
+  --font-sans: "Rubik", sans-serif;
+  --font-serif: "Cardo", serif;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,300&family=Inter:wght@500&family=Lato:ital@0;1&family=Playfair+Display:wght@500&family=Raleway:wght@100;300;600&family=Roboto:ital,wght@0,300;0,400;1,100&family=Space+Grotesk:wght@700&display=swap");
+
+.review .slick-prev,
+.review .slick-next {
+  background-color: #00000045 !important;
+  width: 35px !important;
+  height: 45px !important;
+  z-index: 100;
+  /* border-radius: 50%; */
+}
+
+.review .slick-next {
+  right: 0px !important;
+  border-radius: 0% 0% 0% 0%;
+}
+.review .slick-prev {
+  left: 0px !important;
+  border-radius: 0% 0% 0% 0%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  color: rgb(7, 7, 7);
+  background-color: rgb(252, 252, 252);
+}
+.reviewCard {
+  width: 100%;
+  border-radius: 50px 0 100px 0;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.053),
+    0 2px 2px rgba(0, 0, 0, 0.091) 0 4px 4px rgba(0, 0, 0, 0.046),
+    0 8px 8px rgba(0, 0, 0, 0), 0 16px 16px rgba(0, 0, 0, 0.062);
+}
+.reviewCard:hover {
+  border: 1px solid #f6931e;
+}
+@media (min-width: 100px) {
+  .card {
+    /* height: 350px; */
+    justify-content: center !important;
+  }
+}

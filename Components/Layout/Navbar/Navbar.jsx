@@ -97,16 +97,6 @@ export const Navbar = () => {
                       All Books
                     </Link>
                   </li>
-                  <li className="p-4  duration-200 cursor-pointer active sm-hidden-link">
-                    <Link className="hover-menu color-a-tag" href="/">
-                      Generals Books
-                    </Link>
-                  </li>
-                  <li className="p-4  duration-200 cursor-pointer active sm-hidden-link">
-                    <Link className="hover-menu color-a-tag" href="/">
-                      Medicals Books
-                    </Link>
-                  </li>
 
                   {/* -----------------diploma engineer-------------- */}
                   <div class=" group relative p-4 duration-200 cursor-pointer  sm-hidden-link">
@@ -194,7 +184,13 @@ export const Navbar = () => {
                       </div>
                     </ul>
                   </div>
+
                   {/* -----------------Medical M.B.B.S doctor-------------- */}
+                  <li className="p-4  duration-200 cursor-pointer active sm-hidden-link">
+                    <Link className="hover-menu color-a-tag" href="/">
+                      About Us
+                    </Link>
+                  </li>
 
                   <li className="py-4 duration-200 cursor-pointer active pe-2 sm-hidden- ">
                     <Link

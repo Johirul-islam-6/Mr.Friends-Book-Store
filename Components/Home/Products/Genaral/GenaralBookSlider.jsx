@@ -1,10 +1,10 @@
 "use client";
 import React, { Component } from "react";
 import Slider from "react-slick";
-import { ImageCard } from "./ImageCard";
-import "./Image.css";
+import { BookCard } from "./BookCard";
+import "./BookCard.css";
 
-export default class DiplomaBookSlider extends Component {
+export default class GenaralBookSlider extends Component {
   render() {
     const settings = {
       dots: true,
@@ -44,16 +44,16 @@ export default class DiplomaBookSlider extends Component {
     return (
       <div className="md:px-10">
         <Slider {...settings}>
-          <ImageCard />
-          <ImageCard />
-          <ImageCard />
-          <ImageCard />
-          <ImageCard />
-          <ImageCard />
-          <ImageCard />
-          <ImageCard />
-          <ImageCard />
-          <ImageCard />
+          <BookCard />
+          <BookCard />
+          <BookCard />
+          <BookCard />
+          <BookCard />
+          <BookCard />
+          <BookCard />
+          <BookCard />
+          <BookCard />
+          <BookCard />
         </Slider>
       </div>
     );

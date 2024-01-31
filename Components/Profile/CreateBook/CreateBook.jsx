@@ -169,14 +169,14 @@ export const CreateBook = () => {
                 {publication?.map((item, index) => (
                   <>
                     <option key={index} className="">
-                      {index + 1} {item}
+                      {item}
                     </option>{" "}
                   </>
                 ))}
               </select>
             </div>
 
-            {/* ------ field number 04 ------- */}
+            {/* ------ field number 05 ------- */}
             <div>
               <label
                 class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
@@ -204,7 +204,7 @@ export const CreateBook = () => {
                 ))}
               </select>
             </div>
-            {/* ------ field number 04 ------- */}
+            {/* ------ field number 06 ------- */}
             <div>
               <label
                 class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
@@ -223,7 +223,7 @@ export const CreateBook = () => {
                     {technical?.map((item, index) => (
                       <>
                         <option key={index} className="">
-                          {index + 1} {item?.naem}
+                          {item?.naem}
                         </option>{" "}
                       </>
                     ))}
@@ -234,7 +234,7 @@ export const CreateBook = () => {
                     {genaral?.map((item, index) => (
                       <>
                         <option key={index} className="">
-                          {index + 1} {item?.naem}
+                          {item?.naem}
                         </option>{" "}
                       </>
                     ))}
@@ -245,7 +245,7 @@ export const CreateBook = () => {
                     {Medical?.map((item, index) => (
                       <>
                         <option key={index} className="">
-                          {index + 1} {item?.naem}
+                          {item?.naem}
                         </option>{" "}
                       </>
                     ))}
@@ -254,7 +254,7 @@ export const CreateBook = () => {
               </select>
             </div>
 
-            {/* ------ field number 06 ------- */}
+            {/* ------ field number 08 ------- */}
             <div>
               <label
                 class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
@@ -270,7 +270,7 @@ export const CreateBook = () => {
                 class="input block border border-gray-300 placeholder:font-normal text-[16px] focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
               />
             </div>
-            {/* ------ field number 04 ------- */}
+            {/* ------ field number 09 ------- */}
             <div>
               <label
                 class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
@@ -287,7 +287,7 @@ export const CreateBook = () => {
               />
             </div>
 
-            {/* ------ field number 05 ------- */}
+            {/* ------ field number 10 ------- */}
             <div>
               <label
                 class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
@@ -303,7 +303,7 @@ export const CreateBook = () => {
                 class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
               />
             </div>
-            {/* ------ field number 06 ------- */}
+            {/* ------ field number 11 ------- */}
             <div>
               <label class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN">
                 বই নেওয়ার ঠিকানা
