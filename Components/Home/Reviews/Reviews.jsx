@@ -6,12 +6,10 @@ export const Reviews = () => {
     <>
       <div className="review">
         <div className="mt-20 ">
-          <h1 className="text-center text-[1.7rem] md:text-[2rem] font-[600] pt-5 SILIGURI">
-            দেখে নিন কি বলছেন ইউনিটেক এক্সপার্টরা
+          <h1 className="text-cetegory-heading ps-1 text-center">
+            Student Reviews
           </h1>
-          {/* <h1 className="text-center achieveParagraph SILIGURI">
-            দেখে নিন কি বলছেন ইউনিটেক এক্সপার্টরা
-          </h1> */}
+          <div className="w-[120px] mx-auto h-[5px] bg-[#573BA2]"></div>
           <div className=" mt-8">
             <ReviewsSlider />
           </div>
