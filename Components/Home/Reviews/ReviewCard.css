@@ -26,17 +26,6 @@
   border-radius: 0% 0% 0% 0%;
 }
 
-.card {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  padding: 1rem;
-  width: 100%;
-  text-align: center;
-  color: rgb(7, 7, 7);
-  background-color: rgb(252, 252, 252);
-}
 .reviewCard {
   width: 100%;
   border-radius: 50px 0 100px 0;
@@ -50,9 +39,20 @@
 .reviewCard:hover {
   border: 1px solid #f6931e;
 }
-@media (min-width: 100px) {
-  .card {
-    /* height: 350px; */
-    justify-content: center !important;
-  }
+
+.Reviews .slick-prev,
+.Reviews .slick-next {
+  display: none !important;
+}
+
+.slick-next {
+  right: 0px !important;
+  border-radius: 20% 0% 0% 20%;
+}
+.slick-prev {
+  left: 0px !important;
+  border-radius: 0% 20% 20% 0%;
+}
+.slick-dots {
+  display: none !important;
 }
