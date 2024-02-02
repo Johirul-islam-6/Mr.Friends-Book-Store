@@ -18,10 +18,9 @@ const Registration = () => {
 
   const allAcademic = [
     "Mymensingh Polytechnic Institute",
-    "Dhaka Polytechnic Institute",
-    "Comilla Polytechnic Institute",
-    "Kushtia Polytechnic Institute",
-    "Khulna Polytechnic Institute",
+    "Mymensingh medical college",
+    "Rumdo institute of modern technology",
+    "SSC Genaral",
     "Others...",
   ];
 
@@ -31,25 +30,57 @@ const Registration = () => {
     "Civil Technology",
     "Mechanical Technology",
     "Power Technology",
-    "Ceramic Technology",
-    "Glass Technology",
-    "Surveying Technology",
-    "Civil (Wood) Technology",
     "Automobile Technology",
-    "Construction Technology",
     "Food Technology",
-    "Graphic Design Technology",
     "Power Technology",
-    "Mining and Mine Survey Technology",
-    "Food Technology",
-    "Garment Design and Pattern Making",
-    "Food Technology",
     "Architecture and Interior Design Technology",
     "Tourism and Hospitality Management",
     "Electro-Medical Technology",
-    "Environmental Technology",
+    "-------x--------",
+    "Scince",
+    "Commerce",
+    "Arts",
+    "MBBS",
     "Others..",
   ];
+
+  // -------------------- Back end intregrate ------------------
+
+  const HandleSubmite = (e) => {
+    e.preventDefault();
+
+    // const get = e.target;
+    // const name = get.name.value;
+    // const roll = get.roll.value;
+    // const roll = get.roll.value;
+    // console.log(name);
+    const formData = new FormData(e.target);
+    const name = formData.get("name");
+    const roll = formData.get("roll");
+    const institute = formData.get("institute"); // Assuming you set the "name" attribute for the select as "institute"
+    const department = formData.get("department");
+    const address = formData.get("address");
+    const phone = formData.get("phone");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const gender = formData.get("gender");
+
+    // Now you have all the values, and you can use them as needed
+    const userData = {
+      name,
+      roll,
+      institute,
+      department,
+      address,
+      phone,
+      email,
+      password,
+      gender,
+    };
+
+    console.log(userData);
+  };
+
   return (
     <>
       <div className="bg-[#F6F5F7] border-2">
@@ -57,7 +88,7 @@ const Registration = () => {
           <div class="text-center pb-3">
             <h2 class="text-4xl font-bold text-[#2c293b]  GT">Registration</h2>
           </div>
-          <form>
+          <form onSubmit={HandleSubmite}>
             <div class="grid grid-cols-1 gap-x-6 gap-y-4 mt-4 sm:grid-cols-2 md:px-5">
               <div>
                 <label
@@ -69,8 +100,10 @@ const Registration = () => {
                 <input
                   id="username"
                   type="text"
+                  name="name"
                   placeholder="Enter Your Full Name"
                   class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
+                  required
                 />
               </div>
 
@@ -83,6 +116,7 @@ const Registration = () => {
                 </label>
                 <input
                   id="roll"
+                  name="roll"
                   placeholder="Enter Your Academic Roll"
                   type="number"
                   class="input block border border-gray-300 placeholder:font-normal text-[16px] focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
@@ -97,12 +131,15 @@ const Registration = () => {
                   Institue Name
                 </label>
 
-                <select class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1">
+                <select
+                  name="institute"
+                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+                >
                   <option className="bg-[#E8F0FE]">select</option>
                   {allAcademic.map((item, index) => (
                     <>
                       <option key={index} className="">
-                        {index + 1} {item}
+                        {item}
                       </option>{" "}
                     </>
                   ))}
@@ -117,12 +154,15 @@ const Registration = () => {
                   Department Name
                 </label>
 
-                <select class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1">
+                <select
+                  name="department"
+                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+                >
                   <option className="bg-[#E8F0FE]">select</option>
                   {allDepartment.map((item, index) => (
                     <>
                       <option key={index} className="">
-                        {index + 1} {item}
+                        {item}
                       </option>{" "}
                     </>
                   ))}
