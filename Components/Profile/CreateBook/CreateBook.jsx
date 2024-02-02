@@ -7,6 +7,17 @@ export const CreateBook = () => {
 
   const publication = ["হক প্রকাশনী", "এস আর প্রকাশনী", "অন্যান্য"];
   const departmental = ["কারিগরি", "জেনারেল", "মেডিকেল", "অন্যান্য"];
+  const semester = [
+    "1st Semester",
+    "2nd Semester",
+    "3rd Semester",
+    "4th Semester",
+    "5th Semester",
+    "6th Semester",
+    "7th Semester",
+    "8th Semester",
+    "Others",
+  ];
   const technical = [
     {
       naem: "কম্পিউটার সাইন্স এন্ড টেকনোলজি",
@@ -101,10 +112,58 @@ export const CreateBook = () => {
 
   // const BookObject = [bookName,bookImage,subjectCode,department,mejor-subject, buy-price , sell-price];
 
+  const HandleSubmite = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const bookName = formData.get("bookName");
+    const bookImage = formData.get("bookImage");
+    const subjectCode = formData.get("subjectCode"); // Assuming you set the "name" attribute for the select as "institute"
+    const publication = formData.get("publication");
+    const department = formData.get("department");
+    const mejorSubject = formData.get("mejor-subject");
+    const semester = formData.get("semester");
+    const phone = formData.get("phone");
+    const buyPrice = formData.get("buy-price");
+    const sellPrice = formData.get("sell-price");
+    const email = formData.get("email");
+    const location = formData.get("location");
+    const discription = formData.get("discription");
+
+    if (publication === "select") {
+      return alert("Please select publication Cetagory !");
+    }
+    if (department === "select") {
+      return alert("Please select department Cetagory !");
+    }
+    if (mejorSubject === "select") {
+      return alert("Please select mejor Subject Cetagory !");
+    }
+    if (semester === "select") {
+      return alert("Please select semester Cetagory !");
+    }
+
+    const bookData = {
+      bookName,
+      bookImage,
+      subjectCode,
+      publication,
+      department,
+      mejorSubject,
+      semester,
+      phone,
+      buyPrice,
+      sellPrice,
+      email,
+      location,
+      discription,
+    };
+    console.log(bookData);
+  };
+
   return (
     <>
       <div className="mt-5">
-        <form>
+        <form onSubmit={HandleSubmite}>
           <div class="grid grid-cols-1 gap-x-6 gap-y-4 mt-4 sm:grid-cols-2 md:px-5">
             {/* ------ field number 01 ------- */}
             <div>
@@ -115,6 +174,7 @@ export const CreateBook = () => {
                 বই এর নাম
               </label>
               <input
+                required
                 id="username"
                 name="bookName"
                 type="text"
@@ -131,6 +191,7 @@ export const CreateBook = () => {
                 বই এর ছবি
               </label>
               <input
+                required
                 id="username"
                 name="bookImage"
                 type="file"
@@ -147,6 +208,7 @@ export const CreateBook = () => {
                 বিষয় কোড
               </label>
               <input
+                required
                 id="username"
                 type="text"
                 name="subjectCode"
@@ -164,7 +226,10 @@ export const CreateBook = () => {
                 পাবলিকেশন
               </label>
 
-              <select class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1">
+              <select
+                name="publication"
+                class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+              >
                 <option className="bg-[#E8F0FE]">select</option>
                 {publication?.map((item, index) => (
                   <>
@@ -253,7 +318,35 @@ export const CreateBook = () => {
                 )}
               </select>
             </div>
+            {/* ------ field number 05 ------- */}
+            <div>
+              <label
+                class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                for="phone"
+              >
+                সেমিষ্টার বই
+              </label>
 
+              <select
+                required
+                name="semester"
+                onChange={(e) => setCetagory(e.target.value)}
+                className="input block border border-gray-300 focus:border-pitch-black py-2 px-3 w-full focus:outline-none mt-1"
+              >
+                <option value="selectss" className="bg-[#E8F0FE]">
+                  select
+                </option>
+                {semester?.map((item, index) => (
+                  <option
+                    className="bg-[#e9e9e9de] text-black "
+                    key={index}
+                    value={item}
+                  >
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
             {/* ------ field number 08 ------- */}
             <div>
               <label
@@ -263,6 +356,7 @@ export const CreateBook = () => {
                 সঠিক ফোন নাম্বার
               </label>
               <input
+                required
                 id="phone"
                 name="phone"
                 placeholder="01824842XXX"
@@ -279,6 +373,7 @@ export const CreateBook = () => {
                 ক্রয় মূল্য
               </label>
               <input
+                required
                 name="buy-price"
                 id="username"
                 type="number"
@@ -296,6 +391,7 @@ export const CreateBook = () => {
                 বিক্রয় মূল্য
               </label>
               <input
+                required
                 id="username"
                 name="sell-price"
                 type="number"
@@ -327,6 +423,8 @@ export const CreateBook = () => {
               বই বিবরণ সমূহ
             </label>
             <textarea
+              required
+              name="discription"
               id="username"
               type="text"
               placeholder="কমপক্ষে ৪০ শব্দের হতে হবে,  যেটা দ্বারা ছাত্র-ছাত্রী বই এর ভালো দিকগুলো জানতে জানতে পারে । "

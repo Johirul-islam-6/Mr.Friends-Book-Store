@@ -4,6 +4,7 @@ import "./registration.css";
 import Link from "next/link";
 
 const Registration = () => {
+  const [institute, setSubject] = useState();
   const [passValue, setPassValue] = useState({
     password: "",
     showPassword: false,
@@ -17,14 +18,16 @@ const Registration = () => {
   };
 
   const allAcademic = [
-    "Mymensingh Polytechnic Institute",
-    "Mymensingh medical college",
-    "Rumdo institute of modern technology",
-    "SSC Genaral",
-    "Others...",
+    { name: "Mymensingh Polytechnic Institute", value: "polytechnic" },
+    { name: "Rumdo institute of modern technology", value: "polytechnic" },
+    { name: "Mymensingh Medical college", value: "medical" },
+    { name: "SSC In", value: "SSC" },
+    { name: "HSC In", value: "HSC" },
+    { name: "Honors", value: "Honors" },
+    { name: "Others...", value: "others" },
   ];
 
-  const allDepartment = [
+  const polytechnic = [
     "Computer Science and Technology",
     "Electronics Technology",
     "Civil Technology",
@@ -36,24 +39,47 @@ const Registration = () => {
     "Architecture and Interior Design Technology",
     "Tourism and Hospitality Management",
     "Electro-Medical Technology",
-    "-------x--------",
-    "Scince",
-    "Commerce",
-    "Arts",
-    "MBBS",
+  ];
+  const genaralSSC = ["vocational", "Science", "Commerce", "Arts", "Others"];
+  const genaralHSC = ["Science", "Commerce", "Arts", "Others"];
+  const others = ["Others"];
+
+  const genaralHight = [
+    "Physics",
+    "Mathematics",
+    "Chemistry",
+    "Computer Science",
+    "Biology",
+    "Economics",
+    "Accounting",
+    "Management",
+    "English Literature",
+    "History",
+    "Political Science",
+    "Sociology",
+    "Others..",
+  ];
+  const doctor = [
+    "Anatomy",
+    "Physiology",
+    "Biochemistry",
+    "Pharmacology",
+    "Pathology",
+    "Microbiology",
+    "Community Medicine",
+    "Medicine",
+    "Surgery",
+    "Dermatology",
+    "Psychiatry",
+    "Radiology",
     "Others..",
   ];
 
+  const [ss, sets] = useState();
   // -------------------- Back end intregrate ------------------
 
   const HandleSubmite = (e) => {
     e.preventDefault();
-
-    // const get = e.target;
-    // const name = get.name.value;
-    // const roll = get.roll.value;
-    // const roll = get.roll.value;
-    // console.log(name);
     const formData = new FormData(e.target);
     const name = formData.get("name");
     const roll = formData.get("roll");
@@ -64,6 +90,20 @@ const Registration = () => {
     const email = formData.get("email");
     const password = formData.get("password");
     const gender = formData.get("gender");
+    const agree = formData.get("agree");
+
+    if (institute === "select") {
+      return alert("please select institute name");
+    }
+    if (department === "select") {
+      return alert("please select department Cetagory");
+    }
+    if (agree === null) {
+      return (
+        sets("text-red-500 font-extrabold"),
+        alert("please Agree all privacy policy")
+      );
+    }
 
     // Now you have all the values, and you can use them as needed
     const userData = {
@@ -115,6 +155,7 @@ const Registration = () => {
                   Student Roll
                 </label>
                 <input
+                  required
                   id="roll"
                   name="roll"
                   placeholder="Enter Your Academic Roll"
@@ -126,22 +167,24 @@ const Registration = () => {
               <div>
                 <label
                   class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
-                  for="phone"
+                  for="institute"
                 >
-                  Institue Name
+                  Institute
                 </label>
 
                 <select
+                  onChange={(e) => setSubject(e?.target?.value)}
+                  required
                   name="institute"
                   class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
                 >
-                  <option className="bg-[#E8F0FE]">select</option>
+                  <option className="bg-[#E8F0FE]" value="select">
+                    select
+                  </option>
                   {allAcademic.map((item, index) => (
-                    <>
-                      <option key={index} className="">
-                        {item}
-                      </option>{" "}
-                    </>
+                    <option key={index} value={item?.value}>
+                      {item?.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -159,13 +202,72 @@ const Registration = () => {
                   class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
                 >
                   <option className="bg-[#E8F0FE]">select</option>
-                  {allDepartment.map((item, index) => (
+                  {institute === "polytechnic" && (
                     <>
-                      <option key={index} className="">
-                        {item}
-                      </option>{" "}
+                      {polytechnic?.map((item, index) => (
+                        <>
+                          <option key={index} className="">
+                            {item}
+                          </option>{" "}
+                        </>
+                      ))}
                     </>
-                  ))}
+                  )}
+                  {institute === "SSC" && (
+                    <>
+                      {genaralSSC?.map((item, index) => (
+                        <>
+                          <option key={index} className="">
+                            {item}
+                          </option>{" "}
+                        </>
+                      ))}
+                    </>
+                  )}
+                  {institute === "HSC" && (
+                    <>
+                      {genaralHSC?.map((item, index) => (
+                        <>
+                          <option key={index} className="">
+                            {item}
+                          </option>{" "}
+                        </>
+                      ))}
+                    </>
+                  )}
+                  {institute === "Honors" && (
+                    <>
+                      {genaralHight?.map((item, index) => (
+                        <>
+                          <option key={index} className="">
+                            {item}
+                          </option>{" "}
+                        </>
+                      ))}
+                    </>
+                  )}
+                  {institute === "medical" && (
+                    <>
+                      {doctor?.map((item, index) => (
+                        <>
+                          <option key={index} className="">
+                            {item}
+                          </option>{" "}
+                        </>
+                      ))}
+                    </>
+                  )}
+                  {institute === "others" && (
+                    <>
+                      {others?.map((item, index) => (
+                        <>
+                          <option key={index} className="">
+                            {item}
+                          </option>{" "}
+                        </>
+                      ))}
+                    </>
+                  )}
                 </select>
               </div>
 
@@ -177,6 +279,7 @@ const Registration = () => {
                   Current Address
                 </label>
                 <input
+                  required
                   id="address"
                   name="address"
                   type="text"
@@ -193,6 +296,7 @@ const Registration = () => {
                   Phone
                 </label>
                 <input
+                  required
                   id="phone"
                   name="phone"
                   placeholder="Enter Your Phone Number"
@@ -209,6 +313,7 @@ const Registration = () => {
                   Email Address
                 </label>
                 <input
+                  required
                   id="emailAddress"
                   type="email"
                   name="email"
@@ -223,6 +328,7 @@ const Registration = () => {
                 </label>
                 <div className="eye_div">
                   <input
+                    required
                     name="password"
                     className="input block border  border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 placeholder:font-normal text-[16px]"
                     type={passValue.showPassword ? "text" : "password"}
@@ -263,6 +369,7 @@ const Registration = () => {
               <div className="all-gender flex items-center gap-5 ps-5 py-3">
                 <div class="align-items-center d-flex form-check form-check-inline gap-2 items-center">
                   <input
+                    required
                     type="radio"
                     name="gender"
                     id="male"
@@ -322,8 +429,13 @@ const Registration = () => {
             </div>
 
             <div class="md:ps-5">
-              <h2 class="mt-4 text-[16px]  text-[#000] flex items-center gap-2 ">
-                <input className="" type="checkbox" name="" id="" /> I agree all{" "}
+              <h2
+                class={`mt-4 text-[16px] text-[#000]  flex items-center gap-2 ${
+                  ss ? ss : ""
+                } `}
+              >
+                <input className="" type="checkbox" name="agree" id="" /> I
+                agree all{" "}
                 <span className="text-[#267bbc]  underline">
                   privacy policy
                 </span>
