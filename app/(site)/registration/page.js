@@ -2,8 +2,15 @@
 import React, { useState } from "react";
 import "./registration.css";
 import Link from "next/link";
+import "react-toastify/dist/ReactToastify.css";
+import "sweetalert2/src/sweetalert2.scss";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Registration = () => {
+  const router = useRouter();
+
   const [institute, setSubject] = useState();
   const [passValue, setPassValue] = useState({
     password: "",
@@ -78,19 +85,21 @@ const Registration = () => {
   const [ss, sets] = useState();
   // -------------------- Back end intregrate ------------------
 
-  const HandleSubmite = (e) => {
+  const HandleSubmite = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const name = formData.get("name");
-    const roll = formData.get("roll");
-    const institute = formData.get("institute"); // Assuming you set the "name" attribute for the select as "institute"
-    const department = formData.get("department");
-    const address = formData.get("address");
-    const phone = formData.get("phone");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const gender = formData.get("gender");
-    const agree = formData.get("agree");
+
+    // Extract form data directly without FormData
+    const name = e.target.elements.name.value;
+    const studentRoll = e.target.elements.roll.value;
+    const institute = e.target.elements.institute.value;
+    const department = e.target.elements.department.value;
+    const address = e.target.elements.address.value;
+    const phone = e.target.elements.phone.value;
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+    const gender = e.target.elements.gender.value;
+    const agree = e.target.elements.agree.value;
+    const ruler = "student";
 
     if (institute === "select") {
       return alert("please select institute name");
@@ -108,7 +117,7 @@ const Registration = () => {
     // Now you have all the values, and you can use them as needed
     const userData = {
       name,
-      roll,
+      studentRoll,
       institute,
       department,
       address,
@@ -116,11 +125,65 @@ const Registration = () => {
       email,
       password,
       gender,
+      ruler,
     };
 
-    const url = `http://localhost:6000/api/v1/users/create-user`;
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/users/create-user",
+        userData
+      );
+      const result = response.data;
+      console.log(result);
+      // Handle the data as needed
+      if (result?.success) {
+        console.log("madar chod");
+        Swal.fire({
+          title: `${result?.message}`,
+          text: `Thank you`,
+          icon: "success",
+        });
+      }
+      router.push("/profile");
+    } catch (error) {
+      // Handle errors 0?.message
 
-    console.log(userData);
+      console.error("Error fetching data:", error);
+
+      Swal.fire({
+        title: `${error?.response?.data?.errorMessages[0]?.message}`,
+        text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
+        icon: "error",
+      });
+    }
+
+    // try {
+    //   const response = await fetch(
+    //     "http://localhost:8080/api/v1/users/create-user",
+    //     {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         // Add any other headers if needed
+    //       },
+    //       body: JSON.stringify(userData),
+    //     }
+    //   );
+
+    //   if (response.ok) {
+    //     // Handle success, e.g., show a success message
+    //     Swal.fire({
+    //       title: "Studen Registration Successfully ",
+    //       text: "You clicked the button!",
+    //       icon: "success",
+    //     });
+    //   } else {
+    //     // Handle error, e.g., show an error message
+    //     toast.error("Error during registration", error);
+    //   }
+    // } catch (error) {
+    //   toast.error("Network error", error);
+    // }
   };
 
   return (
@@ -130,6 +193,17 @@ const Registration = () => {
           <div class="text-center pb-3">
             <h2 class="text-4xl font-bold text-[#2c293b]  GT">Registration</h2>
           </div>
+          <button
+            onClick={() =>
+              Swal.fire({
+                title: "Studen Registration Successfully ",
+                text: "You clicked the button!",
+                icon: "success",
+              })
+            }
+          >
+            shalla
+          </button>
           <form onSubmit={HandleSubmite}>
             <div class="grid grid-cols-1 gap-x-6 gap-y-4 mt-4 sm:grid-cols-2 md:px-5">
               <div>
