@@ -134,14 +134,16 @@ const Registration = () => {
         userData
       );
       const result = response.data;
-      console.log(result);
+
       // Handle the data as needed
       if (result?.success) {
-        console.log("madar chod");
         Swal.fire({
-          title: `${result?.message}`,
-          text: `Thank you`,
+          position: "center",
           icon: "success",
+          title: `${result?.message}`,
+          text: "Thank you ",
+          showConfirmButton: false,
+          timer: 2500,
         });
       }
       router.push("/profile");
