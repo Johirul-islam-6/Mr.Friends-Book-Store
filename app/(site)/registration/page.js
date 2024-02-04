@@ -118,6 +118,8 @@ const Registration = () => {
       gender,
     };
 
+    const url = `http://localhost:6000/api/v1/users/create-user`;
+
     console.log(userData);
   };
 
