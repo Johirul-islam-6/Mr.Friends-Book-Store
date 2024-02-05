@@ -86,10 +86,10 @@ const Registration = () => {
 
   const [ss, sets] = useState();
   // -------------------- Back end intregrate ------------------
-  console.log(InstituteName, "dfd");
+  console.log(InstituteName, "hello");
+
   const HandleSubmite = async (e) => {
     e.preventDefault();
-
     // Extract form data directly without FormData
     const name = e.target.elements.name.value;
     const studentRoll = e.target.elements.roll.value;
@@ -129,38 +129,42 @@ const Registration = () => {
       gender,
       ruler,
     };
-    console.log(institute, "sahla");
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/users/create-user",
-        userData
-      );
-      const result = response.data;
+    console.log(userData, "sahla");
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:8080/api/v1/users/create-user",
+    //     userData
+    //   );
+    //   const result = response.data;
 
-      const cookiesData = result?.data;
+    //   const cookiesData = result?.data;
 
-      // if get the data then save
-      if (result?.success && cookiesData) {
-        Cookies.set("CookieYouserData", JSON.stringify(cookiesData));
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: `${result?.message}`,
-          text: "Thank you",
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      }
-      router.push("/profile");
-    } catch (error) {
-      console.error("Error fetching data:", error);
+    //   // if get the data then save
+    //   if (result?.success && cookiesData) {
+    //     Cookies.set("CookieYouserData", JSON.stringify(cookiesData));
+    //     Swal.fire({
+    //       position: "center",
+    //       icon: "success",
+    //       title: `${result?.message}`,
+    //       text: "Thank you",
+    //       showConfirmButton: false,
+    //       timer: 2500,
+    //     });
+    //   }
+    //   router.push("/profile");
+    // } catch (error) {
+    //   console.error("Error fetching data:", error);
 
-      Swal.fire({
-        title: `${error?.response?.data?.errorMessages[0]?.message}`,
-        text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
-        icon: "error",
-      });
-    }
+    //   Swal.fire({
+    //     title: `${error?.response?.data?.errorMessages[0]?.message}`,
+    //     text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
+    //     icon: "error",
+    //   });
+    // }
+  };
+
+  const instituteHandel = (e) => {
+    console.log(e, "madarchod");
   };
 
   return (
@@ -236,7 +240,7 @@ const Registration = () => {
                   </option>
                   {allAcademic.map((item, index) => (
                     <option
-                      onChange={(e) => storeInistitute(e?.target?.value)}
+                      onChange={() => instituteHandel(item?.name)}
                       key={index}
                       value={item?.value}
                     >
