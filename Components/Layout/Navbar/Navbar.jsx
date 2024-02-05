@@ -14,10 +14,17 @@ import store from "../../../app/Assets/Navbar/store.svg";
 import profile from "../../../app/Assets/Navbar/profile.svg";
 
 import bangladesh from "../../../app/Assets/Navbar/bangladesh.png";
-import { SearchBar } from "./SearchBar";
-import { FaRegUserCircle } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 export const Navbar = () => {
+  const { accessToken, setaccessToken } = useState();
+  // ----get Cookis data ----
+  const storedData = Cookies.get("CookieYouserData");
+  if (storedData) {
+    const cookiesData = JSON.parse(storedData);
+    setaccessToken(cookiesData?.accessToken);
+  }
+
   const [isOpen, setIsOpen] = useState(false);
 
   const [isFixed, setIsFixed] = useState(false);
@@ -191,65 +198,73 @@ export const Navbar = () => {
                       About Us
                     </Link>
                   </li>
+                  {!accessToken && (
+                    <>
+                      <li className="py-4 duration-200 cursor-pointer active pe-2 sm-hidden- ">
+                        <Link
+                          className="  singIN text-[#ffffff] bg-[#563A9F] rounded-sm dd px-2 py-2"
+                          href="/registration"
+                        >
+                          Registration
+                        </Link>
+                      </li>
+                    </>
+                  )}
 
-                  <li className="py-4 duration-200 cursor-pointer active pe-2 sm-hidden- ">
-                    <Link
-                      className="  singIN text-[#ffffff] bg-[#563A9F] rounded-sm dd px-2 py-2"
-                      href="/registration"
-                    >
-                      Registration
-                    </Link>
-                  </li>
                   {/* ---------------user Profile --------- */}
-                  <li className="py-4   duration-200 cursor-pointer active sm-hidden-link">
-                    <div class=" group relative p-4 duration-200 cursor-pointer  ">
-                      <button class="hover-menu color-a-tag flex items-center">
-                        <Image
-                          width={25}
-                          height={9}
-                          quality={100}
-                          className=""
-                          src={profile}
-                          alt=""
-                        />
-                      </button>
+                  {accessToken && (
+                    <>
+                      <li className="py-4   duration-200 cursor-pointer active sm-hidden-link">
+                        <div class=" group relative p-4 duration-200 cursor-pointer  ">
+                          <button class="hover-menu color-a-tag flex items-center">
+                            <Image
+                              width={25}
+                              height={9}
+                              quality={100}
+                              className=""
+                              src={profile}
+                              alt=""
+                            />
+                          </button>
 
-                      <ul class="absolute right-[-30px] z-50 hidden py-1 mt-2  group-hover:flex dropdown-box border-2">
-                        <div className="flex gap-x-10  ">
-                          <ul className="w-[120px] ">
-                            <li class="">
-                              <Link
-                                class="text-[14px]  py-1  block text-center  color-a-tag IBM "
-                                href="/profile"
-                              >
-                                Account
-                              </Link>
-                            </li>
-                            <hr className="" />
+                          <ul class="absolute right-[-30px] z-50 hidden py-1 mt-2  group-hover:flex dropdown-box border-2">
+                            <div className="flex gap-x-10  ">
+                              <ul className="w-[120px] ">
+                                <li class="">
+                                  <Link
+                                    class="text-[14px]  py-1  block text-center  color-a-tag IBM "
+                                    href="/profile"
+                                  >
+                                    Account
+                                  </Link>
+                                </li>
+                                <hr className="" />
 
-                            <li class="">
-                              <Link
-                                class="text-[14px]  py-1  block text-center  color-a-tag IBM"
-                                href="wishlists"
-                              >
-                                Wishlists
-                              </Link>
-                            </li>
-                            <hr className="" />
+                                <li class="">
+                                  <Link
+                                    class="text-[14px]  py-1  block text-center  color-a-tag IBM"
+                                    href="wishlists"
+                                  >
+                                    Wishlists
+                                  </Link>
+                                </li>
+                                <hr className="" />
 
-                            <li class="">
-                              <Link
-                                class="text-[14px]  py-1  block text-center  color-a-tag IBM"
-                                href=""
-                              >
-                                Logout
-                              </Link>
-                            </li>
+                                <li class="">
+                                  <Link
+                                    class="text-[14px]  py-1  block text-center  color-a-tag IBM"
+                                    href=""
+                                  >
+                                    Logout
+                                  </Link>
+                                </li>
+                              </ul>
+                            </div>
                           </ul>
                         </div>
-                      </ul>
-                    </div>
-                  </li>
+                      </li>
+                    </>
+                  )}
 
                   <li className="py-4  px-1 duration-200 cursor-pointer active">
                     {/* --- Only Small Size ---- */}

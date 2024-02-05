@@ -7,11 +7,13 @@ import "sweetalert2/src/sweetalert2.scss";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Registration = () => {
   const router = useRouter();
 
-  const [institute, setSubject] = useState();
+  const [InstituteName, storeInistitute] = useState();
+  const [institutes, setSubject] = useState();
   const [passValue, setPassValue] = useState({
     password: "",
     showPassword: false,
@@ -84,14 +86,14 @@ const Registration = () => {
 
   const [ss, sets] = useState();
   // -------------------- Back end intregrate ------------------
-
+  console.log(InstituteName, "dfd");
   const HandleSubmite = async (e) => {
     e.preventDefault();
 
     // Extract form data directly without FormData
     const name = e.target.elements.name.value;
     const studentRoll = e.target.elements.roll.value;
-    const institute = e.target.elements.institute.value;
+    const institute = e.target.elements.institute_name.value;
     const department = e.target.elements.department.value;
     const address = e.target.elements.address.value;
     const phone = e.target.elements.phone.value;
@@ -118,7 +120,7 @@ const Registration = () => {
     const userData = {
       name,
       studentRoll,
-      institute,
+      institute: InstituteName,
       department,
       address,
       phone,
@@ -127,7 +129,7 @@ const Registration = () => {
       gender,
       ruler,
     };
-
+    console.log(institute, "sahla");
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/users/create-user",
@@ -135,21 +137,22 @@ const Registration = () => {
       );
       const result = response.data;
 
-      // Handle the data as needed
-      if (result?.success) {
+      const cookiesData = result?.data;
+
+      // if get the data then save
+      if (result?.success && cookiesData) {
+        Cookies.set("CookieYouserData", JSON.stringify(cookiesData));
         Swal.fire({
           position: "center",
           icon: "success",
           title: `${result?.message}`,
-          text: "Thank you ",
+          text: "Thank you",
           showConfirmButton: false,
           timer: 2500,
         });
       }
       router.push("/profile");
     } catch (error) {
-      // Handle errors 0?.message
-
       console.error("Error fetching data:", error);
 
       Swal.fire({
@@ -158,34 +161,6 @@ const Registration = () => {
         icon: "error",
       });
     }
-
-    // try {
-    //   const response = await fetch(
-    //     "http://localhost:8080/api/v1/users/create-user",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         // Add any other headers if needed
-    //       },
-    //       body: JSON.stringify(userData),
-    //     }
-    //   );
-
-    //   if (response.ok) {
-    //     // Handle success, e.g., show a success message
-    //     Swal.fire({
-    //       title: "Studen Registration Successfully ",
-    //       text: "You clicked the button!",
-    //       icon: "success",
-    //     });
-    //   } else {
-    //     // Handle error, e.g., show an error message
-    //     toast.error("Error during registration", error);
-    //   }
-    // } catch (error) {
-    //   toast.error("Network error", error);
-    // }
   };
 
   return (
@@ -253,14 +228,18 @@ const Registration = () => {
                 <select
                   onChange={(e) => setSubject(e?.target?.value)}
                   required
-                  name="institute"
+                  name="institute_name"
                   class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
                 >
                   <option className="bg-[#E8F0FE]" value="select">
                     select
                   </option>
                   {allAcademic.map((item, index) => (
-                    <option key={index} value={item?.value}>
+                    <option
+                      onChange={(e) => storeInistitute(e?.target?.value)}
+                      key={index}
+                      value={item?.value}
+                    >
                       {item?.name}
                     </option>
                   ))}
@@ -280,7 +259,7 @@ const Registration = () => {
                   class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
                 >
                   <option className="bg-[#E8F0FE]">select</option>
-                  {institute === "polytechnic" && (
+                  {institutes === "polytechnic" && (
                     <>
                       {polytechnic?.map((item, index) => (
                         <>
@@ -291,7 +270,7 @@ const Registration = () => {
                       ))}
                     </>
                   )}
-                  {institute === "SSC" && (
+                  {institutes === "SSC" && (
                     <>
                       {genaralSSC?.map((item, index) => (
                         <>
@@ -302,7 +281,7 @@ const Registration = () => {
                       ))}
                     </>
                   )}
-                  {institute === "HSC" && (
+                  {institutes === "HSC" && (
                     <>
                       {genaralHSC?.map((item, index) => (
                         <>
@@ -313,7 +292,7 @@ const Registration = () => {
                       ))}
                     </>
                   )}
-                  {institute === "Honors" && (
+                  {institutes === "Honors" && (
                     <>
                       {genaralHight?.map((item, index) => (
                         <>
@@ -324,7 +303,7 @@ const Registration = () => {
                       ))}
                     </>
                   )}
-                  {institute === "medical" && (
+                  {institutes === "medical" && (
                     <>
                       {doctor?.map((item, index) => (
                         <>
@@ -335,7 +314,7 @@ const Registration = () => {
                       ))}
                     </>
                   )}
-                  {institute === "others" && (
+                  {institutes === "others" && (
                     <>
                       {others?.map((item, index) => (
                         <>

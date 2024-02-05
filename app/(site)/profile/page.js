@@ -1,10 +1,28 @@
 "use client";
 import { CreateBook } from "@/Components/Profile/CreateBook/CreateBook";
 import { AllSellingBooks } from "@/Components/Profile/SellingBooks/AllSellingBooks";
+import Cookies from "js-cookie";
+import { Router } from "next/router";
 import React, { useState } from "react";
 
 const Profile = () => {
   const [openMadal1, setModal1] = useState(false);
+
+  const storedData = Cookies.get("CookieYouserData");
+  const cookiesData = JSON.parse(storedData);
+  const {
+    name,
+    studentRoll,
+    institute,
+    department,
+    address,
+    phone,
+    email,
+    gender,
+    ruler,
+  } = cookiesData;
+
+  console.log(cookiesData, "data");
 
   return (
     <>
@@ -17,8 +35,8 @@ const Profile = () => {
                   <div className="bg-[#563A9F] p-10 rounded-full">
                     <p className="text-[22px] text-white font-bold">RA</p>
                   </div>
-                  <h1 class="text-xl font-bold pt-5">Md.Johirul Islam</h1>
-                  <p class="text-gray-700">Software Developer</p>
+                  <h1 class="text-xl font-bold pt-5">{name}</h1>
+                  <p class="text-gray-700">{ruler}</p>
                   <div class="mt-6 flex flex-wrap gap-4 justify-center">
                     <a
                       href="#"
@@ -35,12 +53,24 @@ const Profile = () => {
                   </span>
                   <ul>
                     <li class="mb-2">joining date : 02/02/2024</li>
-                    <li class="mb-2">Roll : 574206</li>
-                    <li class="mb-2">Department : Computer</li>
-                    <li class="mb-2">Gender : Male</li>
-                    <li class="mb-2">Phone : 01824842336</li>
-                    <li class="mb-2">Email : johir@gmail.com</li>
+                    <li class="mb-2">Roll : {studentRoll}</li>
+                    <li class="mb-2">Institute : {institute}</li>
+                    <li class="mb-2">Department : {department}</li>
+                    <li class="mb-2">Gender : {gender}</li>
+                    <li class="mb-2">Phone : {phone}</li>
+                    <li class="mb-2">Email : {email}</li>
                   </ul>
+                </div>
+                <div
+                  onClick={() => {
+                    Cookies.remove("CookieYouserData");
+                    Router.push("/");
+                  }}
+                  class="mt-6 flex flex-wrap gap-4 justify-center cursor-pointer"
+                >
+                  <span class="bg-red-600 hover:bg-red-800 text-white py-2 px-6 rounded">
+                    log out
+                  </span>
                 </div>
               </div>
             </div>
