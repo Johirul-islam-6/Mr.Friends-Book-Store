@@ -2,28 +2,40 @@
 import { CreateBook } from "@/Components/Profile/CreateBook/CreateBook";
 import { AllSellingBooks } from "@/Components/Profile/SellingBooks/AllSellingBooks";
 import Cookies from "js-cookie";
-import { Router } from "next/router";
-import React, { useState } from "react";
-
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 const Profile = () => {
+  const navigate = useRouter();
+  const [Loding, setLoding] = useState(true);
+  const accessToken = Cookies.get("accessToken");
+
   const [openMadal1, setModal1] = useState(false);
 
-  const storedData = Cookies.get("CookieYouserData");
-  const cookiesData = JSON.parse(storedData);
-  const {
-    name,
-    studentRoll,
-    institute,
-    department,
-    address,
-    phone,
-    email,
-    gender,
-    ruler,
-  } = cookiesData;
+  const [cookiesInfo, setCookiesInfo] = useState();
 
-  console.log(cookiesData, "data");
+  useEffect(() => {
+    setLoding(false);
+    if (!accessToken) {
+      return navigate.push("/registration");
+    }
+    const getCookiesData = Cookies.get("CookieYouserData");
+    const cookiesInfo = JSON.parse(getCookiesData);
+    setCookiesInfo(cookiesInfo);
+  }, []);
 
+  const logout = () => {
+    Cookies.remove("CookieYouserData");
+    Cookies.remove("accessToken");
+    navigate.push("/");
+  };
+
+  if (Loding) {
+    return (
+      <>
+        <div className="w-[100%] h-[100vh]"></div>
+      </>
+    );
+  }
   return (
     <>
       <div class="relative max-w-screen-xl bg-[#f3f3f3] mx-auto ">
@@ -35,8 +47,8 @@ const Profile = () => {
                   <div className="bg-[#563A9F] p-10 rounded-full">
                     <p className="text-[22px] text-white font-bold">RA</p>
                   </div>
-                  <h1 class="text-xl font-bold pt-5">{name}</h1>
-                  <p class="text-gray-700">{ruler}</p>
+                  <h1 class="text-xl font-bold pt-5">{cookiesInfo?.name}</h1>
+                  <p class="text-gray-700">{cookiesInfo?.ruler}</p>
                   <div class="mt-6 flex flex-wrap gap-4 justify-center">
                     <a
                       href="#"
@@ -53,19 +65,16 @@ const Profile = () => {
                   </span>
                   <ul>
                     <li class="mb-2">joining date : 02/02/2024</li>
-                    <li class="mb-2">Roll : {studentRoll}</li>
-                    <li class="mb-2">Institute : {institute}</li>
-                    <li class="mb-2">Department : {department}</li>
-                    <li class="mb-2">Gender : {gender}</li>
-                    <li class="mb-2">Phone : {phone}</li>
-                    <li class="mb-2">Email : {email}</li>
+                    <li class="mb-2">Roll : {cookiesInfo?.studentRoll}</li>
+                    <li class="mb-2">Institute : {cookiesInfo?.institute}</li>
+                    <li class="mb-2">Department : {cookiesInfo?.department}</li>
+                    <li class="mb-2">Gender : {cookiesInfo?.gender}</li>
+                    <li class="mb-2">Phone : {cookiesInfo?.phone}</li>
+                    <li class="mb-2">Email : {cookiesInfo?.email}</li>
                   </ul>
                 </div>
                 <div
-                  onClick={() => {
-                    Cookies.remove("CookieYouserData");
-                    Router.push("/");
-                  }}
+                  onClick={logout}
                   class="mt-6 flex flex-wrap gap-4 justify-center cursor-pointer"
                 >
                   <span class="bg-red-600 hover:bg-red-800 text-white py-2 px-6 rounded">

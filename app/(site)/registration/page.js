@@ -11,8 +11,6 @@ import Cookies from "js-cookie";
 
 const Registration = () => {
   const router = useRouter();
-
-  const [InstituteName, storeInistitute] = useState();
   const [institutes, setSubject] = useState();
   const [passValue, setPassValue] = useState({
     password: "",
@@ -27,13 +25,13 @@ const Registration = () => {
   };
 
   const allAcademic = [
-    { name: "Mymensingh Polytechnic Institute", value: "polytechnic" },
-    { name: "Rumdo institute of modern technology", value: "polytechnic" },
-    { name: "Mymensingh Medical college", value: "medical" },
-    { name: "SSC In", value: "SSC" },
-    { name: "HSC In", value: "HSC" },
-    { name: "Honors", value: "Honors" },
-    { name: "Others...", value: "others" },
+    { name: "Mymensingh Polytechnic Institute", valueI: "polytechnic" },
+    { name: "Rumdo institute of modern technology", valueI: "polytechnic" },
+    { name: "Mymensingh Medical college", valueI: "medical" },
+    { name: "SSC In", valueI: "SSC" },
+    { name: "HSC In", valueI: "HSC" },
+    { name: "Honors", valueI: "Honors" },
+    { name: "Others...", valueI: "others" },
   ];
 
   const polytechnic = [
@@ -42,12 +40,22 @@ const Registration = () => {
     "Civil Technology",
     "Mechanical Technology",
     "Power Technology",
+    "Electro-Medical Technology",
+    "Electrical Technology",
+  ];
+  const Romdo = [
+    "Computer Science and Technology",
+    "Electronics Technology",
+    "Civil Technology",
+    "Mechanical Technology",
+    "Electrical Technology",
     "Automobile Technology",
     "Food Technology",
     "Power Technology",
     "Architecture and Interior Design Technology",
     "Tourism and Hospitality Management",
     "Electro-Medical Technology",
+    "Nursing",
   ];
   const genaralSSC = ["vocational", "Science", "Commerce", "Arts", "Others"];
   const genaralHSC = ["Science", "Commerce", "Arts", "Others"];
@@ -86,7 +94,6 @@ const Registration = () => {
 
   const [ss, sets] = useState();
   // -------------------- Back end intregrate ------------------
-  console.log(InstituteName, "hello");
 
   const HandleSubmite = async (e) => {
     e.preventDefault();
@@ -120,7 +127,7 @@ const Registration = () => {
     const userData = {
       name,
       studentRoll,
-      institute: InstituteName,
+      institute,
       department,
       address,
       phone,
@@ -129,42 +136,39 @@ const Registration = () => {
       gender,
       ruler,
     };
-    console.log(userData, "sahla");
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:8080/api/v1/users/create-user",
-    //     userData
-    //   );
-    //   const result = response.data;
 
-    //   const cookiesData = result?.data;
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/users/create-user",
+        userData
+      );
+      const result = response.data;
 
-    //   // if get the data then save
-    //   if (result?.success && cookiesData) {
-    //     Cookies.set("CookieYouserData", JSON.stringify(cookiesData));
-    //     Swal.fire({
-    //       position: "center",
-    //       icon: "success",
-    //       title: `${result?.message}`,
-    //       text: "Thank you",
-    //       showConfirmButton: false,
-    //       timer: 2500,
-    //     });
-    //   }
-    //   router.push("/profile");
-    // } catch (error) {
-    //   console.error("Error fetching data:", error);
+      const cookiesData = result?.data;
 
-    //   Swal.fire({
-    //     title: `${error?.response?.data?.errorMessages[0]?.message}`,
-    //     text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
-    //     icon: "error",
-    //   });
-    // }
-  };
+      // if get the data then save
+      if (result?.success && cookiesData) {
+        Cookies.set("accessToken", JSON.stringify(cookiesData?.accessToken));
+        Cookies.set("CookieYouserData", JSON.stringify(cookiesData));
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `${result?.message}`,
+          text: "Thank you",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      }
+      router.push("/profile");
+    } catch (error) {
+      console.error("Error fetching data:", error);
 
-  const instituteHandel = (e) => {
-    console.log(e, "madarchod");
+      Swal.fire({
+        title: `${error?.response?.data?.errorMessages[0]?.message}`,
+        text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
+        icon: "error",
+      });
+    }
   };
 
   return (
@@ -172,78 +176,64 @@ const Registration = () => {
       <div className="bg-[#F6F5F7] border-2">
         <section class="max-w-4xl px-5 pt-6 mx-auto rounded-md shadow-md bg-[#FFFFFF] mt-3">
           <div class="text-center pb-3">
-            <h2 class="text-4xl font-bold text-[#2c293b]  GT">Registration</h2>
+            <h2 class="text-4xl font-[500] text-[#2c293b]  GT">Registration</h2>
           </div>
-          <button
-            onClick={() =>
-              Swal.fire({
-                title: "Studen Registration Successfully ",
-                text: "You clicked the button!",
-                icon: "success",
-              })
-            }
-          >
-            shalla
-          </button>
+
           <form onSubmit={HandleSubmite}>
             <div class="grid grid-cols-1 gap-x-6 gap-y-4 mt-4 sm:grid-cols-2 md:px-5">
               <div>
                 <label
-                  class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                  class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN"
                   for="username"
                 >
-                  Full Name
+                  Full name*
                 </label>
                 <input
                   id="username"
                   type="text"
                   name="name"
-                  placeholder="Enter Your Full Name"
-                  class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
+                  placeholder="Johirul Islam"
+                  class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[15px] py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm"
                   required
                 />
               </div>
 
               <div>
                 <label
-                  class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                  class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN"
                   for="phone"
                 >
-                  Student Roll
+                  Student roll*
                 </label>
                 <input
                   required
                   id="roll"
                   name="roll"
-                  placeholder="Enter Your Academic Roll"
+                  placeholder="maximus 6 number"
                   type="number"
-                  class="input block border border-gray-300 placeholder:font-normal text-[16px] focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+                  class="input block border border-gray-300 placeholder:font-normal text-[15px] focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm"
                 />
               </div>
 
               <div>
                 <label
-                  class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                  class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN"
                   for="institute"
                 >
-                  Institute
+                  Institute name*
                 </label>
 
                 <select
                   onChange={(e) => setSubject(e?.target?.value)}
                   required
                   name="institute_name"
-                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm"
                 >
                   <option className="bg-[#E8F0FE]" value="select">
                     select
                   </option>
                   {allAcademic.map((item, index) => (
-                    <option
-                      onChange={() => instituteHandel(item?.name)}
-                      key={index}
-                      value={item?.value}
-                    >
+                    <option key={index} value={item?.name}>
                       {item?.name}
                     </option>
                   ))}
@@ -252,18 +242,18 @@ const Registration = () => {
 
               <div>
                 <label
-                  class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                  class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN"
                   for="phone"
                 >
-                  Department Name
+                  Department name*
                 </label>
 
                 <select
                   name="department"
-                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm"
                 >
                   <option className="bg-[#E8F0FE]">select</option>
-                  {institutes === "polytechnic" && (
+                  {institutes === "Mymensingh Polytechnic Institute" && (
                     <>
                       {polytechnic?.map((item, index) => (
                         <>
@@ -274,7 +264,18 @@ const Registration = () => {
                       ))}
                     </>
                   )}
-                  {institutes === "SSC" && (
+                  {institutes === "Rumdo institute of modern technology" && (
+                    <>
+                      {Romdo?.map((item, index) => (
+                        <>
+                          <option key={index} className="">
+                            {item}
+                          </option>{" "}
+                        </>
+                      ))}
+                    </>
+                  )}
+                  {institutes === "SSC In" && (
                     <>
                       {genaralSSC?.map((item, index) => (
                         <>
@@ -285,7 +286,7 @@ const Registration = () => {
                       ))}
                     </>
                   )}
-                  {institutes === "HSC" && (
+                  {institutes === "HSC In" && (
                     <>
                       {genaralHSC?.map((item, index) => (
                         <>
@@ -307,7 +308,7 @@ const Registration = () => {
                       ))}
                     </>
                   )}
-                  {institutes === "medical" && (
+                  {institutes === "Mymensingh Medical college" && (
                     <>
                       {doctor?.map((item, index) => (
                         <>
@@ -334,68 +335,68 @@ const Registration = () => {
 
               <div>
                 <label
-                  class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                  class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN"
                   for="emailAddress"
                 >
-                  Current Address
+                  Current address*
                 </label>
                 <input
                   required
                   id="address"
                   name="address"
                   type="text"
-                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 placeholder:font-normal text-[16px]"
-                  placeholder="Ex : Saver, Dhaka"
+                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm placeholder:font-normal text-[15px]"
+                  placeholder="technical More, Mymensingh"
                 />
               </div>
 
               <div>
                 <label
-                  class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                  class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN"
                   for="phone"
                 >
-                  Phone
+                  Phone number*
                 </label>
                 <input
                   required
                   id="phone"
                   name="phone"
-                  placeholder="Enter Your Phone Number"
+                  placeholder="017822XXXXX"
                   type="phone"
-                  class="input block border border-gray-300 placeholder:font-normal text-[16px] focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+                  class="input block border border-gray-300 placeholder:font-normal text-[15px] focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm"
                 />
               </div>
 
               <div>
                 <label
-                  class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                  class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN"
                   for="emailAddress"
                 >
-                  Email Address
+                  Email address*
                 </label>
                 <input
                   required
                   id="emailAddress"
                   type="email"
                   name="email"
-                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 placeholder:font-normal text-[16px]"
-                  placeholder="Enter Your Email"
+                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm placeholder:font-normal text-[15px]"
+                  placeholder="Enter Your valid Email"
                 />
               </div>
 
               <div className="password_2 block  relative">
-                <label class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN">
-                  Password
+                <label class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN">
+                  Password*
                 </label>
                 <div className="eye_div">
                   <input
                     required
                     name="password"
-                    className="input block border  border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 placeholder:font-normal text-[16px]"
+                    className="input block border  border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm placeholder:font-normal text-[15px]"
                     type={passValue.showPassword ? "text" : "password"}
                     onChange={handlePasswordChange("password")}
                     value={passValue.password}
-                    placeholder="Enter Your Password"
+                    placeholder="minimum 6 characters"
                   />
 
                   <div
@@ -489,20 +490,20 @@ const Registration = () => {
               </p> */}
             </div>
 
-            <div class="md:ps-5">
+            <div class="md:ps-6">
               <h2
-                class={`mt-4 text-[16px] text-[#000]  flex items-center gap-2 ${
+                class={`mt-4 text-[15px] text-[#000]  flex items-center gap-2 ${
                   ss ? ss : ""
                 } `}
               >
                 <input className="" type="checkbox" name="agree" id="" /> I
                 agree all{" "}
-                <span className="text-[#267bbc]  underline">
+                <span className="text-[#267bbc]  underline cursor-pointer">
                   privacy policy
                 </span>
                 /{/* <br /> */}
                 <Link href={"/login"}>
-                  <span className="text-[#481D65] cursor-pointer underline ps-2 font-[700]">
+                  <span className="text-[#481D65] cursor-pointer underline  font-[500]">
                     Login
                   </span>
                 </Link>
@@ -511,10 +512,10 @@ const Registration = () => {
             <div class="flex justify-center mt-1">
               <button
                 type="submit"
-                class="my-5 px-12 justify-center bg-[#F6931C] text-gray-100 py-3  rounded-md tracking-wide
-                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#ffa12e] shadow-lg cursor-pointer transition ease-in duration-300"
+                class="my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
+                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#431ea0] shadow-lg cursor-pointer transition ease-in duration-300"
               >
-                Create
+                Submit
               </button>
             </div>
           </form>

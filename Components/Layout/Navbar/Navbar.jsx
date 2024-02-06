@@ -17,18 +17,16 @@ import bangladesh from "../../../app/Assets/Navbar/bangladesh.png";
 import Cookies from "js-cookie";
 
 export const Navbar = () => {
-  const { accessToken, setaccessToken } = useState();
-  // ----get Cookis data ----
-  const storedData = Cookies.get("CookieYouserData");
-  if (storedData) {
-    const cookiesData = JSON.parse(storedData);
-    setaccessToken(cookiesData?.accessToken);
-  }
+  const [accessToken, setCookiesInfo] = useState();
+  const [Loding, setLoding] = useState(true);
+  useEffect(() => {
+    const cookiesInfo = Cookies.get("accessToken");
+    setLoding(false);
+    setCookiesInfo(cookiesInfo);
+  }, [accessToken]);
 
   const [isOpen, setIsOpen] = useState(false);
-
   const [isFixed, setIsFixed] = useState(false);
-
   const handleScroll = () => {
     if (window.scrollY >= 1) {
       setIsFixed(true);
@@ -43,6 +41,14 @@ export const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  if (Loding) {
+    return (
+      <>
+        <div className="bg-[#00000006] w-[100%]"></div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -198,20 +204,6 @@ export const Navbar = () => {
                       About Us
                     </Link>
                   </li>
-                  {!accessToken && (
-                    <>
-                      <li className="py-4 duration-200 cursor-pointer active pe-2 sm-hidden- ">
-                        <Link
-                          className="  singIN text-[#ffffff] bg-[#563A9F] rounded-sm dd px-2 py-2"
-                          href="/registration"
-                        >
-                          Registration
-                        </Link>
-                      </li>
-                    </>
-                  )}
-
-                  {/* ---------------user Profile --------- */}
                   {accessToken && (
                     <>
                       <li className="py-4   duration-200 cursor-pointer active sm-hidden-link">
@@ -265,6 +257,20 @@ export const Navbar = () => {
                       </li>
                     </>
                   )}
+                  {!accessToken && (
+                    <>
+                      <li className="py-4 duration-200 cursor-pointer active pe-2 sm-hidden- ">
+                        <Link
+                          className="  singIN text-[#ffffff] bg-[#563A9F] rounded-sm dd px-2 py-2"
+                          href="/registration"
+                        >
+                          Registration
+                        </Link>
+                      </li>
+                    </>
+                  )}
+
+                  {/* ---------------user Profile --------- */}
 
                   <li className="py-4  px-1 duration-200 cursor-pointer active">
                     {/* --- Only Small Size ---- */}

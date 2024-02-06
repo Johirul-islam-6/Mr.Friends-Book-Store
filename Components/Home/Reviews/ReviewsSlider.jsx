@@ -19,10 +19,10 @@ export default class ReviewsSlider extends Component {
       pauseOnHover: true,
 
       beforeChange: function (currentSlide, nextSlide) {
-        console.log("before change", currentSlide, nextSlide);
+        // console.log("before change", currentSlide, nextSlide);
       },
       afterChange: function (currentSlide) {
-        console.log("after change", currentSlide);
+        // console.log("after change", currentSlide);
       },
     };
 
