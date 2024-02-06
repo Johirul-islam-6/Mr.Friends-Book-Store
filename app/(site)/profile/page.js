@@ -4,6 +4,11 @@ import { AllSellingBooks } from "@/Components/Profile/SellingBooks/AllSellingBoo
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+
+import createImage from "@/app/Assets/prifile/create-image.webp";
+import Image from "next/image";
+import axios from "axios";
+
 const Profile = () => {
   const navigate = useRouter();
   const [Loding, setLoding] = useState(false);
@@ -14,9 +19,6 @@ const Profile = () => {
 
   const [cookiesInfo, setCookiesInfo] = useState();
 
-  // if (accessToken) {
-  //   window.location.reload();
-  // }
   // ------------- token get an genarate -------------
   useEffect(() => {
     setLoding(true);
@@ -26,6 +28,25 @@ const Profile = () => {
     const getCookiesData = Cookies.get("CookieYouserData");
     const cookiesInfo = JSON.parse(getCookiesData);
     setCookiesInfo(cookiesInfo);
+  }, []);
+
+  // --------------- get user created book information -----------------
+
+  const [createdBookInfo, setCreateBookInfo] = useState();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await axios.get(
+          `http://localhost:8080/api/v1/books/?searchTerm=65c1e6de9b215dcf2fe8c937&page=1&limit=5&sort=createdAt&sortOrder=desc`
+        );
+        setCreateBookInfo(result?.data?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
   }, []);
 
   const logout = () => {
@@ -41,6 +62,13 @@ const Profile = () => {
       </>
     );
   }
+
+  const closeModal = (e) => {
+    setModal1(e);
+  };
+
+  // console.log(createdBookInfo.length, "madarchod");
+
   return (
     <>
       <div class="relative max-w-screen-xl bg-[#f3f3f3] mx-auto ">
@@ -148,7 +176,11 @@ const Profile = () => {
                             Close
                           </button>
                         </div>
-                        <CreateBook />
+                        <CreateBook
+                          createdBookInfo={createdBookInfo}
+                          closeModal={closeModal}
+                          userInfo={cookiesInfo}
+                        />
                       </div>
                     </div>
                   </>
@@ -156,9 +188,48 @@ const Profile = () => {
                 {/* ------ Display My Selling Book list-------- */}
                 <div className="all-Selling-book">
                   <div className="grid items-center gap-3 justify-center md:justify-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <AllSellingBooks />
-                    <AllSellingBooks />
-                    <AllSellingBooks />
+                    {!createdBookInfo?.length && (
+                      <>
+                        <AllSellingBooks createdBookInfo={createdBookInfo} />
+                      </>
+                    )}
+                    {createdBookInfo?.length && (
+                      <>
+                        {/* ------ optonal ------ */}
+                        <div className="course-Card-shadow  overflow-hidden bg-[#fff] rounded-md p-5 border-2">
+                          <Image
+                            onClick={() => setModal1(true)}
+                            className="border-2 h-[352px] cursor-pointer flex justify-center items-center w-[100%] object-cover rounded-lg"
+                            width={500}
+                            height={400}
+                            src={createImage}
+                            alt=""
+                          />
+                        </div>
+                        {/* ------ optonal ------ */}
+                        <div className="course-Card-shadow  overflow-hidden bg-[#fff] rounded-md p-5 border-2">
+                          <Image
+                            onClick={() => setModal1(true)}
+                            className="border-2 h-[352px] cursor-pointer flex justify-center items-center w-[100%] object-cover rounded-lg"
+                            width={500}
+                            height={400}
+                            src={createImage}
+                            alt=""
+                          />
+                        </div>
+                        {/* ------ optonal ------ */}
+                        <div className="course-Card-shadow  overflow-hidden bg-[#fff] rounded-md p-5 border-2">
+                          <Image
+                            onClick={() => setModal1(true)}
+                            className="border-2 h-[352px] cursor-pointer flex justify-center items-center w-[100%] object-cover rounded-lg"
+                            width={500}
+                            height={400}
+                            src={createImage}
+                            alt=""
+                          />
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
 

@@ -1,8 +1,13 @@
 "use client";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
-export const CreateBook = () => {
+export const CreateBook = ({ userInfo, closeModal, createdBookInfo }) => {
+  const router = useRouter();
+
   const [cetagorybook, setCetagory] = useState();
 
   const publication = ["হক প্রকাশনী", "এস আর প্রকাশনী", "অন্যান্য"];
@@ -112,11 +117,12 @@ export const CreateBook = () => {
 
   // const BookObject = [bookName,bookImage,subjectCode,department,mejor-subject, buy-price , sell-price];
 
-  const HandleSubmite = (e) => {
+  const HandleSubmite = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const bookName = formData.get("bookName");
-    const bookImage = formData.get("bookImage");
+    // const bookImage = formData.get("bookImage") ;
+    const bookImage = "image.png";
     const subjectCode = formData.get("subjectCode"); // Assuming you set the "name" attribute for the select as "institute"
     const publication = formData.get("publication");
     const department = formData.get("department");
@@ -125,9 +131,10 @@ export const CreateBook = () => {
     const phone = formData.get("phone");
     const buyPrice = formData.get("buy-price");
     const sellPrice = formData.get("sell-price");
-    const email = formData.get("email");
+    const email = userInfo?.email;
     const location = formData.get("location");
     const discription = formData.get("discription");
+    const userId = userInfo?.id;
 
     if (publication === "select") {
       return alert("Please select publication Cetagory !");
@@ -143,6 +150,7 @@ export const CreateBook = () => {
     }
 
     const bookData = {
+      userId,
       bookName,
       bookImage,
       subjectCode,
@@ -158,7 +166,39 @@ export const CreateBook = () => {
       discription,
     };
     console.log(bookData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/books/create-book",
+        bookData
+      );
+      const result = response.data;
+      console.log(result, "result");
+      // if get the data then save
+      if (result?.success) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `${result?.message}`,
+          text: "Thank you",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+
+        closeModal(false);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+
+      Swal.fire({
+        title: `${error?.response?.data?.errorMessages[0]?.message}`,
+        text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
+        icon: "error",
+      });
+    }
   };
+
+  // ------ get user Book informtion list --------
 
   return (
     <>
@@ -356,6 +396,7 @@ export const CreateBook = () => {
                 সঠিক ফোন নাম্বার
               </label>
               <input
+                defaultValue={userInfo?.phone}
                 required
                 id="phone"
                 name="phone"

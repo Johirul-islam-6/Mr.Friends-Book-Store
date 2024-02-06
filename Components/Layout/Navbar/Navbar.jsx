@@ -24,7 +24,6 @@ export const Navbar = () => {
 
   useEffect(() => {
     setCookiesInfo(cookiesInfo);
-    console.log("acss");
 
     setLoding(false);
   }, [accessToken, Loding]);

@@ -2,10 +2,13 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import book1 from "@/app/Assets/Product/Diploma/1st/one.webp";
-export const AllSellingBooks = () => {
+
+export const AllSellingBooks = ({ createdBookInfo }) => {
   const [EditebookModel, setEditebookModel] = useState(false);
 
   const [cetagorybook, setCetagory] = useState();
+
+  const [EditeBook, setEditeBookInfo] = useState();
 
   const publication = ["হক প্রকাশনী", "এস আর প্রকাশনী", "অন্যান্য"];
   const departmental = ["কারিগরি", "জেনারেল", "মেডিকেল", "অন্যান্য"];
@@ -103,32 +106,42 @@ export const AllSellingBooks = () => {
 
   return (
     <>
-      <div className="course-Card-shadow  overflow-hidden bg-[#fff] rounded-md p-5 border-2">
-        <div className="image relative">
-          <div className="bg-[#0000007b] w-[100%] h-[100%]  absolute rounded-t-md"></div>
-          <Image
-            width={1424}
-            height={450}
-            className="rounded-t-md d-image w-[100%] h-[350px]"
-            src={book1}
-            alt=""
-          />
-          <div className="flex bg-[#0000001e] justify-between w-[100%] px-2 absolute top-0 text-[#fff]   py-2  text-center">
-            <button className="text-[12px] md:text-[12px] bg-red-800 hover:bg-red-500 text-white px-[10px] py-[3px] rounded-sm">
-              Delete
-            </button>
-            <button
-              onClick={() => setEditebookModel(true)}
-              className="text-[12px] md:text-[14px] bg-green-700 hover:bg-green-600 text-white px-[10px] py-[3px] rounded-sm"
-            >
-              Edite
-            </button>
+      {createdBookInfo?.map((book) => (
+        <>
+          <div
+            key={book?.id}
+            className="course-Card-shadow  overflow-hidden bg-[#fff] rounded-md p-5 border-2"
+          >
+            <div className="image relative">
+              <div className="bg-[#0000007b] w-[100%] h-[100%]  absolute rounded-t-md"></div>
+              <Image
+                width={1424}
+                height={450}
+                className="rounded-t-md d-image w-[100%] h-[350px]"
+                src={book1}
+                alt=""
+              />
+              <div className="flex bg-[#0000001e] justify-between w-[100%] px-2 absolute top-0 text-[#fff]   py-2  text-center">
+                <button className="text-[12px] md:text-[12px] bg-red-800 hover:bg-red-500 text-white px-[10px] py-[3px] rounded-sm">
+                  Delete
+                </button>
+                <button
+                  onClick={() => {
+                    setEditeBookInfo(book);
+                    setEditebookModel(true);
+                  }}
+                  className="text-[12px] md:text-[14px] bg-green-700 hover:bg-green-600 text-white px-[10px] py-[3px] rounded-sm"
+                >
+                  Edite
+                </button>
+              </div>
+              <h1 className="flex bg-[#000000a2]  w-[100%] justify-center absolute bottom-0 text-[#fff] text-[18px] md:text-[25px] font-[700] py-2  text-center">
+                ফিজিক্স-১
+              </h1>
+            </div>
           </div>
-          <h1 className="flex bg-[#000000a2]  w-[100%] justify-center absolute bottom-0 text-[#fff] text-[18px] md:text-[25px] font-[700] py-2  text-center">
-            ফিজিক্স-১
-          </h1>
-        </div>
-      </div>
+        </>
+      ))}
 
       {/* ------ Open Model ----- */}
 
