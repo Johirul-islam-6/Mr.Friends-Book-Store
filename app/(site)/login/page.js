@@ -2,8 +2,13 @@
 import React, { useState } from "react";
 import "./Login.css";
 import Link from "next/link";
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Login = () => {
+  const router = useRouter();
   const [passValue, setPassValue] = useState({
     password: "",
     showPassword: false,
@@ -16,38 +21,93 @@ const Login = () => {
     setPassValue({ ...passValue, showPassword: !passValue.showPassword });
   };
 
+  const HandleSubmite = async (e) => {
+    e.preventDefault();
+
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+
+    // Now you have all the values, and you can use them as needed
+    const userData = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/users/login",
+        userData
+      );
+      const result = response.data;
+
+      const cookiesData = result?.data;
+
+      // if get the data then save
+      if (result?.success && cookiesData) {
+        Cookies.set("accessToken", JSON.stringify(cookiesData?.accessToken));
+        Cookies.set("CookieYouserData", JSON.stringify(cookiesData));
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `${result?.message}`,
+          text: "Thank you",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      }
+
+      router.push("/profile");
+      setTimeout(() => {
+        window.location.reload();
+      }, 700);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+
+      Swal.fire({
+        title: `${error?.response?.data?.errorMessages[0]?.message}`,
+        text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <>
       <div className="bg-[#F6F5F7] border-2">
-        <div class="text-center pt-1 md:pt-4 pb-2">
-          <h2 class="mt-3 text-[30px] md:text-4xl font-bold text-[#2c293b]  GT">
-            Login as Existing Student
-          </h2>
-        </div>
-        <section class="max-w-2xl px-5 pt-7 mx-auto rounded-md shadow-md bg-[#FFFFFF] mt-3">
-          <form>
-            <div class="grid grid-cols-1 gap-x-6 gap-y-4 mt-4 sm:grid-cols-1 md:px-5">
+        <section class="max-w-2xl md:w-[35%] px-5 pt-7 mx-auto rounded-md shadow-md bg-[#FFFFFF] mt-3">
+          <form onSubmit={HandleSubmite}>
+            <div class="text-center ">
+              <h2 class=" text-[30px] md:text-4xl font-bold text-[#563A9F] GT ">
+                Login
+              </h2>
+              <div className="w-[80px] h-[3px] bg-[#563A9F] mx-auto mt-2"></div>
+            </div>
+            <div class="grid grid-cols-1 gap-x-6 gap-y-4 mt-8 sm:grid-cols-1 md:px-10 ">
               <div>
                 <label
-                  class="text-[#000b] md:text-[14px] font-bold  md:ps-2 IN"
+                  class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN"
                   for="emailAddress"
                 >
-                  Email Address
+                  Email Address*
                 </label>
                 <input
                   id="emailAddress"
+                  name="email"
                   type="email"
-                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-2"
+                  placeholder="Enter Your valid Email"
+                  class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN  placeholder:font-normal text-[16px] rounded-sm"
                 />
               </div>
 
               <div className="password_2 block  relative">
-                <label class="text-[#000b] md:text-[14px] font-bold  md:ps-2 IN">
-                  Password
+                <label class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN">
+                  Password*
                 </label>
                 <div className="eye_div">
                   <input
-                    className="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-2"
+                    name="password"
+                    placeholder="XXXXXXXX"
+                    className="input block border  border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm placeholder:font-normal text-[15px]"
                     type={passValue.showPassword ? "text" : "password"}
                     onChange={handlePasswordChange("password")}
                     value={passValue.password}
@@ -79,46 +139,40 @@ const Login = () => {
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="flex justify-between md:px-5">
-              <div className="remember_me flex items-center mt-3">
-                <input
-                  type="checkbox"
-                  id="rememberMe"
-                  //   checked={loginData.rememberMe}
-                  //   onChange={handleRememberMeChange}
-                  className="mr-2"
-                />
-                <label htmlFor="rememberMe" className="text-gray-500">
-                  Remember Me
-                </label>
+              <div className="flex justify-between ">
+                <div className="remember_me flex items-center mt-3">
+                  <input
+                    type="checkbox"
+                    id="rememberMe"
+                    //   checked={loginData.rememberMe}
+                    //   onChange={handleRememberMeChange}
+                    className="mr-2"
+                  />
+                  <label htmlFor="rememberMe" className="text-gray-500">
+                    Remember Me
+                  </label>
+                </div>
+                <p className="pt-3 text-end text-[14px] hover:text-[#982121] cursor-pointer underline">
+                  Forgot your password?
+                </p>
               </div>
-              <p className="pt-3 text-end text-[14px] hover:text-[#982121] cursor-pointer underline">
-                Forgot your password?
-              </p>
+
+              <div class="">
+                <h2 class="mt-4 text-[14px]  text-[#000] ">
+                  I agree all
+                  <span className="text-[#BF1F49] px-1 underline ms-1 cursor-pointer">
+                    Privacy & rull
+                  </span>
+                  <Link href={"/registration"}>
+                    <span className="text-[#481D65]  cursor-pointer underline ms-2 font-bold">
+                      Create a new account{" "}
+                    </span>
+                  </Link>
+                </h2>
+              </div>
             </div>
 
-            <div class="md:ps-5">
-              <h2 class="mt-4 text-[14px]  text-[#000] ">
-                By creating an account, you agree to Mrfriends.org’s{" "}
-                <span className="text-[#BF1F49] px-1 underline">
-                  Privacy Notice
-                </span>
-                and{" "}
-                <span className="text-[#BF1F49] px-1 underline">
-                  {" "}
-                  Terms of Use.
-                </span>
-                or
-                <br />
-                <Link href={"/registration"}>
-                  <span className="text-[#481D65]  cursor-pointer underline">
-                    Create a new account{" "}
-                  </span>
-                </Link>
-              </h2>
-            </div>
             <div class="flex justify-center mt-2">
               <button
                 type="submit"

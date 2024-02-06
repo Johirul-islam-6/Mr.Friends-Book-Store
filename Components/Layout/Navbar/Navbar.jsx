@@ -10,20 +10,24 @@ import "./Navbar.css";
 import "./Responsive.css";
 import Image from "next/image";
 import logo from "../../../app/Assets/Navbar/logo.svg";
-import store from "../../../app/Assets/Navbar/store.svg";
 import profile from "../../../app/Assets/Navbar/profile.svg";
 
 import bangladesh from "../../../app/Assets/Navbar/bangladesh.png";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
   const [accessToken, setCookiesInfo] = useState();
   const [Loding, setLoding] = useState(true);
+  const router = useRouter();
+  const cookiesInfo = Cookies.get("accessToken");
+
   useEffect(() => {
-    const cookiesInfo = Cookies.get("accessToken");
-    setLoding(false);
     setCookiesInfo(cookiesInfo);
-  }, [accessToken]);
+    console.log("acss");
+
+    setLoding(false);
+  }, [accessToken, Loding]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
@@ -199,7 +203,7 @@ export const Navbar = () => {
                   </div>
 
                   {/* -----------------Medical M.B.B.S doctor-------------- */}
-                  <li className="p-4  duration-200 cursor-pointer active sm-hidden-link">
+                  <li className="py-4 pe-4 duration-200 cursor-pointer active sm-hidden-link">
                     <Link className="hover-menu color-a-tag" href="/">
                       About Us
                     </Link>
@@ -207,8 +211,11 @@ export const Navbar = () => {
                   {accessToken && (
                     <>
                       <li className="py-4   duration-200 cursor-pointer active sm-hidden-link">
-                        <div class=" group relative p-4 duration-200 cursor-pointer  ">
-                          <button class="hover-menu color-a-tag flex items-center">
+                        <div class=" group relative py-4 duration-200 cursor-pointer  ">
+                          <Link
+                            href={"/profile"}
+                            class="hover-menu color-a-tag flex items-center border-2 px-1 rounded-md"
+                          >
                             <Image
                               width={25}
                               height={9}
@@ -217,9 +224,9 @@ export const Navbar = () => {
                               src={profile}
                               alt=""
                             />
-                          </button>
+                          </Link>
 
-                          <ul class="absolute right-[-30px] z-50 hidden py-1 mt-2  group-hover:flex dropdown-box border-2">
+                          {/* <ul class="absolute right-[-30px] z-50 hidden py-1 mt-2  group-hover:flex dropdown-box border-2">
                             <div className="flex gap-x-10  ">
                               <ul className="w-[120px] ">
                                 <li class="">
@@ -252,7 +259,7 @@ export const Navbar = () => {
                                 </li>
                               </ul>
                             </div>
-                          </ul>
+                          </ul> */}
                         </div>
                       </li>
                     </>
@@ -262,9 +269,9 @@ export const Navbar = () => {
                       <li className="py-4 duration-200 cursor-pointer active pe-2 sm-hidden- ">
                         <Link
                           className="  singIN text-[#ffffff] bg-[#563A9F] rounded-sm dd px-2 py-2"
-                          href="/registration"
+                          href="/login"
                         >
-                          Registration
+                          Login
                         </Link>
                       </li>
                     </>

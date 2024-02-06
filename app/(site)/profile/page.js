@@ -6,17 +6,22 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 const Profile = () => {
   const navigate = useRouter();
-  const [Loding, setLoding] = useState(true);
+  const [Loding, setLoding] = useState(false);
+
   const accessToken = Cookies.get("accessToken");
 
   const [openMadal1, setModal1] = useState(false);
 
   const [cookiesInfo, setCookiesInfo] = useState();
 
+  // if (accessToken) {
+  //   window.location.reload();
+  // }
+  // ------------- token get an genarate -------------
   useEffect(() => {
-    setLoding(false);
+    setLoding(true);
     if (!accessToken) {
-      return navigate.push("/registration");
+      return navigate.push("/login");
     }
     const getCookiesData = Cookies.get("CookieYouserData");
     const cookiesInfo = JSON.parse(getCookiesData);
@@ -26,10 +31,10 @@ const Profile = () => {
   const logout = () => {
     Cookies.remove("CookieYouserData");
     Cookies.remove("accessToken");
-    navigate.push("/");
+    window.location.reload();
   };
 
-  if (Loding) {
+  if (!Loding) {
     return (
       <>
         <div className="w-[100%] h-[100vh]"></div>

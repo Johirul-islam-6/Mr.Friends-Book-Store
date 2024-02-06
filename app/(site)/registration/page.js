@@ -160,6 +160,9 @@ const Registration = () => {
         });
       }
       router.push("/profile");
+      setTimeout(() => {
+        window.location.reload();
+      }, 700);
     } catch (error) {
       console.error("Error fetching data:", error);
 
