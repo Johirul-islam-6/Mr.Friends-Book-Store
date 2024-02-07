@@ -12,15 +12,21 @@ import axios from "axios";
 const Profile = () => {
   const navigate = useRouter();
   const [Loding, setLoding] = useState(false);
-
+  const [loding2, setLoding2] = useState(true);
   const accessToken = Cookies.get("accessToken");
-
   const [openMadal1, setModal1] = useState(false);
 
   const [cookiesInfo, setCookiesInfo] = useState();
-
-  // ------------- token get an genarate -------------
+  const [createdBookInfo, setCreateBookInfo] = useState();
+  const [refreshbook, setrefresh] = useState(false);
+  const createdBook = (e) => {
+    if (e) {
+      setrefresh(e);
+    }
+  };
+  console.log("shallar", refreshbook);
   useEffect(() => {
+    // ------------- token get an genarate -------------
     setLoding(true);
     if (!accessToken) {
       return navigate.push("/login");
@@ -28,26 +34,27 @@ const Profile = () => {
     const getCookiesData = Cookies.get("CookieYouserData");
     const cookiesInfo = JSON.parse(getCookiesData);
     setCookiesInfo(cookiesInfo);
-  }, []);
 
-  // --------------- get user created book information -----------------
-
-  const [createdBookInfo, setCreateBookInfo] = useState();
-
-  useEffect(() => {
+    // ------------ get 3 book lisht -----------
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/api/v1/books/?searchTerm=65c1e6de9b215dcf2fe8c937&page=1&limit=5&sort=createdAt&sortOrder=desc`
+          `http://localhost:8080/api/v1/books/?searchTerm=${cookiesInfo?.email}&page=1&limit=5&sort=createdAt&sortOrder=desc`
         );
+
         setCreateBookInfo(result?.data?.data);
+        setLoding2(false);
       } catch (error) {
         console.log(error);
       }
     }
 
     fetchData();
-  }, []);
+
+    setTimeout(() => {
+      setrefresh(false);
+    }, 5000);
+  }, [refreshbook, accessToken]);
 
   const logout = () => {
     Cookies.remove("CookieYouserData");
@@ -63,11 +70,13 @@ const Profile = () => {
     );
   }
 
+  if (loding2) {
+    return <div className="w-[100%] h-[40vh] bg-black">...</div>;
+  }
+
   const closeModal = (e) => {
     setModal1(e);
   };
-
-  // console.log(createdBookInfo.length, "madarchod");
 
   return (
     <>
@@ -177,6 +186,7 @@ const Profile = () => {
                           </button>
                         </div>
                         <CreateBook
+                          createdBook={createdBook}
                           createdBookInfo={createdBookInfo}
                           closeModal={closeModal}
                           userInfo={cookiesInfo}
@@ -188,12 +198,16 @@ const Profile = () => {
                 {/* ------ Display My Selling Book list-------- */}
                 <div className="all-Selling-book">
                   <div className="grid items-center gap-3 justify-center md:justify-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    {!createdBookInfo?.length && (
+                    {createdBookInfo?.length !== 0 ? (
                       <>
-                        <AllSellingBooks createdBookInfo={createdBookInfo} />
+                        <AllSellingBooks
+                          createdBooks={createdBook}
+                          createdBookInfo={createdBookInfo}
+                          userInfo={cookiesInfo}
+                          createdBook={createdBook}
+                        />
                       </>
-                    )}
-                    {createdBookInfo?.length && (
+                    ) : (
                       <>
                         {/* ------ optonal ------ */}
                         <div className="course-Card-shadow  overflow-hidden bg-[#fff] rounded-md p-5 border-2">

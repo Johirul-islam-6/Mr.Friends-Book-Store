@@ -5,10 +5,16 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-export const CreateBook = ({ userInfo, closeModal, createdBookInfo }) => {
+export const CreateBook = ({
+  userInfo,
+  closeModal,
+  createdBookInfo,
+  createdBook,
+}) => {
   const router = useRouter();
 
   const [cetagorybook, setCetagory] = useState();
+  const [cetagorybook2, setCetagory2] = useState();
 
   const publication = ["হক প্রকাশনী", "এস আর প্রকাশনী", "অন্যান্য"];
   const departmental = ["কারিগরি", "জেনারেল", "মেডিকেল", "অন্যান্য"];
@@ -165,15 +171,21 @@ export const CreateBook = ({ userInfo, closeModal, createdBookInfo }) => {
       location,
       discription,
     };
-    console.log(bookData);
 
+    if (createdBookInfo?.length >= 3) {
+      return Swal.fire({
+        title: `আপনি সর্বোচ্চ ৩ টি বই পাবলিশ করার ‍Store পাবেন।`,
+        text: ` ৩ টি বই এর মধ্যে থেকে ১ টি বই ডিলিট করতে হবে । ডিলিট করার পর অন্য ১টি বই যুক্ত করা যাবে ।`,
+        icon: "error",
+      });
+    }
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/books/create-book",
         bookData
       );
       const result = response.data;
-      console.log(result, "result");
+
       // if get the data then save
       if (result?.success) {
         Swal.fire({
@@ -184,7 +196,7 @@ export const CreateBook = ({ userInfo, closeModal, createdBookInfo }) => {
           showConfirmButton: false,
           timer: 2500,
         });
-
+        createdBook(true);
         closeModal(false);
       }
     } catch (error) {
@@ -199,7 +211,7 @@ export const CreateBook = ({ userInfo, closeModal, createdBookInfo }) => {
   };
 
   // ------ get user Book informtion list --------
-
+  console.log(createdBookInfo?.length);
   return (
     <>
       <div className="mt-5">
@@ -370,7 +382,7 @@ export const CreateBook = ({ userInfo, closeModal, createdBookInfo }) => {
               <select
                 required
                 name="semester"
-                onChange={(e) => setCetagory(e.target.value)}
+                onChange={(e) => setCetagory2(e.target.value)}
                 className="input block border border-gray-300 focus:border-pitch-black py-2 px-3 w-full focus:outline-none mt-1"
               >
                 <option value="selectss" className="bg-[#E8F0FE]">
