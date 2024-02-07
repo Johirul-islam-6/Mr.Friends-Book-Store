@@ -121,21 +121,9 @@ export const AllSellingBooks = ({
     ,
   ];
 
-  // async function updateBook(bookId, updatedBookData) {
-  //   setEditebookModel(true);
-
-  //   try {
-  //     const response = await axios.patch(
-  //       `http://localhost:8080/api/v1/books/${bookId}`,
-  //       updatedBookData
-  //     );
-  //     console.log("Book updated successfully:", response.data);
-  //     // Optionally, update state or perform any other action upon successful update
-  //   } catch (error) {
-  //     console.error("Error updating book:", error);
-  //     // Optionally, handle the error in a meaningful way
-  //   }
-  // }
+  const [bookId, setBookId] = useState();
+  const [Cetagory2, setCetagory2] = useState();
+  const [Cetagory, setCetagory1] = useState();
 
   const updateBook = async (e) => {
     e.preventDefault();
@@ -145,9 +133,9 @@ export const AllSellingBooks = ({
     const bookImage = "image.png";
     const subjectCode = formData.get("subjectCode"); // Assuming you set the "name" attribute for the select as "institute"
     const publication = formData.get("publication");
-    const department = formData.get("department");
+    const department = Cetagory;
     const mejorSubject = formData.get("mejor-subject");
-    const semester = formData.get("semester");
+    const semester = Cetagory2;
     const phone = formData.get("phone");
     const buyPrice = formData.get("buy-price");
     const sellPrice = formData.get("sell-price");
@@ -172,14 +160,14 @@ export const AllSellingBooks = ({
       discription,
       userId,
     };
-    console.log("data -->", updateData);
+
     try {
       const response = await axios.patch(
         `http://localhost:8080/api/v1/books/${bookId}`,
         updateData
       );
       const result = response?.data;
-      console.log("update ==>", result);
+
       if (result?.success) {
         Swal.fire({
           position: "center",
@@ -192,8 +180,6 @@ export const AllSellingBooks = ({
         createdBook(true);
         setEditebookModel(false);
       }
-      console.log("Book updated successfully:", response.data);
-      // Optionally, update state or perform any other action upon successful update
     } catch (error) {
       console.error("Error updating book:", error);
       // Optionally, handle the error in a meaningful way
@@ -386,10 +372,10 @@ export const AllSellingBooks = ({
 
                   <select
                     name="department"
-                    onChange={(e) => setCetagory(e.target.value)}
+                    onChange={(e) => setCetagory1(e.target.value)}
                     className="input block border border-gray-300 focus:border-pitch-black py-2 px-3 w-full focus:outline-none mt-1"
                   >
-                    <option value="selectss" className="bg-[#E8F0FE]">
+                    <option value="select" className="bg-[#E8F0FE]">
                       {EditeAble?.department}
                     </option>
                     {departmental?.map((item, index) => (
@@ -468,7 +454,7 @@ export const AllSellingBooks = ({
                     onChange={(e) => setCetagory2(e.target.value)}
                     className="input block border border-gray-300 focus:border-pitch-black py-2 px-3 w-full focus:outline-none mt-1"
                   >
-                    <option value="selectss" className="bg-[#E8F0FE]">
+                    <option value="select" className="bg-[#E8F0FE]">
                       {EditeAble?.semester}
                     </option>
                     {semester?.map((item, index) => (
@@ -570,6 +556,7 @@ export const AllSellingBooks = ({
 
               <div class="flex justify-center mt-1">
                 <button
+                  onClick={() => setBookId(EditeAble?._id)}
                   type="submit"
                   class="my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
                  font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#8555fe] shadow-lg cursor-pointer transition ease-in duration-300"

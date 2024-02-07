@@ -59,7 +59,7 @@ const Login = () => {
       router.push("/profile");
       setTimeout(() => {
         window.location.reload();
-      }, 700);
+      }, 2000);
     } catch (error) {
       console.error("Error fetching data:", error);
 

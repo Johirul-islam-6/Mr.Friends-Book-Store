@@ -11,6 +11,9 @@
 .bookCard:hover .bg-color {
   background-color: #0000000d;
 }
+.bookCard {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
 
 .card {
   position: relative;
