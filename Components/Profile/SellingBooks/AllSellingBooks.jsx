@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import book1 from "@/app/Assets/Product/Diploma/1st/one.webp";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { ConvertToBase64 } from "../CreateBook/CreateBook";
 
 export const AllSellingBooks = ({
   createdBookInfo,
@@ -15,6 +16,7 @@ export const AllSellingBooks = ({
 
   const [cetagorybook, setCetagory] = useState();
   const [EditeAble, setEditeAble] = useState();
+  const [postImage, setPostImage] = useState();
 
   const semester = [
     "1st Semester",
@@ -130,7 +132,7 @@ export const AllSellingBooks = ({
     const formData = new FormData(e.target);
     const bookName = formData.get("bookName");
     // const bookImage = formData.get("bookImage") ;
-    const bookImage = "image.png";
+    const bookImage = postImage;
     const subjectCode = formData.get("subjectCode"); // Assuming you set the "name" attribute for the select as "institute"
     const publication = formData.get("publication");
     const department = Cetagory;
@@ -210,6 +212,16 @@ export const AllSellingBooks = ({
     }
   }
 
+  const handelFileImageUpload = async (fileImage) => {
+    const file = fileImage?.target?.files[0];
+    try {
+      const base64 = await ConvertToBase64(file);
+      setPostImage(base64);
+    } catch (error) {
+      console.error("Error converting file to Base64:", error);
+    }
+  };
+
   return (
     <>
       {createdBookInfo?.map((book) => (
@@ -224,7 +236,7 @@ export const AllSellingBooks = ({
                 width={1424}
                 height={450}
                 className="rounded-t-md d-image w-[100%] h-[350px]"
-                src={book1}
+                src={book?.bookImage}
                 alt=""
               />
               <div className="flex bg-[#0000001e] justify-between w-[100%] px-2 absolute top-0 text-[#fff]   py-2  text-center">
@@ -309,11 +321,15 @@ export const AllSellingBooks = ({
                     বই এর ছবি
                   </label>
                   <input
-                    id="username"
+                    required
+                    // defaultValue={EditeAble?.bookImage}
+                    onChange={(e) => handelFileImageUpload(e)}
+                    id="file-upload"
                     name="bookImage"
-                    defaultValue={EditeAble?.Image}
+                    label="image"
                     type="file"
-                    placeholder="Enter Your Full Name"
+                    accept=".jpeg, .png, jpg"
+                    placeholder="book Cover image"
                     class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
                   />
                 </div>
@@ -497,8 +513,8 @@ export const AllSellingBooks = ({
                     defaultValue={EditeAble?.buyPrice}
                     name="buy-price"
                     id="username"
-                    type="number"
-                    placeholder="Enter Your Full Name"
+                    type="text"
+                    placeholder="কত টাকা দিয়ে ক্রয় করেছিলেন?"
                     class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
                   />
                 </div>
@@ -515,8 +531,8 @@ export const AllSellingBooks = ({
                     defaultValue={EditeAble?.sellPrice}
                     id="username"
                     name="sell-price"
-                    type="number"
-                    placeholder="Enter Your Full Name"
+                    type="text"
+                    placeholder="কত টাকা বিক্রয় করতে চান "
                     class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
                   />
                 </div>

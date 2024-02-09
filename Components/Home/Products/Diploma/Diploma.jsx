@@ -5,7 +5,8 @@ import semester1 from "../../../../app/Assets/Product/Diploma/mechanical/mecanic
 import civil from "@/app/Assets/Product/Diploma/Civil/civil-logo.jpg";
 import Electical from "@/app/Assets/Product/Diploma/Electical/electical.png";
 import electronic from "@/app/Assets/Product/Diploma/electronic/electronic.jpg";
-import computer from "@/app/Assets/Product/Diploma/Computer/computer.Gif";
+import computer from "@/app/Assets/Product/Diploma/Computer/computer.png";
+
 import power from "@/app/Assets/Product/Diploma/Power/power.png";
 import Electromedical from "@/app/Assets/Product/Diploma/Electromedical/Electromedical.jpg";
 import DiplomaBookSlider from "./DiplomaBookSlider";

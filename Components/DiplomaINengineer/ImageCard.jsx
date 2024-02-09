@@ -5,10 +5,6 @@ import book1 from "@/app/Assets/allBook/Math.jpg";
 import Link from "next/link";
 
 export const ImageCard = ({ ResultBooks }) => {
-  // const [iTime, getTimes] = useState();
-
-  console.log("result", ResultBooks);
-
   return (
     <>
       {ResultBooks?.map((singelbook) => (
@@ -23,7 +19,7 @@ export const ImageCard = ({ ResultBooks }) => {
               width={1424}
               height={450}
               className="rounded-t-md d-image w-[100%] h-[230px] "
-              src={book1}
+              src={singelbook?.bookImage}
               alt=""
             />
             <h1 className="flex bg-[#00000076]  w-[100%] justify-center absolute bottom-0 text-[#fff] text-[18px] md:text-[25px] font-[700] py-2  text-center">
@@ -48,7 +44,7 @@ export const ImageCard = ({ ResultBooks }) => {
               2024
             </p> */}
               <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
-                নতুন বাজার,মাসকান্দা
+                {singelbook?.location}
               </p>
               {/* <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
               ১ম সেমিস্টার
@@ -82,7 +78,7 @@ export const ImageCard = ({ ResultBooks }) => {
                 </div>
               </div>
               <div className="bg-[#573ba2] hover:bg-[#492d95]">
-                <Link href={`/detailsBook/1`}>
+                <Link href={`/detailsBook/${singelbook?._id}`}>
                   <button className="flex w-[100%] rounded-lg px-2 py-[8px] text-[12px] md:text-[16px] text-center justify-center font-[600] text-[#ffffff]">
                     Book Details
                   </button>

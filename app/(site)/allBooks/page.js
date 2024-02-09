@@ -23,9 +23,9 @@ const AllBooks = () => {
     };
   }, []);
 
-  const [Loding, setLoding] = useState();
+  const [Loding, setLoding] = useState(true);
   const [searchingValue, setSearchingValue] = useState("");
-  const [ResultBooks, setResultBooks] = useState();
+  const [ResultBooks, setResultBooks] = useState("");
 
   useEffect(() => {
     //  ------------------ searching field -----------
@@ -49,10 +49,20 @@ const AllBooks = () => {
   if (Loding) {
     return (
       <>
-        <div>loding</div>
+        <div className="w-[100%] flex h-[100vh] justify-center items-center">
+          <div class="relative flex justify-center items-center">
+            <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
+            <img
+              src="https://www.svgrepo.com/show/509001/avatar-thinking-9.svg"
+              class="rounded-full h-28 w-28"
+            />
+          </div>
+        </div>
       </>
     );
   }
+
+  console.log("All book 01 =>", ResultBooks);
 
   return (
     <>
@@ -118,10 +128,22 @@ const AllBooks = () => {
 
         {/* ------ Display all Category Book ---- */}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 gap-y-6 gap-x-5  mt-2">
-          <ImageCard ResultBooks={ResultBooks} />
-          {/* <ImageCard ResultBooks={ResultBooks} /> */}
-        </div>
+        {ResultBooks?.length > 0 && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 gap-y-6 gap-x-5  mt-2">
+              <ImageCard ResultBooks={ResultBooks} />
+            </div>
+          </>
+        )}
+        {ResultBooks?.length === 0 && (
+          <>
+            <div class=" h-[80vh] w-[100%] flex justify-center items-center bg-[#fff]">
+              <h1 className="text-[25px] font-[600] text-[#000000b3]">
+                No data available!
+              </h1>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

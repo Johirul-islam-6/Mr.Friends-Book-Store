@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-
+//mamunbooks.com/
 export const CreateBook = ({
   userInfo,
   closeModal,
@@ -15,6 +15,7 @@ export const CreateBook = ({
 
   const [cetagorybook, setCetagory] = useState();
   const [cetagorybook2, setCetagory2] = useState();
+  const [postImage, setPostImage] = useState();
 
   const publication = ["হক প্রকাশনী", "এস আর প্রকাশনী", "অন্যান্য"];
   const departmental = ["কারিগরি", "জেনারেল", "মেডিকেল", "অন্যান্য"];
@@ -128,7 +129,7 @@ export const CreateBook = ({
     const formData = new FormData(e.target);
     const bookName = formData.get("bookName");
     // const bookImage = formData.get("bookImage") ;
-    const bookImage = "image.png";
+    const bookImage = postImage;
     const subjectCode = formData.get("subjectCode"); // Assuming you set the "name" attribute for the select as "institute"
     const publication = formData.get("publication");
     const department = formData.get("department");
@@ -172,6 +173,8 @@ export const CreateBook = ({
       discription,
     };
 
+    console.log("image Data=>", bookData);
+
     if (createdBookInfo?.length >= 3) {
       return Swal.fire({
         title: `আপনি সর্বোচ্চ ৩ টি বই পাবলিশ করার ‍Store পাবেন।`,
@@ -182,7 +185,10 @@ export const CreateBook = ({
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/books/create-book",
-        bookData
+        bookData,
+        {
+          maxContentLength: 1000000000,
+        }
       );
       const result = response.data;
 
@@ -210,8 +216,16 @@ export const CreateBook = ({
     }
   };
 
-  // ------ get user Book informtion list --------
-  console.log(createdBookInfo?.length);
+  const handelFileImageUpload = async (fileImage) => {
+    const file = fileImage?.target?.files[0];
+    try {
+      const base64 = await ConvertToBase64(file);
+      setPostImage(base64);
+    } catch (error) {
+      console.error("Error converting file to Base64:", error);
+    }
+  };
+
   return (
     <>
       <div className="mt-5">
@@ -243,10 +257,13 @@ export const CreateBook = ({
                 বই এর ছবি
               </label>
               <input
+                onChange={(e) => handelFileImageUpload(e)}
                 required
-                id="username"
+                id="file-upload"
                 name="bookImage"
+                label="image"
                 type="file"
+                accept=".jpeg, .png, jpg"
                 placeholder="Enter Your Full Name"
                 class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
               />
@@ -429,7 +446,7 @@ export const CreateBook = ({
                 required
                 name="buy-price"
                 id="username"
-                type="number"
+                type="text"
                 placeholder="Enter Your Full Name"
                 class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
               />
@@ -447,7 +464,7 @@ export const CreateBook = ({
                 required
                 id="username"
                 name="sell-price"
-                type="number"
+                type="text"
                 placeholder="Enter Your Full Name"
                 class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
               />
@@ -499,3 +516,16 @@ export const CreateBook = ({
     </>
   );
 };
+
+export function ConvertToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
+}
