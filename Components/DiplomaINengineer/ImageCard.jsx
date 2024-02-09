@@ -46,9 +46,9 @@ export const ImageCard = ({ ResultBooks }) => {
               <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
                 {singelbook?.location}
               </p>
-              {/* <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
-              ১ম সেমিস্টার
-            </p> */}
+              <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
+                {singelbook?.semester}
+              </p>
             </div>
             <div className="">
               <div className="flex justify-between py-3 ">

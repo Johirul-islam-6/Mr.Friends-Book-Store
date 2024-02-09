@@ -28,6 +28,10 @@ const AllBooks = () => {
   const [ResultBooks, setResultBooks] = useState("");
 
   useEffect(() => {
+    if (searchingValue === "সকল বই") {
+      setSearchingValue("");
+    }
+
     //  ------------------ searching field -----------
     async function fetchData() {
       try {
@@ -36,7 +40,7 @@ const AllBooks = () => {
         );
 
         setResultBooks(result?.data?.data);
-        console.log("result", result);
+
         setLoding(false);
       } catch (error) {
         console.log(error);
@@ -46,23 +50,13 @@ const AllBooks = () => {
     fetchData();
   }, [searchingValue]);
 
-  if (Loding) {
-    return (
-      <>
-        <div className="w-[100%] flex h-[100vh] justify-center items-center">
-          <div class="relative flex justify-center items-center">
-            <div class="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"></div>
-            <img
-              src="https://www.svgrepo.com/show/509001/avatar-thinking-9.svg"
-              class="rounded-full h-28 w-28"
-            />
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  console.log("All book 01 =>", ResultBooks);
+  const options = [
+    { value: "All", name: "সকল বই" },
+    { value: "Freemium", name: "কারিগরি" },
+    { value: "Free", name: "জেনারেল" },
+    { value: "Paid", name: "মেডিকেল" },
+    { value: "Paid", name: "অন্যান্য" },
+  ];
 
   return (
     <>
@@ -72,33 +66,34 @@ const AllBooks = () => {
             isFixed ? "search-fixed  bg-white w-full py-4" : ""
           } flex mx-auto justify-center md:justify-between items-center  mt-12 mb-2 border-t-2 border-b-2  py-3`}
         >
-          {searchingValue ? (
-            <>
-              <div className=" justify-start items-center  md:flex">
-                <h1 className="text-[12px] md:text-[16px] text-[#563A9F]">
-                  {" "}
-                  <span className="font-bold ">Searching : </span>{" "}
-                  {searchingValue}
-                </h1>
-              </div>
-            </>
-          ) : (
-            <>
-              <select
-                id="pricingType"
-                name="pricingType"
-                class="py-[5px] px-[5px] border-2 border-[#563A9F] focus:outline-none focus:border-[#563A9F] text-[#563A9F] rounded "
-              >
-                <option value="All" selected="">
-                  সকল বই
-                </option>
-                <option value="Freemium">কারিগরি</option>
-                <option value="Free">জেনারেল</option>
-                <option value="Paid">মেডিকেল</option>
-                <option value="Paid">অন্যান্য</option>
-              </select>
-            </>
-          )}
+          <div className="flex gap-2">
+            <select
+              onChange={(e) => setSearchingValue(e?.target?.value)}
+              id="pricingType"
+              name="pricingType"
+              class="py-[5px] px-[5px] border-2 border-[#563A9F] focus:outline-none focus:border-[#563A9F] text-[#563A9F] rounded "
+            >
+              {options?.map((item, index) => (
+                <>
+                  <option key={index} value={item?.name}>
+                    {item?.name}
+                  </option>
+                </>
+              ))}
+            </select>
+
+            {searchingValue && (
+              <>
+                <div className=" justify-start items-center  md:flex">
+                  <h1 className="text-[12px] md:text-[16px] text-[#563A9F]">
+                    {" "}
+                    <span className="font-bold "> {searchingValue} </span> বই
+                    সমূহ
+                  </h1>
+                </div>
+              </>
+            )}
+          </div>
 
           <div class="flex space-x-4 md:me-5">
             <div class="relative flex ">
@@ -128,6 +123,125 @@ const AllBooks = () => {
 
         {/* ------ Display all Category Book ---- */}
 
+        {Loding && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 justify-center md:justify-start lg:grid-cols-4 gap-3 gap-y-6 gap-x-5  mt-2">
+              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
+                <div class="flex p-4 space-x-4 sm:px-8">
+                  <div class="flex-1 py-2 space-y-4">
+                    <div class="w-full h-3 rounded bg-gray-300"></div>
+                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
+                  </div>
+                </div>
+                <div class="p-4 space-y-4 sm:px-8">
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                </div>
+                <div class="w-full h-10 rounded bg-gray-300"></div>
+              </div>
+              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
+                <div class="flex p-4 space-x-4 sm:px-8">
+                  <div class="flex-1 py-2 space-y-4">
+                    <div class="w-full h-3 rounded bg-gray-300"></div>
+                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
+                  </div>
+                </div>
+                <div class="p-4 space-y-4 sm:px-8">
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                </div>
+                <div class="w-full h-10 rounded bg-gray-300"></div>
+              </div>
+              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
+                <div class="flex p-4 space-x-4 sm:px-8">
+                  <div class="flex-1 py-2 space-y-4">
+                    <div class="w-full h-3 rounded bg-gray-300"></div>
+                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
+                  </div>
+                </div>
+                <div class="p-4 space-y-4 sm:px-8">
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                </div>
+                <div class="w-full h-10 rounded bg-gray-300"></div>
+              </div>
+              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
+                <div class="flex p-4 space-x-4 sm:px-8">
+                  <div class="flex-1 py-2 space-y-4">
+                    <div class="w-full h-3 rounded bg-gray-300"></div>
+                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
+                  </div>
+                </div>
+                <div class="p-4 space-y-4 sm:px-8">
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                </div>
+                <div class="w-full h-10 rounded bg-gray-300"></div>
+              </div>
+              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
+                <div class="flex p-4 space-x-4 sm:px-8">
+                  <div class="flex-1 py-2 space-y-4">
+                    <div class="w-full h-3 rounded bg-gray-300"></div>
+                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
+                  </div>
+                </div>
+                <div class="p-4 space-y-4 sm:px-8">
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                </div>
+                <div class="w-full h-10 rounded bg-gray-300"></div>
+              </div>
+              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
+                <div class="flex p-4 space-x-4 sm:px-8">
+                  <div class="flex-1 py-2 space-y-4">
+                    <div class="w-full h-3 rounded bg-gray-300"></div>
+                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
+                  </div>
+                </div>
+                <div class="p-4 space-y-4 sm:px-8">
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                </div>
+                <div class="w-full h-10 rounded bg-gray-300"></div>
+              </div>
+              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
+                <div class="flex p-4 space-x-4 sm:px-8">
+                  <div class="flex-1 py-2 space-y-4">
+                    <div class="w-full h-3 rounded bg-gray-300"></div>
+                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
+                  </div>
+                </div>
+                <div class="p-4 space-y-4 sm:px-8">
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                </div>
+                <div class="w-full h-10 rounded bg-gray-300"></div>
+              </div>
+              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
+                <div class="flex p-4 space-x-4 sm:px-8">
+                  <div class="flex-1 py-2 space-y-4">
+                    <div class="w-full h-3 rounded bg-gray-300"></div>
+                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
+                  </div>
+                </div>
+                <div class="p-4 space-y-4 sm:px-8">
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                  <div class="w-full h-4 rounded bg-gray-300"></div>
+                </div>
+                <div class="w-full h-10 rounded bg-gray-300"></div>
+              </div>
+            </div>
+          </>
+        )}
+
         {ResultBooks?.length > 0 && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 gap-y-6 gap-x-5  mt-2">
@@ -135,7 +249,7 @@ const AllBooks = () => {
             </div>
           </>
         )}
-        {ResultBooks?.length === 0 && (
+        {ResultBooks?.length === 0 && !Loding && (
           <>
             <div class=" h-[80vh] w-[100%] flex justify-center items-center bg-[#fff]">
               <h1 className="text-[25px] font-[600] text-[#000000b3]">

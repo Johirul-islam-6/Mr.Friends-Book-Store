@@ -12,44 +12,36 @@ const DiplomaSubjec = () => {
   let DepartmentName = "";
 
   if (id === "CT") {
-    DepartmentName = "Civil ";
+    DepartmentName = "সিভিল টেকনোলজি";
   }
   if (id === "ET") {
-    DepartmentName = "Electrical ";
+    DepartmentName = "ইলেকট্রিক্যাল টেকনোলজি ";
   }
   if (id === "MT") {
-    DepartmentName = "Mechanical  ";
+    DepartmentName = "মেকানিক্যাল টেকনোলজি  ";
   }
   if (id === "CST") {
-    DepartmentName = "Computer Science ";
+    DepartmentName = "কম্পিউটার সাইন্স এন্ড টেকনোলজি ";
   }
   if (id === "ETT") {
-    DepartmentName = "Electronic ";
+    DepartmentName = "ইলেকট্রনিক্স টেকনোলজি ";
   }
   if (id === "PT") {
-    DepartmentName = "Power ";
+    DepartmentName = "পাওয়ার টেকনোলজি ";
   }
   if (id === "EMT") {
-    DepartmentName = "Electromedical";
+    DepartmentName = "ইলেকট্রোমেডিক্যাল টেকনোলজি";
   }
 
   // ---- get semester a function data provide onather components ----
 
-  const getSemesterNumber = (number) => {
-    setSemester(number);
-  };
+  // const getSemesterNumber = (number) => {
+  //   setSemester(number);
+  // };
 
   return (
     <div className="max-w-screen-xl mx-auto">
-      <DepartmentBanner
-        getSemesterNumber={getSemesterNumber}
-        department={DepartmentName}
-      />
-
-      <AllBookList
-        SemesterNumber={SemesterNumber}
-        department={DepartmentName}
-      />
+      <DepartmentBanner ID={id} department={DepartmentName} />
     </div>
   );
 };

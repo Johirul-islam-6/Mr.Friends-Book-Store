@@ -76,13 +76,13 @@ body,
 /* ----------- text cetagory ---------- */
 
 .text-cetegory-heading {
-  font-size: 35px;
+  font-size: 30px;
   color: #2b0f42;
   font-weight: 600;
   font-family: "Space Grotesk", sans-serif;
 }
 @media (max-width: 520px) {
   .text-cetegory-heading {
-    font-size: 25px !important;
+    font-size: 22px !important;
   }
 }
