@@ -28,24 +28,18 @@ export const ImageCard = ({ ResultBooks }) => {
           </div>
           <div className="px-2 pb-1">
             <div className="all-button-courses flex flex-wrap justify-start items-center mt-5 gap-2 ">
-              {/* <button className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
-              Department : Computer
-            </button> */}
-              <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2] ">
-                {singelbook?.subjectCode}
-              </p>
               <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
                 {singelbook?.publication}
               </p>
               <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
                 {singelbook?.createdAt?.slice(0, 10)}
               </p>
-              {/* <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
-              2024
-            </p> */}
-              <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
-                {singelbook?.location}
+              <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2] ">
+                {singelbook?.subjectCode?.slice(0, 5)}
               </p>
+              {/* <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
+                {singelbook?.location}
+              </p> */}
               <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
                 {singelbook?.semester}
               </p>
@@ -53,11 +47,11 @@ export const ImageCard = ({ ResultBooks }) => {
             <div className="">
               <div className="flex justify-between py-3 ">
                 <h1 className="font-[600] text-[16px] md:text-[18px] whitespace-nowrap pe-2 text-[#000000af]">
-                  টাকা.{" "}
-                  <span className="font-[800] text-[18px] md:text-[20px] lg:text-[23px] ps-1">
+                  টাকা-{" "}
+                  <span className="font-[800] text-[18px] md:text-[20px] lg:text-[23px] px-[3px]">
                     {singelbook?.sellPrice}
                   </span>
-                  <span className="text-[14px]">৳</span>
+                  <span className="text-[20px] font-bold text-[#000]">৳</span>
                 </h1>
                 <div className="review flex justify-center items-center gap-[2px] font-[600] text-[10px] md:text-[12px] whitespace-nowrap">
                   <svg
