@@ -185,7 +185,7 @@ export const CreateBook = ({
     }
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/books/create-book",
+        "https://resell-book-store-server.vercel.app/api/v1/books/create-book",
         bookData,
         {
           maxContentLength: 1000000000,

@@ -15,7 +15,7 @@ const EachBookInfo = () => {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/api/v1/books/${id}`
+          `https://resell-book-store-server.vercel.app/api/v1/books/${id}`
         );
         console.log("respons => ", result);
         setResultBooks(result?.data?.data);

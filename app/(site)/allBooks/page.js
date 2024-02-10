@@ -36,9 +36,9 @@ const AllBooks = () => {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/api/v1/books/?searchTerm=${searchingValue}&page=1&limit=20&sort=createdAt&sortOrder=desc`
+          `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=${searchingValue}&page=1&limit=20&sort=createdAt&sortOrder=desc`
         );
-
+        console.log(result, "madarchod");
         setResultBooks(result?.data?.data);
 
         setLoding(false);
@@ -58,20 +58,22 @@ const AllBooks = () => {
     { value: "Paid", name: "অন্যান্য" },
   ];
 
+  console.log("all data => ", ResultBooks);
+
   return (
     <>
       <div className="max-w-screen-xl mx-auto">
         <div
           className={`${
-            isFixed ? "search-fixed  bg-white w-full py-4" : ""
-          } flex mx-auto justify-center md:justify-between items-center  mt-12 mb-2 border-t-2 border-b-2  py-3`}
+            isFixed ? "search-fixed  bg-white w-full py-4 px-2" : ""
+          } flex mx-auto  justify-between items-center  mt-12 mb-2 border-t-2 border-b-2  py-3`}
         >
           <div className="flex gap-2 md:ms-2">
             <select
               onChange={(e) => setSearchingValue(e?.target?.value)}
               id="pricingType"
               name="pricingType"
-              class="py-[5px] px-[5px] border-2 border-[#563A9F] focus:outline-none focus:border-[#563A9F] text-[#563A9F] rounded "
+              class="py-[8px] md:py-[5px] md:px-[5px] border-2 border-[#563A9F] focus:outline-none focus:border-[#563A9F] text-[#563A9F] md:text-[16px] text-[10px] rounded "
             >
               {options?.map((item, index) => (
                 <>
@@ -84,7 +86,7 @@ const AllBooks = () => {
 
             {searchingValue && (
               <>
-                <div className=" justify-start items-center  md:flex">
+                <div className=" justify-start items-center hidden  md:flex">
                   <h1 className="text-[12px] md:text-[16px] text-[#563A9F]">
                     {" "}
                     <span className="font-bold "> {searchingValue} </span> বই
@@ -182,61 +184,38 @@ const AllBooks = () => {
                 </div>
                 <div class="w-full h-10 rounded bg-gray-300"></div>
               </div>
-              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
-                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
-                <div class="flex p-4 space-x-4 sm:px-8">
-                  <div class="flex-1 py-2 space-y-4">
-                    <div class="w-full h-3 rounded bg-gray-300"></div>
-                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
-                  </div>
-                </div>
+
+              <div class="py-4 hidden md:block  rounded-lg shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300 rounded-lg"></div>
+
                 <div class="p-4 space-y-4 sm:px-8">
                   <div class="w-full h-4 rounded bg-gray-300"></div>
                   <div class="w-full h-4 rounded bg-gray-300"></div>
                 </div>
-                <div class="w-full h-10 rounded bg-gray-300"></div>
               </div>
-              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
-                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
-                <div class="flex p-4 space-x-4 sm:px-8">
-                  <div class="flex-1 py-2 space-y-4">
-                    <div class="w-full h-3 rounded bg-gray-300"></div>
-                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
-                  </div>
-                </div>
+              <div class="py-4 hidden md:block  rounded-lg shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300 rounded-lg"></div>
+
                 <div class="p-4 space-y-4 sm:px-8">
                   <div class="w-full h-4 rounded bg-gray-300"></div>
                   <div class="w-full h-4 rounded bg-gray-300"></div>
                 </div>
-                <div class="w-full h-10 rounded bg-gray-300"></div>
               </div>
-              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
-                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
-                <div class="flex p-4 space-x-4 sm:px-8">
-                  <div class="flex-1 py-2 space-y-4">
-                    <div class="w-full h-3 rounded bg-gray-300"></div>
-                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
-                  </div>
-                </div>
+              <div class="py-4 hidden md:block  rounded-lg shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300 rounded-lg"></div>
+
                 <div class="p-4 space-y-4 sm:px-8">
                   <div class="w-full h-4 rounded bg-gray-300"></div>
                   <div class="w-full h-4 rounded bg-gray-300"></div>
                 </div>
-                <div class="w-full h-10 rounded bg-gray-300"></div>
               </div>
-              <div class="py-4 rounded shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
-                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300"></div>
-                <div class="flex p-4 space-x-4 sm:px-8">
-                  <div class="flex-1 py-2 space-y-4">
-                    <div class="w-full h-3 rounded bg-gray-300"></div>
-                    <div class="w-5/6 h-3 rounded bg-gray-300"></div>
-                  </div>
-                </div>
+              <div class="py-4 hidden md:block  rounded-lg shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+                <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300 rounded-lg"></div>
+
                 <div class="p-4 space-y-4 sm:px-8">
                   <div class="w-full h-4 rounded bg-gray-300"></div>
                   <div class="w-full h-4 rounded bg-gray-300"></div>
                 </div>
-                <div class="w-full h-10 rounded bg-gray-300"></div>
               </div>
             </div>
           </>

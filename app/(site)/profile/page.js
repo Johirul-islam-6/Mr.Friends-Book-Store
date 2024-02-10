@@ -39,7 +39,7 @@ const Profile = () => {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/api/v1/books/?searchTerm=${cookiesInfo?.email}&page=1&limit=5&sort=createdAt&sortOrder=desc`
+          `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=${cookiesInfo?.email}&page=1&limit=5&sort=createdAt&sortOrder=desc`
         );
 
         setCreateBookInfo(result?.data?.data);

@@ -139,7 +139,7 @@ const Registration = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/users/create-user",
+        "https://resell-book-store-server.vercel.app/api/v1/users/create-user",
         userData
       );
       const result = response.data;

@@ -45,7 +45,7 @@ export const DepartmentBanner = ({ department, ID }) => {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/api/v1/books/?mejorSubject=${searchingValue}&searchTerm=${filteringValue}&page=1&limit=20&sort=createdAt&sortOrder=desc`
+          `https://resell-book-store-server.vercel.app/api/v1/books/?mejorSubject=${searchingValue}&searchTerm=${filteringValue}&page=1&limit=20&sort=createdAt&sortOrder=desc`
         );
 
         setResultBooks(result?.data?.data);

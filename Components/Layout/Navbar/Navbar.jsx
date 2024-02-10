@@ -265,9 +265,9 @@ export const Navbar = () => {
                   )}
                   {!accessToken && (
                     <>
-                      <li className="py-4 duration-200 cursor-pointer active pe-2 sm-hidden- ">
+                      <li className="py-4 duration-200 cursor-pointer active pe-2  ">
                         <Link
-                          className="  singIN text-[#ffffff] bg-[#563A9F] rounded-sm dd px-2 py-2"
+                          className="  singIN text-[#ffffff] bg-[#563A9F] rounded-sm dd px-3 flex items-center pt-[4px] pb-[7px] "
                           href="/login"
                         >
                           Login
@@ -287,9 +287,10 @@ export const Navbar = () => {
 
                         {/* ----- drower container body ------- */}
                         <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
-                          <Card />
-                          <Card />
-                          <Card />
+                          <Card
+                            setIsOpen={setIsOpen}
+                            accessToken={accessToken}
+                          />
                         </Drawer>
                       </div>
                     </div>

@@ -46,7 +46,7 @@ const DiplomaBookSlider = ({ ResultBooks, Loding }) => {
       {Loding && (
         <>
           <div className="grid  md:grid-cols-4 gap-5 justify-center items-center md:justify-start">
-            <div class="py-4  rounded-lg shadow-md w-60 sm:w-96 animate-pulse bg-gray-50 mx-auto">
+            <div class="py-4    rounded-lg shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
               <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300 rounded-lg"></div>
 
               <div class="p-4 space-y-4 sm:px-8">
@@ -54,7 +54,7 @@ const DiplomaBookSlider = ({ ResultBooks, Loding }) => {
                 <div class="w-full h-4 rounded bg-gray-300"></div>
               </div>
             </div>
-            <div class="py-4 hidden md:block  rounded-lg shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
+            <div class="py-4  hidden md:block  rounded-lg shadow-md w-60 sm:w-80 animate-pulse bg-gray-50 mx-auto">
               <div class="flex-shrink-0 w-full h-52 rounded-mf bg-gray-300 rounded-lg"></div>
 
               <div class="p-4 space-y-4 sm:px-8">
@@ -118,7 +118,7 @@ const DiplomaBookSlider = ({ ResultBooks, Loding }) => {
                         {item?.location}
                       </p>
                     </div>
-                    <Link href={"/detailsBook/1"}>
+                    <Link href={`/detailsBook/${item?._id}`}>
                       <button class="px-8 bg-white text-black py-2 mt-5 font-[600]">
                         View Details
                       </button>

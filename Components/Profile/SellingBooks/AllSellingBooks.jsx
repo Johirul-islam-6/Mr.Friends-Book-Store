@@ -165,7 +165,7 @@ export const AllSellingBooks = ({
 
     try {
       const response = await axios.patch(
-        `http://localhost:8080/api/v1/books/${bookId}`,
+        `https://resell-book-store-server.vercel.app/api/v1/books/${bookId}`,
         updateData
       );
       const result = response?.data;
@@ -192,7 +192,7 @@ export const AllSellingBooks = ({
   async function deleteBook(bookId, name) {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/v1/books/${bookId}`
+        `https://resell-book-store-server.vercel.app/api/v1/books/${bookId}`
       );
       console.log("Book deleted successfully:", response.data);
       if (response?.data?.success) {
