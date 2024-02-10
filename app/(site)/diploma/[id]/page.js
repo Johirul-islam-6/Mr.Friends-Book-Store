@@ -33,12 +33,6 @@ const DiplomaSubjec = () => {
     DepartmentName = "ইলেকট্রোমেডিক্যাল টেকনোলজি";
   }
 
-  // ---- get semester a function data provide onather components ----
-
-  // const getSemesterNumber = (number) => {
-  //   setSemester(number);
-  // };
-
   return (
     <div className="max-w-screen-xl mx-auto">
       <DepartmentBanner ID={id} department={DepartmentName} />

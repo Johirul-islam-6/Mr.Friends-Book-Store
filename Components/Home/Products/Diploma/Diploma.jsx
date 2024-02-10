@@ -1,3 +1,4 @@
+"use client";
 import "./Diploma.css";
 import Image from "next/image";
 import cetegoryImage from "../../../../app/Assets/Product/Diploma/book.webp";
@@ -11,8 +12,33 @@ import power from "@/app/Assets/Product/Diploma/Power/power.png";
 import Electromedical from "@/app/Assets/Product/Diploma/Electromedical/Electromedical.jpg";
 import DiplomaBookSlider from "./DiplomaBookSlider";
 import Link from "next/link";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export const Diploma = () => {
+  const [Loding, setLoding] = useState(true);
+  const [filteringValue, setfilterValue] = useState("কারিগরি");
+  const [ResultBooks, setResultBooks] = useState("");
+
+  useEffect(() => {
+    //  ------------------ searching field -----------
+    async function fetchData() {
+      try {
+        const result = await axios.get(
+          `http://localhost:8080/api/v1/books/?department=${filteringValue}&page=1&limit=20&sort=createdAt&sortOrder=desc`
+        );
+
+        setResultBooks(result?.data?.data);
+
+        setLoding(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+  }, [filteringValue]);
+
   return (
     <>
       <div className="diploma-engineer pt-[40px]">
@@ -138,7 +164,7 @@ export const Diploma = () => {
               New Book lists
             </h1>
           </Link>
-          <DiplomaBookSlider />
+          <DiplomaBookSlider ResultBooks={ResultBooks} Loding={Loding} />
         </div>
       </div>
     </>

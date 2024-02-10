@@ -44,8 +44,14 @@ const Login = () => {
 
       // if get the data then save
       if (result?.success && cookiesData) {
-        Cookies.set("accessToken", JSON.stringify(cookiesData?.accessToken));
-        Cookies.set("CookieYouserData", JSON.stringify(cookiesData));
+        // Calculate expiration time (30 days from now)
+        const expirationTime = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days in milliseconds
+        Cookies.set("accessToken", JSON.stringify(cookiesData?.accessToken), {
+          expires: expirationTime,
+        });
+        Cookies.set("CookieYouserData", JSON.stringify(cookiesData), {
+          expires: expirationTime,
+        });
         Swal.fire({
           position: "center",
           icon: "success",

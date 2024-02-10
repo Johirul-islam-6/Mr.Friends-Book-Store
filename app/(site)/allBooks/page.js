@@ -66,7 +66,7 @@ const AllBooks = () => {
             isFixed ? "search-fixed  bg-white w-full py-4" : ""
           } flex mx-auto justify-center md:justify-between items-center  mt-12 mb-2 border-t-2 border-b-2  py-3`}
         >
-          <div className="flex gap-2">
+          <div className="flex gap-2 md:ms-2">
             <select
               onChange={(e) => setSearchingValue(e?.target?.value)}
               id="pricingType"
