@@ -13,15 +13,14 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  padding: 1rem;
-  width: 100%;
+  padding: 0 25px !important;
+  border: 2px solid #563ba254;
   text-align: center;
   color: whitesmoke;
-  background-color: whitesmoke;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1),
-    0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1),
-    0 16px 16px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff !important;
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
 }
+
 @media (min-width: 100px) {
   .card {
     height: 350px;
@@ -34,7 +33,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 110%;
+  height: 100%;
   background-size: cover;
   background-position: 0 0;
   transition: transform calc(var(--d) * 7) var(--e);
@@ -72,17 +71,19 @@
   transition: transform calc(var(--d) * 1) var(--e);
 }
 
-.content {
-  /* position: relative; */
+.contents {
+  /* margin-top: 40px; */
+  position: relative;
+  z-index: 100;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  padding: 1rem;
+  width: 150% !important;
+  /* padding: 1rem; */
   transition: transform var(--d) var(--e);
-  z-index: 1;
 }
-/* .content > * + * {
+/* .contents > * + * {
   margin-top: 1rem;
 } */
 
@@ -90,9 +91,10 @@
   font-size: 1.3rem;
   font-weight: bold;
   line-height: 1.2;
-  background-color: #573ba2;
+  background-color: #0000006c !important;
   margin: 0 7px;
   color: #ffff;
+  margin-top: 22px !important;
 }
 
 .copy {
@@ -130,10 +132,10 @@
     transform: translateY(0);
   }
 
-  .content {
+  .contents {
     transform: translateY(calc(100% - 4.5rem));
   }
-  .content > *:not(.title) {
+  .contents > *:not(.title) {
     opacity: 0;
     transform: translateY(1rem);
     transition: transform var(--d) var(--e), opacity var(--d) var(--e);
@@ -151,12 +153,12 @@
   .card:focus-within:after {
     transform: translateY(-50%);
   }
-  .card:hover .content,
-  .card:focus-within .content {
+  .card:hover .contents,
+  .card:focus-within .contents {
     transform: translateY(0);
   }
-  .card:hover .content > *:not(.title),
-  .card:focus-within .content > *:not(.title) {
+  .card:hover .contents > *:not(.title),
+  .card:focus-within .contents > *:not(.title) {
     opacity: 1;
     transform: translateY(0);
     transition-delay: calc(var(--d) / 8);
@@ -164,8 +166,8 @@
 
   .card:focus-within:before,
   .card:focus-within:after,
-  .card:focus-within .content,
-  .card:focus-within .content > *:not(.title) {
+  .card:focus-within .contents,
+  .card:focus-within .contents > *:not(.title) {
     transition-duration: 0s;
   }
 }
