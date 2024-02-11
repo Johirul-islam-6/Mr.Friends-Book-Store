@@ -574,10 +574,11 @@ export const AllSellingBooks = ({
                 <button
                   onClick={() => setBookId(EditeAble?._id)}
                   type="submit"
-                  class="my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
-                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#8555fe] shadow-lg cursor-pointer transition ease-in duration-300"
+                  className={`my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
+                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#8555fe] shadow-lg cursor-pointer transition ease-in duration-300 
+                 `}
                 >
-                  Create
+                  create
                 </button>
               </div>
             </form>

@@ -13,7 +13,7 @@ export const CreateBook = ({
   createdBook,
 }) => {
   const router = useRouter();
-
+  // const [disable, disableButton] = useState(null);
   const [cetagorybook, setCetagory] = useState();
   const [cetagorybook2, setCetagory2] = useState();
   const [postImage, setPostImage] = useState();
@@ -143,6 +143,7 @@ export const CreateBook = ({
     const location = formData.get("location");
     const discription = formData.get("discription");
     const userId = userInfo?.id;
+    const status = "panding";
 
     if (publication === "select") {
       return alert("Please select publication Cetagory !");
@@ -172,10 +173,10 @@ export const CreateBook = ({
       email,
       location,
       discription,
+      status,
     };
 
-    console.log("image Data=>", bookData);
-
+    console.log("madarchod", bookData);
     if (createdBookInfo?.length >= 3) {
       return Swal.fire({
         title: `আপনি সর্বোচ্চ ৩ টি বই পাবলিশ করার ‍Store পাবেন।`,
@@ -192,6 +193,8 @@ export const CreateBook = ({
         }
       );
       const result = response.data;
+
+      console.log(result, "laste");
 
       // if get the data then save
       if (result?.success) {
@@ -505,9 +508,10 @@ export const CreateBook = ({
 
           <div class="flex justify-center mt-1">
             <button
+              // onClick={() => disableButton("hidden")}
               type="submit"
               class="my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
-                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#8555fe] shadow-lg cursor-pointer transition ease-in duration-300"
+                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#8555fe] shadow-lg cursor-pointer transition ease-in duration-300 "
             >
               Create
             </button>
