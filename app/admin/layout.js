@@ -7,17 +7,18 @@ import Image from "next/image";
 import "./admin.css";
 
 import logo from "@/app/Assets/admin/logo.png";
+import Link from "next/link";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="">
         <div className="flex w-[100%] mx-auto">
-          <div className="flex ">
+          <div className="flex  h-[100vh]">
             {/* ----- left site nav---- */}
             <aside class="hidden sm:flex sm:flex-col">
-              <a
-                href="#"
+              <Link
+                href="/admin"
                 class="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500"
               >
                 <svg
@@ -31,11 +32,11 @@ export default function RootLayout({ children }) {
                     d="M320.7 352c8.1-89.7 83.5-160 175.3-160c8.9 0 17.6 .7 26.1 1.9L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1h32v69.7c-.1 .9-.1 1.8-.1 2.8V472c0 22.1 17.9 40 40 40h16c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2H160h24c22.1 0 40-17.9 40-40V448 384c0-17.7 14.3-32 32-32h64l.7 0zM640 368a144 144 0 1 0 -288 0 144 144 0 1 0 288 0zm-76.7-43.3c6.2 6.2 6.2 16.4 0 22.6l-72 72c-6.2 6.2-16.4 6.2-22.6 0l-40-40c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L480 385.4l60.7-60.7c6.2-6.2 16.4-6.2 22.6 0z"
                   />
                 </svg>
-              </a>
+              </Link>
               <div class="flex-grow flex flex-col justify-between text-gray-500 bg-gray-800">
                 <nav class="flex flex-col mx-4 my-6 space-y-4">
-                  <a
-                    href="#"
+                  <Link
+                    href="/admin/panding_post"
                     class="flex flex-col items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
                   >
                     {/* <span class="sr-only">Post</span> */}
@@ -51,7 +52,7 @@ export default function RootLayout({ children }) {
                       />
                     </svg>
                     posts
-                  </a>
+                  </Link>
                   <a
                     href="#"
                     class="flex flex-col items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
@@ -138,10 +139,10 @@ export default function RootLayout({ children }) {
               </div>
             </aside>
           </div>
-          <div className="block">
+          <div className="block w-[100%]">
             {/* -------- navbar ----- */}
-            <div className="nav">
-              <header class="flex items-center h-20 px-6 sm:px-10 bg-white">
+            <div className="border-b-2 ">
+              <header class="flex items-center h-20 px-6 sm:px-10 bg-white ">
                 <button class="block sm:hidden relative flex-shrink-0 p-2 mr-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800 focus:bg-gray-100 focus:text-gray-800 rounded-full">
                   <span class="sr-only">Menu</span>
                   <svg
