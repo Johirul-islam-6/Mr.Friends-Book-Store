@@ -17,9 +17,9 @@ const EachBookInfo = () => {
         const result = await axios.get(
           `https://resell-book-store-server.vercel.app/api/v1/books/${id}`
         );
-        console.log("respons => ", result);
+
         setResultBooks(result?.data?.data);
-        console.log("result", result);
+
         setLoding(false);
       } catch (error) {
         console.log(error);

@@ -83,51 +83,52 @@ const DiplomaBookSlider = ({ ResultBooks, Loding }) => {
       )}
       <Slider {...settings}>
         {Array.isArray(ResultBooks) &&
-          ResultBooks.map((item, index) => (
-            <>
-              <div className="card ">
-                <div key={item?._id} class="shadow-card-slider pe-20">
-                  <div className="w-[100%] flex justify-start items-center mx-auto ">
-                    <Image
-                      width={0}
-                      height={0}
-                      className="w-[100%] h-[100%] absolute top-5 pe-10 "
-                      src={item?.bookImage} // Use item.bookImage instead of ResultBooks?.bookImage
-                      alt=""
-                    />
-                  </div>
-                  <div class="contents ">
-                    <h2 class="title p-2 py-3 w-[100%] ">
-                      {item?.bookName?.slice(0, 20)}
-                    </h2>
-                    <div className="all-button-courses flex flex-wrap justify-center items-center mt-5 gap-2 ">
-                      <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
-                        {item?.publication}
-                      </p>
-                      <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
-                        {item?.createdAt?.slice(0, 10)}
-                      </p>
-                      <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff] ">
-                        {item?.subjectCode?.slice(0, 5)}
-                      </p>
-
-                      <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
-                        {item?.semester}
-                      </p>
-                      <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
-                        {item?.location}
-                      </p>
+          ResultBooks.map(
+            (item, index) =>
+              item?.status === "success" && (
+                <div key={item?._id} className="card ">
+                  <div class="shadow-card-slider pe-20">
+                    <div className="w-[100%] flex justify-start items-center mx-auto ">
+                      <Image
+                        width={0}
+                        height={0}
+                        className="w-[100%] h-[100%] absolute top-5 pe-10 "
+                        src={item?.bookImage} // Use item.bookImage instead of ResultBooks?.bookImage
+                        alt=""
+                      />
                     </div>
-                    <Link href={`/detailsBook/${item?._id}`}>
-                      <button class="px-8 bg-white text-black py-2 mt-5 font-[600]">
-                        View Details
-                      </button>
-                    </Link>
+                    <div class="contents ">
+                      <h2 class="title p-2 py-3 w-[100%] ">
+                        {item?.bookName?.slice(0, 20)}
+                      </h2>
+                      <div className="all-button-courses flex flex-wrap justify-center items-center mt-5 gap-2 ">
+                        <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
+                          {item?.publication}
+                        </p>
+                        <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
+                          {item?.createdAt?.slice(0, 10)}
+                        </p>
+                        <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff] ">
+                          {item?.subjectCode?.slice(0, 5)}
+                        </p>
+
+                        <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
+                          {item?.semester}
+                        </p>
+                        <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
+                          {item?.location}
+                        </p>
+                      </div>
+                      <Link href={`/detailsBook/${item?._id}`}>
+                        <button class="px-8 bg-white text-black py-2 mt-5 font-[600]">
+                          View Details
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </>
-          ))}
+              )
+          )}
       </Slider>
     </div>
   );

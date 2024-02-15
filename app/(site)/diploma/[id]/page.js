@@ -1,9 +1,9 @@
 "use client";
-
-import { AllBookList } from "@/Components/DiplomaINengineer/AllBookList";
-import { DepartmentBanner } from "@/Components/DiplomaINengineer/Department";
+import { AllBookList } from "@/Components/DiplomaEngineer/AllBookList";
+import { DepartmentBanner } from "@/Components/DiplomaEngineer/Department";
+import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const DiplomaSubjec = () => {
   const [SemesterNumber, setSemester] = useState();
@@ -15,19 +15,19 @@ const DiplomaSubjec = () => {
     DepartmentName = "সিভিল টেকনোলজি";
   }
   if (id === "ET") {
-    DepartmentName = "ইলেকট্রিক্যাল টেকনোলজি ";
+    DepartmentName = "ইলেকট্রিক্যাল টেকনোলজি";
   }
   if (id === "MT") {
-    DepartmentName = "মেকানিক্যাল টেকনোলজি  ";
+    DepartmentName = "মেকানিক্যাল টেকনোলজি";
   }
   if (id === "CST") {
-    DepartmentName = "কম্পিউটার সাইন্স এন্ড টেকনোলজি ";
+    DepartmentName = "কম্পিউটার সাইন্স এন্ড টেকনোলজি";
   }
   if (id === "ETT") {
-    DepartmentName = "ইলেকট্রনিক্স টেকনোলজি ";
+    DepartmentName = "ইলেকট্রনিক্স টেকনোলজি";
   }
   if (id === "PT") {
-    DepartmentName = "পাওয়ার টেকনোলজি ";
+    DepartmentName = "পাওয়ার টেকনোলজি";
   }
   if (id === "EMT") {
     DepartmentName = "ইলেকট্রোমেডিক্যাল টেকনোলজি";
@@ -35,7 +35,7 @@ const DiplomaSubjec = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto">
-      <DepartmentBanner ID={id} department={DepartmentName} />
+      <DepartmentBanner id={id} department={DepartmentName} />
     </div>
   );
 };

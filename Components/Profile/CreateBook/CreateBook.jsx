@@ -362,7 +362,7 @@ export const CreateBook = ({
                       <>
                         <option key={index} className="">
                           {item?.naem}
-                        </option>{" "}
+                        </option>
                       </>
                     ))}
                   </>

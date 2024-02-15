@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,300&family=Inter:wght@500&family=Playfair+Display:wght@500&family=Raleway:wght@100;300;600&family=Roboto:ital,wght@0,300;0,400;1,100&family=Space+Grotesk:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo+Play:wght@600;900&family=Fira+Code:wght@500&family=Fira+Sans:ital,wght@1,300&family=Hind+Madurai:wght@300;400&family=Playfair+Display&family=Poppins:ital,wght@1,300&family=REM:wght@100;600&family=Raleway:wght@700&family=Roboto:ital,wght@0,400;1,500&family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;1,400&display=swap");
+
+html,
+body,
+:root {
+  height: 100%;
+  background: #ffffff;
+}
+
+/* ==========font ========== */
+.IN {
+  font-family: "Poppins", sans-serif;
+}
+.GT {
+  font-family: "GT Super Bold", serif;
+}
+.IBM {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.crossed-text {
+  text-decoration: line-through;
+}
+/* ---------- project layOut max width -------->  */
+.max-w-screen-xl {
+  max-width: 1500px;
+}
+
+@media (max-width: 1023px) {
+  .max-w-screen-xl {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* <---------- project layOut max width end --------  */
+
+/* ---------------animations----------------> */
+.background_color_animation {
+  animation: rotateAndGlow 10s linear infinite,
+    moveBackground 20s linear infinite;
+}
+
+@keyframes rotateAndGlow {
+  0% {
+    transform: rotate(0deg);
+    box-shadow: 0 0 10px rgba(0, 59, 128, 0.5);
+  }
+  100% {
+    transform: rotate(360deg);
+    box-shadow: 0 0 30px rgb(126, 7, 110);
+  }
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+@media (min-width: 200px) and (max-width: 500px) {
+}
+
+/* ----------- text cetagory ---------- */
+
+.text-cetegory-heading {
+  font-size: 30px;
+  color: #2b0f42;
+  font-weight: 600;
+  font-family: "Space Grotesk", sans-serif;
+}
+@media (max-width: 520px) {
+  .text-cetegory-heading {
+    font-size: 22px !important;
+  }
+}
+
+.panding-image:hover .button-showing {
+  display: flex;
+}

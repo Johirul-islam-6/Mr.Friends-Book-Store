@@ -1,5 +1,5 @@
 "use client";
-import { ImageCard } from "@/Components/DiplomaINengineer/ImageCard";
+import { ImageCard } from "@/Components/DiplomaEngineer/ImageCard";
 import "./AllBooks.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -38,7 +38,7 @@ const AllBooks = () => {
         const result = await axios.get(
           `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=${searchingValue}&page=1&limit=20&sort=createdAt&sortOrder=desc`
         );
-        console.log(result, "madarchod");
+
         setResultBooks(result?.data?.data);
 
         setLoding(false);
@@ -57,8 +57,6 @@ const AllBooks = () => {
     { value: "Paid", name: "মেডিকেল" },
     { value: "Paid", name: "অন্যান্য" },
   ];
-
-  console.log("all data => ", ResultBooks);
 
   return (
     <>
