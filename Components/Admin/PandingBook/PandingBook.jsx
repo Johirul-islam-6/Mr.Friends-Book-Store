@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import pandingimage from "@/app/Assets/allBook/Math.jpg";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Link from "next/link";
 
 export const PandingBook = () => {
   const [Loding, setLoding] = useState(true);
@@ -53,7 +54,7 @@ export const PandingBook = () => {
     async function fetchData() {
       try {
         const result = await axios.patch(
-          `http://localhost:8080/api/v1/books/status/${updateStatus}`,
+          `https://resell-book-store-server.vercel.app/api/v1/books/status/${updateStatus}`,
           data
         );
 
@@ -72,7 +73,7 @@ export const PandingBook = () => {
 
         setLoding(false);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
 
@@ -104,8 +105,6 @@ export const PandingBook = () => {
     setStatus(e);
     setReload(true);
   };
-
-  console.log("get success =>", updateStatus);
 
   return (
     <>
@@ -209,9 +208,11 @@ export const PandingBook = () => {
               ))}
             </div>
             <div className="flex justify- mt-3">
-              <button className="text-[12px] px-5  bg-[#7E22CE] text-white">
-                all panding post
-              </button>
+              <Link href={"/admin/panding_post"}>
+                <button className="text-[12px] px-5  bg-[#7E22CE] text-white">
+                  all panding post
+                </button>
+              </Link>
             </div>
           </div>
         </div>

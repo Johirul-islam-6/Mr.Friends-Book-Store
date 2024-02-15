@@ -51,7 +51,7 @@ const PandingPost = () => {
     async function fetchData() {
       try {
         const result = await axios.patch(
-          `http://localhost:8080/api/v1/books/status/${updateStatus}`,
+          `https://resell-book-store-server.vercel.app/api/v1/books/status/${updateStatus}`,
           data
         );
 
@@ -77,7 +77,7 @@ const PandingPost = () => {
     fetchData();
   }, [updateStatus]);
 
-  // ----------- delete -------------
+  // ----------- delete panding book -------------
 
   async function fetchData(bookId, name) {
     try {
@@ -98,6 +98,7 @@ const PandingPost = () => {
     }
   }
 
+  // --------------- reload all book ------------
   const updateStatusValue = (e) => {
     setStatus(e);
     setReload(true);
@@ -131,6 +132,7 @@ const PandingPost = () => {
                 </div>
 
                 <input
+                  onChange={(e) => setSearchingValue(e?.target?.value)}
                   class="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
                   type="text"
                   id="search"
@@ -141,18 +143,29 @@ const PandingPost = () => {
           </div>
 
           <div class="px-3 py-4 flex justify-center overflow-y-auto overflow-x-auto  h-[70vh]">
-            <table class="w-full text-md bg-white shadow-md rounded mb-4">
-              <div className="flex flex-col justify-center">
+            <div class="w-full text-md bg-white shadow-md rounded mb-4">
+              {Loding && (
+                <>
+                  <div className="flex px-3 ">
+                    <div class=" gap-3 py-4 rounded shadow-md w-[100%] grid grid-cols-1 md:grid-cols-1 animate-pulse bg-gray-50 mx-auto">
+                      <div class="flex-shrink-0 w-[100%] h-52 rounded-mf bg-gray-300"></div>
+                      <div class="flex-shrink-0 w-[100%] h-52 rounded-mf bg-gray-300"></div>
+                      <div class="flex-shrink-0 w-[100%] h-52 rounded-mf bg-gray-300"></div>
+                    </div>
+                  </div>
+                </>
+              )}
+              <span className="flex flex-col justify-center">
                 {PendingBook?.map((singelbook, index) => (
                   <>
-                    <div
+                    <span
                       key={index}
                       class="border-b hover:bg-orange-100 bg-gray-100 flex flex-col w-[100%] md:grid justify-center grid-cols-1 md:grid-cols-5 lg:grid-cols-5 border-2"
                     >
                       <td class="p-3 px-5 relative">
-                        <div className="absolute bg-green-600 px-2 text-white rounded-full">
+                        <p className="absolute bg-green-600 px-2 text-white rounded-full">
                           {index + 1}
-                        </div>
+                        </p>
                         <Image
                           width={120}
                           height={100}
@@ -217,11 +230,11 @@ const PandingPost = () => {
                           Cancel
                         </button>
                       </td>
-                    </div>
+                    </span>
                   </>
                 ))}
-              </div>
-            </table>
+              </span>
+            </div>
           </div>
         </div>
       </div>
