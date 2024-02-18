@@ -85,13 +85,13 @@ export const ImageCard = ({ ResultBooks, reloadFunction }) => {
                 <div className="px-2 pb-1">
                   <div className="all-button-courses flex flex-wrap justify-start items-center mt-5 gap-2 ">
                     <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
-                      {singelbook?.publication}
+                      {singelbook?.department}
                     </p>
                     <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
                       {singelbook?.createdAt?.slice(0, 10)}
                     </p>
                     <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2] ">
-                      {singelbook?.subjectCode?.slice(0, 5)}
+                      {singelbook?.location?.slice(0, 12)}
                     </p>
                     {/* <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
                 {singelbook?.location}

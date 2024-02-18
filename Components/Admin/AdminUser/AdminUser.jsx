@@ -1,99 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
-export const AdminUser = () => {
+const data = [
+  { name: "Group A", value: 400 },
+  { name: "Group B", value: 300 },
+  { name: "Group C", value: 300 },
+  { name: "Group D", value: 200 },
+];
+
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
   return (
-    <>
-      <div class=" row-span-2 bg-white shadow rounded-lg">
-        <div class="w-[100%] bg-[#16A34A] text-white flex items-center justify-between px-32 py-5 font-semibold border-b border-gray-100">
-          <div className="flex justify-between ">
-            <span>New Created Account</span>
-          </div>
-        </div>
-        <div class="overflow-y-auto">
-          <ul class="p-6 space-y-6">
-            <li class="flex items-center">
-              <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src="https://randomuser.me/api/portraits/women/82.jpg"
-                  alt="Annette Watson profile picture"
-                />
-              </div>
-              <span class="text-gray-600">Annette Watson</span>
-              <span class="ml-auto font-semibold">9.3</span>
-            </li>
-            <li class="flex items-center">
-              <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src="https://randomuser.me/api/portraits/men/81.jpg"
-                  alt="Calvin Steward profile picture"
-                />
-              </div>
-              <span class="text-gray-600">Calvin Steward</span>
-              <span class="ml-auto font-semibold">8.9</span>
-            </li>
-            <li class="flex items-center">
-              <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src="https://randomuser.me/api/portraits/men/80.jpg"
-                  alt="Ralph Richards profile picture"
-                />
-              </div>
-              <span class="text-gray-600">Ralph Richards</span>
-              <span class="ml-auto font-semibold">8.7</span>
-            </li>
-            <li class="flex items-center">
-              <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src="https://randomuser.me/api/portraits/men/79.jpg"
-                  alt="Bernard Murphy profile picture"
-                />
-              </div>
-              <span class="text-gray-600">Bernard Murphy</span>
-              <span class="ml-auto font-semibold">8.2</span>
-            </li>
-            <li class="flex items-center">
-              <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src="https://randomuser.me/api/portraits/women/78.jpg"
-                  alt="Arlene Robertson profile picture"
-                />
-              </div>
-              <span class="text-gray-600">Arlene Robertson</span>
-              <span class="ml-auto font-semibold">8.2</span>
-            </li>
-            <li class="flex items-center">
-              <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src="https://randomuser.me/api/portraits/women/77.jpg"
-                  alt="Jane Lane profile picture"
-                />
-              </div>
-              <span class="text-gray-600">Jane Lane</span>
-              <span class="ml-auto font-semibold">8.1</span>
-            </li>
-            <li class="flex items-center">
-              <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src="https://randomuser.me/api/portraits/men/76.jpg"
-                  alt="Pat Mckinney profile picture"
-                />
-              </div>
-              <span class="text-gray-600">Pat Mckinney</span>
-              <span class="ml-auto font-semibold">7.9</span>
-            </li>
-            <li class="flex items-center">
-              <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                <img
-                  src="https://randomuser.me/api/portraits/men/75.jpg"
-                  alt="Norman Walters profile picture"
-                />
-              </div>
-              <span class="text-gray-600">Norman Walters</span>
-              <span class="ml-auto font-semibold">7.7</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </>
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
   );
 };
+
+const AdminUser = () => {
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <PieChart width={400} height={400}>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          labelLine={false}
+          label={renderCustomizedLabel}
+          outerRadius={80}
+          fill="#8884d8"
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+      </PieChart>
+    </ResponsiveContainer>
+  );
+};
+
+export default AdminUser;

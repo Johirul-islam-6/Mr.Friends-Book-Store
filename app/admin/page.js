@@ -1,23 +1,93 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 
 import "./admin.css";
 import Image from "next/image";
 
 import { PandingBook } from "@/Components/Admin/PandingBook/PandingBook";
 import { AdminUser } from "@/Components/Admin/AdminUser/AdminUser";
+import axios from "axios";
 
 const Admin = () => {
+  const [allUser, setUser] = useState("");
+  const [avaragePostget, setAvaragePostget] = useState("");
+  const [avaragePost, setAvaragePost] = useState("");
+  const [pandingBook, setpandingPost] = useState("");
+  const [avarage, setAvarage] = useState("");
+  const [Loading, setLoading] = useState(true);
+
+  const Url = `https://resell-book-store-server.vercel.app/api/v1/users/?searchTerm=&page=1&limit=100000&sort=createdAt&sortOrder=desc`;
+  const Url2 = `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=&page=1&limit=100000&sort=createdAt&sortOrder=desc`;
+  // ------- get users----
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const usersResponse = await axios.get(Url);
+        const booksResponse = await axios.get(Url2);
+
+        const usersData = usersResponse?.data?.data;
+        const booksData = booksResponse?.data?.data;
+
+        setUser(usersData);
+        setAvaragePostget(booksData);
+
+        // Perform calculation after both data fetches are completed
+        if (usersData && booksData) {
+          // Check if user count is a valid number
+          const userCount = parseFloat(usersData.length);
+          // Check if book count is a valid number
+          const bookCount = parseFloat(booksData.length);
+
+          if (!isNaN(userCount) && !isNaN(bookCount) && userCount !== 0) {
+            const totalPost = bookCount / userCount;
+            setAvaragePost(totalPost);
+          } else {
+            console.log("Invalid user count or book count");
+          }
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [Url, Url2]);
+
+  useEffect(() => {
+    if (avaragePostget) {
+      const pendingBooks = avaragePostget.filter(
+        (item) => item?.status !== "success"
+      );
+      const result = pendingBooks?.slice(0, 60);
+      setpandingPost(result);
+    }
+
+    const tatalpost = parseFloat(avaragePostget?.length);
+    const pandingPost = parseFloat(pandingBook?.length);
+    const AvaragePost = (tatalpost / pandingPost).toFixed(2);
+    setAvarage(AvaragePost);
+  }, [avaragePostget]);
+
+  // ---- get avarage post---------
+
   return (
     <>
-      <div class="flex bg-gray-100 min-h-screen">
+      <div class="flex bg-gray-100 min-h-screen overflow-y-auto">
         <div class="flex-grow text-gray-800">
           <main class="p-6 sm:p-10 space-y-6">
             <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
               <div class="mr-6">
-                <h1 class="text-4xl font-semibold mb-2">Admin Panel</h1>
-                <h2 class="text-gray-600 ml-0.5">Student helping purposes</h2>
+                <h1 class="text-4xl font-semibold mb-2 text-center md:text-start">
+                  Admin Panel
+                </h1>
+                <h2 class="text-gray-600 ml-0. text-center md:text-start">
+                  Student Post supervision
+                </h2>
               </div>
-              <div class="flex flex-wrap items-start justify-end -mb-3">
+              <div class="flex flex-wrap items-start justify-center md:justify-end -mb-3">
                 <button class="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
                   <svg
                     aria-hidden="true"
@@ -35,7 +105,7 @@ const Admin = () => {
                   </svg>
                   Manage dashboard
                 </button>
-                <button class="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3">
+                <button class="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md md:ml-6 mb-3">
                   <svg
                     aria-hidden="true"
                     fill="none"
@@ -74,10 +144,13 @@ const Admin = () => {
                   </svg>
                 </div>
                 <div>
-                  <span class="block text-2xl font-bold">62</span>
+                  <span class="block text-2xl font-bold">
+                    {allUser?.length}
+                  </span>
                   <span class="block text-gray-500">Total Account</span>
                 </div>
               </div>
+
               <div class="flex items-center p-8 bg-white shadow rounded-lg">
                 <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
                   <svg
@@ -96,8 +169,10 @@ const Admin = () => {
                   </svg>
                 </div>
                 <div>
-                  <span class="block text-2xl font-bold">6.8</span>
-                  <span class="block text-gray-500">Average Post</span>
+                  <span class="block text-2xl font-bold">
+                    {avaragePostget?.length}
+                  </span>
+                  <span class="block text-gray-500">Tatal Post</span>
                 </div>
               </div>
               <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -118,13 +193,13 @@ const Admin = () => {
                   </svg>
                 </div>
                 <div>
-                  <span class="inline-block text-2xl font-bold">9</span>
+                  <span class="inline-block text-2xl font-bold">
+                    {pandingBook?.length}
+                  </span>
                   <span class="inline-block text-xl text-gray-500 font-semibold">
-                    (14%)
+                    ({avarage + "%"})
                   </span>
-                  <span class="block text-gray-500">
-                    Underperforming students
-                  </span>
+                  <span class="block text-gray-500">Pending Post</span>
                 </div>
               </div>
               <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -154,10 +229,10 @@ const Admin = () => {
             {/* ===================== showin user Panding Book list start ====================== */}
             <section class="grid md:grid-cols-1 xl:grid-cols-1 xl:grid-rows-3 xl:grid-flow-col gap-6">
               {/* ------------------ panding book list------------- */}
-              <PandingBook />
-
-              {/* ------------------- all users------------- */}
               <AdminUser />
+              {/* ------------------- all users------------- */}
+
+              <PandingBook />
             </section>
             {/* ===================== showin user Panding Book list end ====================== */}
           </main>
