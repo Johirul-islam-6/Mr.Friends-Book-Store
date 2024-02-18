@@ -8,6 +8,8 @@ import React, { useEffect, useState } from "react";
 import createImage from "@/app/Assets/prifile/create-image.webp";
 import Image from "next/image";
 import axios from "axios";
+import Link from "next/link";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const Profile = () => {
   const navigate = useRouter();
@@ -110,8 +112,24 @@ const Profile = () => {
                     <p className="text-[22px] text-white font-bold">RA</p>
                   </div>
                   <h1 class="text-xl font-bold pt-5">{cookiesInfo?.name}</h1>
-                  <p class="text-gray-700">{cookiesInfo?.ruler}</p>
-                  <div class="mt-6 flex flex-wrap gap-4 justify-center">
+                  {cookiesInfo?.ruler === "superAdmin" ? (
+                    <>
+                      <Link
+                        className="bg-green-700 px-3 py-1 mt-2 rounded-lg"
+                        href={"/admin"}
+                      >
+                        <p class="text-white flex items-center justify-center gap-1">
+                          {cookiesInfo?.ruler} <FaRegArrowAltCircleRight />{" "}
+                        </p>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <p class="text-gray-700 mt-1">{cookiesInfo?.ruler}</p>
+                    </>
+                  )}
+
+                  <div class="mt-2 flex flex-wrap gap-4 justify-center">
                     <a
                       href="#"
                       class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"

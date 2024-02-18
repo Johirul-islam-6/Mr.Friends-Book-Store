@@ -1,10 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Image.css";
 import Image from "next/image";
 import book1 from "@/app/Assets/allBook/Math.jpg";
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
+import axios from "axios";
 
-export const ImageCard = ({ ResultBooks }) => {
+export const ImageCard = ({ ResultBooks, reloadFunction }) => {
+  const [Loading, setLoading] = useState(true);
+  const accessToken = Cookies.get("accessToken");
+  const [userInfo, setUserInfo] = useState("");
+
+  useEffect(() => {
+    if (accessToken) {
+      const getCookiesData = Cookies.get("CookieYouserData");
+      const cookiesInfo = JSON.parse(getCookiesData);
+      setUserInfo(cookiesInfo);
+    }
+    setLoading(false);
+  }, [accessToken]);
+
+  console.log("User info =>", userInfo?.ruler);
+
+  const onlyAdminhandleDelete = async (book_id) => {
+    if (!userInfo?.ruler === "superAdmin") {
+      return;
+    }
+    try {
+      // Send DELETE request to delete the book with its ID
+      await axios.delete(
+        `https://resell-book-store-server.vercel.app/api/v1/books/${book_id}`
+      );
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: `Deleted`,
+        text: "Thank you",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+      reloadFunction(true);
+    } catch (error) {
+      console.error("Error deleting book:", error);
+    }
+  };
+
   return (
     <>
       {ResultBooks?.map(
@@ -17,7 +59,18 @@ export const ImageCard = ({ ResultBooks }) => {
                 className="hover:border-[#573BA2] duration-150 overflow-hidden bg-[#fff] rounded-md p-2 border-b-4 border-t-4 bookCard"
               >
                 <div className="image relative">
-                  <div className="bg-[#00000029] bg-color w-[100%] h-[100%]  absolute rounded-t-md"></div>
+                  <div className="bg-[#00000029] bg-color w-[100%] h-[100%]  absolute rounded-t-md">
+                    {userInfo?.ruler === "superAdmin" && (
+                      <>
+                        <button
+                          onClick={() => onlyAdminhandleDelete(singelbook?._id)}
+                          className="flex justify-end py-1 px-2 w-[100%]"
+                        >
+                          <FaTrashAlt className="text-[#a02020] hover:text-[#e53f3f]" />
+                        </button>
+                      </>
+                    )}
+                  </div>
                   <Image
                     width={1424}
                     height={450}

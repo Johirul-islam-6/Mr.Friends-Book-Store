@@ -26,6 +26,11 @@ const AllBooks = () => {
   const [Loding, setLoding] = useState(true);
   const [searchingValue, setSearchingValue] = useState("");
   const [ResultBooks, setResultBooks] = useState("");
+  const [reload, setreload] = useState(false);
+
+  const reloadFunction = (sure) => {
+    setreload(sure);
+  };
 
   useEffect(() => {
     if (searchingValue === "সকল বই") {
@@ -48,7 +53,7 @@ const AllBooks = () => {
     }
 
     fetchData();
-  }, [searchingValue]);
+  }, [searchingValue, reload]);
 
   const options = [
     { value: "All", name: "সকল বই" },
@@ -222,7 +227,10 @@ const AllBooks = () => {
         {ResultBooks?.length > 0 && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 gap-y-6 gap-x-5  mt-2">
-              <ImageCard ResultBooks={ResultBooks} />
+              <ImageCard
+                reloadFunction={reloadFunction}
+                ResultBooks={ResultBooks}
+              />
             </div>
           </>
         )}
