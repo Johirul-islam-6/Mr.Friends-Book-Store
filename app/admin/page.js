@@ -10,6 +10,7 @@ import axios from "axios";
 
 const Admin = () => {
   const [allUser, setUser] = useState("");
+  const [adminUser, setadminUser] = useState("");
   const [avaragePostget, setAvaragePostget] = useState("");
   const [avaragePost, setAvaragePost] = useState("");
   const [pandingBook, setpandingPost] = useState("");
@@ -61,7 +62,7 @@ const Admin = () => {
       const pendingBooks = avaragePostget.filter(
         (item) => item?.status !== "success"
       );
-      const result = pendingBooks?.slice(0, 60);
+      const result = pendingBooks;
       setpandingPost(result);
     }
 
@@ -69,9 +70,18 @@ const Admin = () => {
     const pandingPost = parseFloat(pandingBook?.length);
     const AvaragePost = (tatalpost / pandingPost).toFixed(2);
     setAvarage(AvaragePost);
-  }, [avaragePostget]);
+
+    // admin user
+    if (allUser) {
+      const pendingBooks = allUser.filter((item) => item?.ruler !== "student");
+      const result = pendingBooks;
+      setadminUser(result);
+    }
+  }, [avaragePostget, allUser]);
 
   // ---- get avarage post---------
+
+  console.log("admin usera", adminUser);
 
   return (
     <>
@@ -229,10 +239,10 @@ const Admin = () => {
             {/* ===================== showin user Panding Book list start ====================== */}
             <section class="grid md:grid-cols-1 xl:grid-cols-1 xl:grid-rows-3 xl:grid-flow-col gap-6">
               {/* ------------------ panding book list------------- */}
-              <AdminUser />
-              {/* ------------------- all users------------- */}
-
               <PandingBook />
+
+              {/* ------------------- all users------------- */}
+              <AdminUser adminUser={adminUser} />
             </section>
             {/* ===================== showin user Panding Book list end ====================== */}
           </main>

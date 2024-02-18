@@ -1,63 +1,58 @@
 import React, { useState } from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { FaUserTie } from "react-icons/fa";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
+export const AdminUser = ({ adminUser }) => {
+  const [selectedValue, setSelectedValue] = useState("");
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  // Define options for the select dropdown
+  const options = [
+    { value: "superAdmin", label: "superAdmin" },
+    { value: "admin", label: "admin" },
+    { value: "student", label: "student" },
+  ];
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
+  // Event handler for when a value is selected
+  const handleSelectChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
   return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
+    <>
+      <div class=" row-span-2 bg-white shadow rounded-lg">
+        <div class="w-[100%] bg-[#16A34A] text-white flex items-center justify-center md:px-32 py-5 font-semibold border-b border-gray-100">
+          <div className="flex justify-between ">
+            <p className="text-[16px] text-center">All Admin List store</p>
+          </div>
+        </div>
+        <div class="overflow-y-auto">
+          <ul class="p-6 space-y-6">
+            {Array.isArray(adminUser) &&
+              adminUser?.map((user, index) => (
+                <>
+                  <li key={index} class="flex items-center">
+                    <div class="h-10 flex justify-center items-center w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                      <FaUserTie className="text-[22px] text-[#030e10d3]" />
+                    </div>
+                    <span class="text-gray-600">{user?.name}</span>
+
+                    <select
+                      disabled={user?.ruler !== "superAdmin"}
+                      className="ml-auto font-semibold text-[16px] text-[#0b78e5c8] border-2 px-[3px]"
+                      value={selectedValue}
+                      onChange={handleSelectChange}
+                    >
+                      {/* Map over the options and create an option for each */}
+                      {options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {user?.ruler === "admin" ? "admin" : "superAdmin"}
+                        </option>
+                      ))}
+                    </select>
+                  </li>
+                </>
+              ))}
+          </ul>
+        </div>
+      </div>
+    </>
   );
 };
-
-const AdminUser = () => {
-  return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart width={400} height={400}>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          label={renderCustomizedLabel}
-          outerRadius={80}
-          fill="#8884d8"
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
-    </ResponsiveContainer>
-  );
-};
-
-export default AdminUser;
