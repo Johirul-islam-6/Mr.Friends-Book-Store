@@ -85,3 +85,20 @@ body,
 .panding-image:hover .button-showing {
   display: flex;
 }
+.disabled-button {
+  background-color: #03b562 !important; /* Change the background color */ /* Change the text color */
+  cursor: not-allowed; /* Change the cursor */
+  opacity: 0.6; /* Change the opacity */
+  pointer-events: none; /* Disable pointer events */
+}
+
+@media (min-width: 700px) and (max-width: 1000px) {
+  .mid-user-item-hide {
+    display: none !important;
+  }
+}
+@media (max-width: 699px) {
+  .sm-user-item-hide {
+    display: none !important;
+  }
+}

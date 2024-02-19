@@ -34,9 +34,7 @@ export const PandingBook = ({ reloase }) => {
     }
 
     fetchData();
-  }, [searchingValue, reloades]);
 
-  useEffect(() => {
     if (ResultBooks) {
       const pendingBooks = ResultBooks.filter(
         (item) => item?.status !== "success"
@@ -45,7 +43,7 @@ export const PandingBook = ({ reloase }) => {
       setPendingBook(result);
       setReload(true);
     }
-  }, [ResultBooks, reloades]);
+  }, [searchingValue, reloades, ResultBooks]);
 
   // ---------- Updatae Status book ---------
 

@@ -2,6 +2,7 @@
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const PandingPost = () => {
   const [Loding, setLoding] = useState(true);
@@ -9,6 +10,12 @@ const PandingPost = () => {
   const [ResultBooks, setResultBooks] = useState([]);
   const [PendingBook, setPendingBook] = useState([]);
   const [reloades, setReload] = useState(false);
+  const [buttonHidden, setHidden] = useState(false);
+
+  // --------------- reload all book ------------
+  const reloadButton = (e) => {
+    setReload(e);
+  };
 
   useEffect(() => {
     //  ------------------ searching field -----------
@@ -27,22 +34,18 @@ const PandingPost = () => {
     }
 
     fetchData();
-  }, [searchingValue, reloades]);
 
-  useEffect(() => {
     if (ResultBooks) {
       const pendingBooks = ResultBooks.filter(
         (item) => item?.status !== "success"
       );
-      const result = pendingBooks?.slice(0, 60);
+      const result = pendingBooks;
       setPendingBook(result);
     }
-  }, [ResultBooks]);
+  }, [searchingValue, reloades, ResultBooks]);
 
   // ---------- Updatae Status book ---------
-
   const [updateStatus, setStatus] = useState();
-
   useEffect(() => {
     const data = {
       status: "success",
@@ -67,7 +70,8 @@ const PandingPost = () => {
             timer: 2000,
           });
         }
-
+        setHidden(false);
+        reloadButton(true);
         setLoding(false);
       } catch (error) {
         console.log(error);
@@ -98,10 +102,10 @@ const PandingPost = () => {
     }
   }
 
-  // --------------- reload all book ------------
   const updateStatusValue = (e) => {
     setStatus(e);
     setReload(true);
+    setHidden(true);
   };
 
   return (
@@ -216,7 +220,9 @@ const PandingPost = () => {
                         <button
                           onClick={() => updateStatusValue(singelbook?._id)}
                           type="button"
-                          class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                          class={`mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline ${
+                            buttonHidden ? "disabled-button" : ""
+                          }`}
                         >
                           confirm
                         </button>
@@ -225,7 +231,8 @@ const PandingPost = () => {
                             fetchData(singelbook?._id, singelbook?.bookName)
                           }
                           type="button"
-                          class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                          class={`text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline 
+                          `}
                         >
                           Cancel
                         </button>
