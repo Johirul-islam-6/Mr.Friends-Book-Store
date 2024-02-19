@@ -5,3 +5,9 @@
   left: 0;
   /* width: 100%; */
 }
+
+@media (min-width: 1150px) {
+  .All-Card {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

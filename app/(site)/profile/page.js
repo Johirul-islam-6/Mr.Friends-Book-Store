@@ -4,7 +4,7 @@ import { AllSellingBooks } from "@/Components/Profile/SellingBooks/AllSellingBoo
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
+import "./profile.css";
 import createImage from "@/app/Assets/prifile/create-image.webp";
 import Image from "next/image";
 import axios from "axios";
@@ -105,40 +105,52 @@ const Profile = () => {
       <div class="relative max-w-screen-xl bg-[#f3f3f3] mx-auto ">
         <div class=" mx-auto py-5">
           <div class="grid grid-cols-4 sm:grid-cols-12 gap-2 ">
-            <div class="col-span-4 sm:col-span-3">
+            <div class="col-span-5  sm:col-span-3 ">
               <div class="bg-white shadow rounded-lg p-6">
                 <div class="flex flex-col items-center">
                   <div className="bg-[#563A9F] p-10 rounded-full">
                     <p className="text-[22px] text-white font-bold">RA</p>
                   </div>
-                  <h1 class="text-xl font-bold pt-5">{cookiesInfo?.name}</h1>
-                  {cookiesInfo?.ruler === "superAdmin" ? (
-                    <>
-                      <Link
-                        className="bg-green-700 px-3 py-1 mt-2 rounded-lg"
-                        href={"/admin"}
-                      >
-                        <p class="text-white flex items-center justify-center gap-1">
-                          {cookiesInfo?.ruler} <FaRegArrowAltCircleRight />{" "}
-                        </p>
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <p class="text-gray-700 mt-1">{cookiesInfo?.ruler}</p>
-                    </>
-                  )}
 
-                  <div class="mt-2 flex flex-wrap gap-4 justify-center">
-                    <a
-                      href="#"
-                      class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
-                    >
-                      Edite Profile
-                    </a>
+                  <h1 class="text-xl font-bold pt-5">{cookiesInfo?.name}</h1>
+
+                  <div className="flex justify-center items-center gap-3 md:gap-x-8  mt-3  w-[100%]">
+                    {cookiesInfo?.ruler === "superAdmin" ? (
+                      <>
+                        <div class="mt-2 flex flex-wrap gap-4 justify-center">
+                          <a
+                            href={"/admin"}
+                            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 font-[600] text-[14px] rounded bttn"
+                          >
+                            Admin panel
+                          </a>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div class="mt-2 flex flex-wrap gap-4 justify-center">
+                          <a
+                            href={"#"}
+                            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 font-[600] text-[14px] rounded bttn"
+                          >
+                            Student
+                          </a>
+                        </div>
+                      </>
+                    )}
+
+                    <div class="mt-2 flex flex-wrap gap-4 justify-center">
+                      <a
+                        href="#"
+                        class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-[14px] font-[600] rounded bttn"
+                      >
+                        Edite Profile
+                      </a>
+                    </div>
                   </div>
                 </div>
-                <hr class="my-6 border-t border-gray-300" />
+                <hr class="my-4 border-t border-gray-300" />
+
                 <div class="flex flex-col">
                   <span class="text-gray-700 uppercase font-bold tracking-wider mb-2">
                     information
@@ -169,7 +181,9 @@ const Profile = () => {
               <div class="bg-white shadow rounded-lg p-6">
                 <div className="flex items-center justify-between mb-5">
                   <div className="block">
-                    <h2 class="md:text-xl font-bold ">My Resale Books</h2>
+                    <h2 class="md:text-xl font-bold ">
+                      My Resale posted Books{" "}
+                    </h2>
                     <p className="text-[8px] md:text-[11px]">
                       আপনি সর্বোচ্চ ৩ টি বই পাবলিশ করতে পারবে ।
                     </p>
@@ -235,7 +249,7 @@ const Profile = () => {
                 )}
                 {/* ------ Display My Selling Book list-------- */}
                 <div className="all-Selling-book">
-                  <div className="grid items-center gap-3 justify-center md:justify-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="profile-container grid items-center gap-3 justify-center md:justify-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {createdBookInfo?.length !== 0 ? (
                       <>
                         <AllSellingBooks
@@ -285,47 +299,20 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <h2 class="text-xl font-bold mt-6 mb-4">Experience</h2>
-                <div class="mb-6">
+                <div class="mb-6 mt-5">
                   <div class="flex justify-between flex-wrap gap-2 w-full">
-                    <span class="text-gray-700 font-bold">Web Developer</span>
+                    <span class="text-gray-700 font-bold">কিছু কথা..</span>
                     <p>
-                      <span class="text-gray-700 mr-2">at ABC Company</span>
-                      <span class="text-gray-700">2017 - 2019</span>
+                      <span class="text-gray-700 mr-2">**মানুষের ব্যবহার</span>
+                      <span class="text-gray-700">তার পরিচয়**</span>
                     </p>
                   </div>
-                  <p class="mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    finibus est vitae tortor ullamcorper, ut vestibulum velit
-                    convallis. Aenean posuere risus non velit egestas suscipit.
-                  </p>
-                </div>
-                <div class="mb-6">
-                  <div class="flex justify-between flex-wrap gap-2 w-full">
-                    <span class="text-gray-700 font-bold">Web Developer</span>
-                    <p>
-                      <span class="text-gray-700 mr-2">at ABC Company</span>
-                      <span class="text-gray-700">2017 - 2019</span>
-                    </p>
-                  </div>
-                  <p class="mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    finibus est vitae tortor ullamcorper, ut vestibulum velit
-                    convallis. Aenean posuere risus non velit egestas suscipit.
-                  </p>
-                </div>
-                <div class="mb-6">
-                  <div class="flex justify-between flex-wrap gap-2 w-full">
-                    <span class="text-gray-700 font-bold">Web Developer</span>
-                    <p>
-                      <span class="text-gray-700 mr-2">at ABC Company</span>
-                      <span class="text-gray-700">2017 - 2019</span>
-                    </p>
-                  </div>
-                  <p class="mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    finibus est vitae tortor ullamcorper, ut vestibulum velit
-                    convallis. Aenean posuere risus non velit egestas suscipit.
+                  <p class="mt-5">
+                    তিনি সত্যিকার অর্থে একজন ‘পর্যটক রিপোর্টার’। তিনি এক জায়গায়
+                    বসে খবর সংগ্রহ করেন না, খবর সংগ্রহের জন্য ছুটে যান প্রত্যন্ত
+                    অঞ্চলে; তাঁর কর্ম এলাকা রাজশাহী হলেও নাটোর, নওগাঁ, টাঙ্গাইল
+                    কিংবা ঢাকায়ও ছুটে যান খবরের খোঁজে। আমাদের চারপাশে কত বিচিত্র
+                    ঘটনা ঘটে; সেটি হতে পারে পারিবারিক ।
                   </p>
                 </div>
               </div>

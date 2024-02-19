@@ -226,7 +226,7 @@ const AllBooks = () => {
 
         {ResultBooks?.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-6 gap-x-5  mt-2">
+            <div className="All-Card grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-6 gap-x-5  mt-2">
               <ImageCard
                 reloadFunction={reloadFunction}
                 ResultBooks={ResultBooks}

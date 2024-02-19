@@ -219,9 +219,11 @@ export const CreateBook = ({
       });
     }
   };
-
+  const [uploadeImages, setuploade] = useState();
   const handelFileImageUpload = async (fileImage) => {
     const file = fileImage?.target?.files[0];
+    setuploade(file);
+
     try {
       const base64 = await ConvertToBase64(file);
       setPostImage(base64);
@@ -230,6 +232,7 @@ export const CreateBook = ({
     }
   };
 
+  console.log("imge", uploadeImages?.name);
   return (
     <>
       <div className="mt-5">
@@ -260,17 +263,51 @@ export const CreateBook = ({
               >
                 বই এর ছবি
               </label>
-              <input
-                onChange={(e) => handelFileImageUpload(e)}
-                required
-                id="file-upload"
-                name="bookImage"
-                label="image"
-                type="file"
-                accept=".jpeg, .png, jpg"
-                placeholder="Enter Your Full Name"
-                class="input block border border-gray-300 focus:border-pitch-black placeholder:font-normal text-[16px] py-2 px-3 w-full focus:outline-none mt-1"
-              />
+
+              <div class="relative px-2 mt-1">
+                <label
+                  title="Click to upload"
+                  for="bookImage"
+                  class="cursor-pointer flex h-[20px] items-center 
+                   before:border-gray-400/60 hover:before:border-gray-300 group dark:before:bg-darker
+                    dark:hover:before:border-gray-500 before:bg-gray-100 dark:before:border-gray-600 
+                    before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed
+                     before:transition-transform before:duration-300 hover:before:scale-105
+                      active:duration-75 active:before:scale-95"
+                >
+                  <div class="w-[50px] mt-9 relative flex justify-center items-center">
+                    <img
+                      class="w-[30px]"
+                      src="https://www.svgrepo.com/show/485545/upload-cicle.svg"
+                      alt="file upload icon"
+                      width="512"
+                      height="512"
+                    />
+                  </div>
+
+                  <div class="relative top-[20px]">
+                    <span class="block text-[14px] font-semibold relative text-blue-900 dark:text-black group-hover:text-blue-500">
+                      {uploadeImages?.name
+                        ? uploadeImages?.name?.slice(0, 16)
+                        : "Upload a image"}
+                    </span>
+                    <span class=" block text-[12px] text-gray-500 dark:text-gray-400">
+                      Max 980kb
+                    </span>
+                  </div>
+                </label>
+                <input
+                  onChange={(e) => handelFileImageUpload(e)}
+                  hidden=""
+                  type="file"
+                  name="bookImage"
+                  id="bookImage"
+                  accept=".jpeg, .png, jpg"
+                  class="bg-[#F3F4F6] mb-1 "
+                />
+              </div>
+
+              {/* ///// */}
             </div>
             {/* ------ field number 03 ------- */}
             <div>
@@ -290,31 +327,6 @@ export const CreateBook = ({
               />
             </div>
             {/* ------ field number 04 ------- */}
-
-            <div>
-              <label
-                class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
-                for="phone"
-              >
-                পাবলিকেশন
-              </label>
-
-              <select
-                name="publication"
-                class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
-              >
-                <option className="bg-[#E8F0FE]">select</option>
-                {publication?.map((item, index) => (
-                  <>
-                    <option key={index} className="">
-                      {item}
-                    </option>{" "}
-                  </>
-                ))}
-              </select>
-            </div>
-
-            {/* ------ field number 05 ------- */}
             <div>
               <label
                 class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
@@ -391,6 +403,31 @@ export const CreateBook = ({
                 )}
               </select>
             </div>
+
+            {/* ------ field number 05 ------- */}
+            <div>
+              <label
+                class="text-[#000b] md:text-[14px] text-[14px] ps-[2px] font-bold  md:ps-1 IN"
+                for="phone"
+              >
+                পাবলিকেশন
+              </label>
+
+              <select
+                name="publication"
+                class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1"
+              >
+                <option className="bg-[#E8F0FE]">select</option>
+                {publication?.map((item, index) => (
+                  <>
+                    <option key={index} className="">
+                      {item}
+                    </option>{" "}
+                  </>
+                ))}
+              </select>
+            </div>
+
             {/* ------ field number 05 ------- */}
             <div>
               <label

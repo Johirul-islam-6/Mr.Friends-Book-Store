@@ -1,0 +1,11 @@
+@media (min-width: 750px) and (max-width: 1150px) {
+  .profile-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 600px) and (max-width: 1200px) {
+  .bttn {
+    font-size: 9px !important;
+    padding: 5px 8px !important;
+  }
+}

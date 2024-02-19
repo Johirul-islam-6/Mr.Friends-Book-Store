@@ -20,6 +20,11 @@ const Admin = () => {
   const Url = `https://resell-book-store-server.vercel.app/api/v1/users/?searchTerm=&page=1&limit=100000&sort=createdAt&sortOrder=desc`;
   const Url2 = `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=&page=1&limit=100000&sort=createdAt&sortOrder=desc`;
   // ------- get users----
+  const [reloaseStart, setReload] = useState(false);
+  const reloase = (e) => {
+    setReload(e);
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -55,7 +60,7 @@ const Admin = () => {
     }
 
     fetchData();
-  }, [Url, Url2]);
+  }, [Url, Url2, reloaseStart]);
 
   useEffect(() => {
     if (avaragePostget) {
@@ -77,7 +82,7 @@ const Admin = () => {
       const result = pendingBooks;
       setadminUser(result);
     }
-  }, [avaragePostget, allUser]);
+  }, [avaragePostget, allUser, reloaseStart]);
 
   // ---- get avarage post---------
 
@@ -155,7 +160,17 @@ const Admin = () => {
                 </div>
                 <div>
                   <span class="block text-2xl font-bold">
-                    {allUser?.length}
+                    {Loading ? (
+                      <>
+                        <div class="flex gap-2 pb-2">
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                        </div>
+                      </>
+                    ) : (
+                      <>{allUser?.length}</>
+                    )}{" "}
                   </span>
                   <span class="block text-gray-500">Total Account</span>
                 </div>
@@ -180,7 +195,17 @@ const Admin = () => {
                 </div>
                 <div>
                   <span class="block text-2xl font-bold">
-                    {avaragePostget?.length}
+                    {Loading ? (
+                      <>
+                        <div class="flex gap-2 pb-2">
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                        </div>
+                      </>
+                    ) : (
+                      <> {avaragePostget?.length}</>
+                    )}{" "}
                   </span>
                   <span class="block text-gray-500">Tatal Post</span>
                 </div>
@@ -204,10 +229,28 @@ const Admin = () => {
                 </div>
                 <div>
                   <span class="inline-block text-2xl font-bold">
-                    {pandingBook?.length}
+                    {Loading ? (
+                      <>
+                        <div class="flex gap-2 pb-2">
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                        </div>
+                      </>
+                    ) : (
+                      <> {pandingBook?.length}</>
+                    )}{" "}
                   </span>
                   <span class="inline-block text-xl text-gray-500 font-semibold">
-                    ({avarage + "%"})
+                    {Loading ? (
+                      <>
+                        <div class="flex gap-2 pb-2 ms-2">
+                          <div class="rounded-full h-[5px] w-[5px] bg-violet-800 animate-ping"></div>
+                        </div>
+                      </>
+                    ) : (
+                      <> ({avarage + "%"})</>
+                    )}{" "}
                   </span>
                   <span class="block text-gray-500">Pending Post</span>
                 </div>
@@ -239,7 +282,7 @@ const Admin = () => {
             {/* ===================== showin user Panding Book list start ====================== */}
             <section class="grid md:grid-cols-1 xl:grid-cols-1 xl:grid-rows-3 xl:grid-flow-col gap-6">
               {/* ------------------ panding book list------------- */}
-              <PandingBook />
+              <PandingBook reloase={reloase} />
 
               {/* ------------------- all users------------- */}
               <AdminUser adminUser={adminUser} />

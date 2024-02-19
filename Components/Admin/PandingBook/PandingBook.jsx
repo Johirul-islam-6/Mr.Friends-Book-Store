@@ -6,12 +6,16 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Link from "next/link";
 
-export const PandingBook = () => {
+export const PandingBook = ({ reloase }) => {
   const [Loding, setLoding] = useState(true);
   const [searchingValue, setSearchingValue] = useState("");
   const [ResultBooks, setResultBooks] = useState([]);
   const [PendingBook, setPendingBook] = useState([]);
   const [reloades, setReload] = useState(false);
+
+  const ReloadeData = (e) => {
+    setReload(e);
+  };
 
   useEffect(() => {
     //  ------------------ searching field -----------
@@ -22,7 +26,7 @@ export const PandingBook = () => {
         );
 
         setResultBooks(result?.data?.data);
-
+        setReload(true);
         setLoding(false);
       } catch (error) {
         console.log(error);
@@ -39,13 +43,15 @@ export const PandingBook = () => {
       );
       const result = pendingBooks?.slice(0, 6);
       setPendingBook(result);
+      setReload(true);
     }
-  }, [ResultBooks]);
+  }, [ResultBooks, reloades]);
 
   // ---------- Updatae Status book ---------
 
   const [updateStatus, setStatus] = useState();
 
+  // ----- post update success ----
   useEffect(() => {
     const data = {
       status: "success",
@@ -70,7 +76,7 @@ export const PandingBook = () => {
             timer: 2000,
           });
         }
-
+        ReloadeData(true);
         setLoding(false);
       } catch (error) {
         // console.log(error);
@@ -82,6 +88,7 @@ export const PandingBook = () => {
 
   // ----------- delete -------------
 
+  // ---------- post delete ---
   async function fetchData(bookId, name) {
     try {
       const response = await axios.delete(
@@ -95,6 +102,7 @@ export const PandingBook = () => {
           icon: "success",
         });
         setReload(true);
+        reloase(true);
       }
     } catch (error) {
       console.error("Error deleting book:", error);
