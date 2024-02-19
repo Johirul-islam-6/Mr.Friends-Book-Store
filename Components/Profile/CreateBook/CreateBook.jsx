@@ -17,6 +17,7 @@ export const CreateBook = ({
   const [cetagorybook, setCetagory] = useState();
   const [cetagorybook2, setCetagory2] = useState();
   const [postImage, setPostImage] = useState();
+  const [buttonHidden, setHidden] = useState(false);
 
   const publication = ["হক প্রকাশনী", "এস আর প্রকাশনী", "অন্যান্য"];
   const departmental = ["কারিগরি", "জেনারেল", "মেডিকেল", "অন্যান্য"];
@@ -175,7 +176,7 @@ export const CreateBook = ({
       discription,
       status,
     };
-
+    setHidden(true);
     console.log("madarchod", bookData);
     if (createdBookInfo?.length >= 3) {
       return Swal.fire({
@@ -547,8 +548,10 @@ export const CreateBook = ({
             <button
               // onClick={() => disableButton("hidden")}
               type="submit"
-              class="my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
-                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#8555fe] shadow-lg cursor-pointer transition ease-in duration-300 "
+              class={`my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
+                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#8555fe] shadow-lg cursor-pointer transition ease-in duration-300 ${
+                   buttonHidden ? "disabled-button" : ""
+                 }`}
             >
               Create
             </button>

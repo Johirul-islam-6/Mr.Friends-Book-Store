@@ -9,6 +9,7 @@ import axios from "axios";
 
 const Login = () => {
   const router = useRouter();
+  const [buttonHidden, setHidden] = useState(false);
   const [passValue, setPassValue] = useState({
     password: "",
     showPassword: false,
@@ -32,7 +33,7 @@ const Login = () => {
       email,
       password,
     };
-
+    setHidden(true);
     try {
       const response = await axios.post(
         "https://resell-book-store-server.vercel.app/api/v1/users/login",
@@ -182,8 +183,10 @@ const Login = () => {
             <div class="flex justify-center mt-2">
               <button
                 type="submit"
-                class="my-5 px-12 justify-center bg-[#BF1F49] text-gray-100 py-3  rounded-md tracking-wide
-                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#bf1f4ad3] shadow-lg cursor-pointer transition ease-in duration-300"
+                class={`my-5 px-12 justify-center bg-[#BF1F49] text-gray-100 py-3  rounded-md tracking-wide
+                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#bf1f4ad3] shadow-lg cursor-pointer transition ease-in duration-300 ${
+                   buttonHidden ? "disabled-button" : ""
+                 }`}
               >
                 Login
               </button>

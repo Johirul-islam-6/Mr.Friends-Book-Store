@@ -12,6 +12,12 @@ body,
   background: #ffffff;
 }
 
+.disabled-button {
+  background-color: #03b562 !important; /* Change the background color */ /* Change the text color */
+  cursor: not-allowed; /* Change the cursor */
+  opacity: 0.6; /* Change the opacity */
+  pointer-events: none; /* Disable pointer events */
+}
 /* ==========font ========== */
 .IN {
   font-family: "Poppins", sans-serif;

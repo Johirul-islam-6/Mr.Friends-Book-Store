@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 const Registration = () => {
   const router = useRouter();
   const [institutes, setSubject] = useState();
+  const [buttonHidden, setHidden] = useState(false);
   const [passValue, setPassValue] = useState({
     password: "",
     showPassword: false,
@@ -137,6 +138,7 @@ const Registration = () => {
       ruler,
     };
 
+    setHidden(true);
     try {
       const response = await axios.post(
         "https://resell-book-store-server.vercel.app/api/v1/users/create-user",
@@ -148,7 +150,10 @@ const Registration = () => {
 
       // if get the data then save
       if (result?.success && cookiesData) {
-        Cookies.set("accessToken", JSON.stringify(cookiesData?.accessToken));
+        const expirationTime = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days in milliseconds
+        Cookies.set("accessToken", JSON.stringify(cookiesData?.accessToken), {
+          expires: expirationTime,
+        });
         Cookies.set("CookieYouserData", JSON.stringify(cookiesData));
         Swal.fire({
           position: "center",
@@ -158,8 +163,9 @@ const Registration = () => {
           showConfirmButton: false,
           timer: 2500,
         });
+        router.push("/profile");
       }
-      router.push("/profile");
+
       setTimeout(() => {
         window.location.reload();
       }, 700);
@@ -515,8 +521,10 @@ const Registration = () => {
             <div class="flex justify-center mt-1">
               <button
                 type="submit"
-                class="my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
-                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#431ea0] shadow-lg cursor-pointer transition ease-in duration-300"
+                class={`my-5 px-12 justify-center bg-[#563A9F] text-gray-100 py-3  rounded-md tracking-wide
+                 font-semibold  focus:outline-none focus:shadow-outline hover:bg-[#431ea0] shadow-lg cursor-pointer transition ease-in duration-300 ${
+                   buttonHidden ? "disabled-button" : ""
+                 } `}
               >
                 Submit
               </button>
