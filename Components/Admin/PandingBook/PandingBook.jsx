@@ -207,6 +207,7 @@ export const PandingBook = ({ reloase }) => {
                       width={350}
                       height={400}
                       src={singelbook?.bookImage}
+                      className="h-[320px]"
                       alt=""
                     />
                   </div>

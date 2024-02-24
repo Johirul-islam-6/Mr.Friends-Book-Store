@@ -32,11 +32,13 @@ export default function RootLayout({ children }) {
       <body className="">
         {Loading && (
           <>
-            <div class="flex space-x-2 justify-center items-center bg-white h-screen ">
-              <span class="sr-only">Loading...</span>
-              <div class="h-8 w-8 bg-[#563A9F] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-              <div class="h-8 w-8 bg-[#563A9F] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-              <div class="h-8 w-8 bg-[#563A9F] rounded-full animate-bounce"></div>
+            <div className="absolute w-[100%] bg-white h-[140vh] z-[1000]">
+              <div class="flex space-x-2 justify-center items-center bg-white h-screen  ">
+                <span class="sr-only">Loading...</span>
+                <div class="h-8 w-8 bg-[#563A9F] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div class="h-8 w-8 bg-[#563A9F] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div class="h-8 w-8 bg-[#563A9F] rounded-full animate-bounce"></div>
+              </div>
             </div>
           </>
         )}
@@ -158,51 +160,27 @@ export default function RootLayout({ children }) {
                         </svg>
                         review
                       </a>
-
-                      <a
-                        href="#"
-                        class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
-                      >
-                        <span class="sr-only">Documents</span>
-                        <svg
-                          aria-hidden="true"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          class="h-6 w-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                          />
-                        </svg>
-                      </a>
                     </nav>
                     <div class="inline-flex items-center justify-center h-20 w-20 border-t border-gray-700">
-                      <button class="p-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
-                        <span class="sr-only">Settings</span>
-                        <svg
-                          aria-hidden="true"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          class="h-6 w-6"
+                      <button class="p-3   rounded-lg">
+                        <Link
+                          href="/"
+                          class="flex flex-col items-center justify-center py-3 hover:text-gray-400  rounded-lg"
                         >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
+                          {/* <span class="sr-only">Post</span> */}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={15}
+                            hanging={15}
+                            viewBox="0 0 576 512"
+                          >
+                            <path
+                              fill="#ffffff"
+                              d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
+                            />
+                          </svg>
+                          Exit
+                        </Link>
                       </button>
                     </div>
                   </div>
@@ -239,20 +217,22 @@ export default function RootLayout({ children }) {
                       />
                     </div>
                     <div class="flex flex-shrink-0 items-center ml-auto">
-                      <button class="inline-flex items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
-                        <span class="sr-only">User Menu</span>
-                        <div class="flex flex-col md:flex md:flex-col md:items-end md:leading-tight">
-                          <span class="font-semibold">
-                            {userInfo?.name?.slice(0, 30)}
+                      <Link href={`/profile`}>
+                        <button class="inline-flex items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
+                          <span class="sr-only">User Menu</span>
+                          <div class="flex flex-col md:flex md:flex-col md:items-end md:leading-tight">
+                            <span class="font-semibold">
+                              {userInfo?.name?.slice(0, 30)}
+                            </span>
+                            <span class="text-sm text-gray-600">
+                              {userInfo?.ruler}
+                            </span>
+                          </div>
+                          <span class="hidden h-12 w-12 ml-2 sm:ml-3 mr-2 md:flex justify-center items-center bg-gray-100 rounded-full overflow-hidden">
+                            <FaUserTie className="text-[22px] text-[#030e10d3]" />
                           </span>
-                          <span class="text-sm text-gray-600">
-                            {userInfo?.ruler}
-                          </span>
-                        </div>
-                        <span class="hidden h-12 w-12 ml-2 sm:ml-3 mr-2 md:flex justify-center items-center bg-gray-100 rounded-full overflow-hidden">
-                          <FaUserTie className="text-[22px] text-[#030e10d3]" />
-                        </span>
-                      </button>
+                        </button>
+                      </Link>
                     </div>
                   </header>
                 </div>

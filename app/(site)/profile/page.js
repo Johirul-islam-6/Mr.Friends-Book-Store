@@ -15,12 +15,17 @@ const Profile = () => {
   const navigate = useRouter();
   const [Loding, setLoding] = useState(false);
   const [loding2, setLoding2] = useState(true);
+  const [loding3, setLoding3] = useState(true);
   const accessToken = Cookies.get("accessToken");
   const [openMadal1, setModal1] = useState(false);
-
+  const [userId, setuserId] = useState();
   const [cookiesInfo, setCookiesInfo] = useState();
+
   const [createdBookInfo, setCreateBookInfo] = useState();
   const [refreshbook, setrefresh] = useState(false);
+
+  const [UserInformation, setUserInformation] = useState([]);
+
   const createdBook = (e) => {
     if (e) {
       setrefresh(e);
@@ -28,41 +33,86 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    // ------------- token get an genarate -------------
     setLoding(true);
     if (!accessToken) {
       return navigate.push("/login");
     }
     const getCookiesData = Cookies.get("CookieYouserData");
-    const cookiesInfo = JSON.parse(getCookiesData);
-    setCookiesInfo(cookiesInfo);
+    const cookiesInfos = JSON.parse(getCookiesData);
+    setuserId(cookiesInfos?.id);
+    setCookiesInfo(cookiesInfos);
 
     // ------------ get 3 book lisht -----------
-    async function fetchData() {
-      try {
-        const result = await axios.get(
-          `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=${cookiesInfo?.email}&page=1&limit=5&sort=createdAt&sortOrder=desc`
-        );
+    if (cookiesInfo?.email) {
+      async function fetchData() {
+        try {
+          const result = await axios.get(
+            `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=${cookiesInfo?.email}&page=1&limit=5&sort=createdAt&sortOrder=desc`
+          );
 
-        setCreateBookInfo(result?.data?.data);
-        setLoding2(false);
-      } catch (error) {
-        console.log(error);
+          setCreateBookInfo(result?.data?.data);
+          setLoding2(false);
+        } catch (error) {
+          console.log(error);
+        }
       }
+
+      fetchData();
     }
 
-    fetchData();
+    // ------- user admin checking-----
+    if (cookiesInfo?.email) {
+      async function fetchData2() {
+        try {
+          const result = await axios.get(
+            `https://resell-book-store-server.vercel.app/api/v1/users/?searchTerm=${cookiesInfo?.email}&page=1&limit=5&sort=createdAt&sortOrder=desc`
+          );
+
+          setUserInformation(result?.data?.data);
+          setLoding3(false);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchData2();
+    }
 
     setTimeout(() => {
       setrefresh(false);
     }, 5000);
-  }, [refreshbook, accessToken]);
+  }, [refreshbook, accessToken, cookiesInfo?.email, navigate]);
 
   const logout = () => {
     Cookies.remove("CookieYouserData");
     Cookies.remove("accessToken");
     window.location.reload();
   };
+
+  const closeModal = (e) => {
+    setModal1(e);
+  };
+  // ======== when User block ======
+  if (UserInformation[0]?.ruler === "block") {
+    return (
+      <>
+        <div className="flex justify-center items-center h-[100vh] ">
+          <h1 className="text-center text-red-700 text-[25px] font-[600]">
+            Sorry Your account is Suspended!
+          </h1>
+        </div>
+      </>
+    );
+  }
+
+  // ========== user admin access =====
+  if (UserInformation[0]?.ruler) {
+    if (UserInformation[0]?.ruler === cookiesInfo?.ruler) {
+    } else {
+      Cookies.remove("CookieYouserData");
+      Cookies.remove("accessToken");
+      window.location.reload();
+    }
+  }
 
   if (!Loding) {
     return (
@@ -96,10 +146,6 @@ const Profile = () => {
     );
   }
 
-  const closeModal = (e) => {
-    setModal1(e);
-  };
-
   return (
     <>
       <div class="relative max-w-screen-xl bg-[#f3f3f3] mx-auto ">
@@ -115,7 +161,8 @@ const Profile = () => {
                   <h1 class="text-xl font-bold pt-5">{cookiesInfo?.name}</h1>
 
                   <div className="flex justify-center items-center gap-3 md:gap-x-8  mt-3  w-[100%]">
-                    {cookiesInfo?.ruler === "superAdmin" ? (
+                    {cookiesInfo?.ruler === "superAdmin" ||
+                    cookiesInfo?.ruler === "admin" ? (
                       <>
                         <div class="mt-2 flex flex-wrap gap-4 justify-center">
                           <a
@@ -156,7 +203,10 @@ const Profile = () => {
                     information
                   </span>
                   <ul>
-                    <li class="mb-2">joining date : 02/02/2024</li>
+                    <li class="mb-2">
+                      joining date :{" "}
+                      {UserInformation[0]?.createdAt?.slice(0, 10)}
+                    </li>
                     <li class="mb-2">Roll : {cookiesInfo?.studentRoll}</li>
                     <li class="mb-2">Institute : {cookiesInfo?.institute}</li>
                     <li class="mb-2">Department : {cookiesInfo?.department}</li>

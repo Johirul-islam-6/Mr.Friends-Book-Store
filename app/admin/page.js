@@ -7,6 +7,7 @@ import Image from "next/image";
 import { PandingBook } from "@/Components/Admin/PandingBook/PandingBook";
 import { AdminUser } from "@/Components/Admin/AdminUser/AdminUser";
 import axios from "axios";
+import Link from "next/link";
 
 const Admin = () => {
   const [allUser, setUser] = useState("");
@@ -120,23 +121,26 @@ const Admin = () => {
                   </svg>
                   Manage dashboard
                 </button>
-                <button class="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md md:ml-6 mb-3">
-                  <svg
-                    aria-hidden="true"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
-                  Create new admin
-                </button>
+
+                <Link href={`/admin/userAdmin`}>
+                  <button class="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md md:ml-6 mb-3">
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                    Create new admin
+                  </button>
+                </Link>
               </div>
             </div>
 
@@ -249,7 +253,7 @@ const Admin = () => {
                         </div>
                       </>
                     ) : (
-                      <> ({avarage + "%"})</>
+                      <> </>
                     )}{" "}
                   </span>
                   <span class="block text-gray-500">Pending Post</span>

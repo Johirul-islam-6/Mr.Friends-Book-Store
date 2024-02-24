@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { FaUserTie } from "react-icons/fa";
 
 export const AdminUser = ({ adminUser }) => {
-  const [selectedValue, setSelectedValue] = useState("");
-
   // Define options for the select dropdown
   const options = [
     { value: "superAdmin", label: "superAdmin" },
@@ -11,10 +9,6 @@ export const AdminUser = ({ adminUser }) => {
     { value: "student", label: "student" },
   ];
 
-  // Event handler for when a value is selected
-  const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
   return (
     <>
       <div class=" row-span-2 bg-white shadow rounded-lg">
@@ -35,10 +29,10 @@ export const AdminUser = ({ adminUser }) => {
                     <span class="text-gray-600">{user?.name}</span>
 
                     <select
-                      disabled={user?.ruler !== "superAdmin"}
+                      disabled={
+                        user?.ruler !== "superAdmin" || user?.ruler !== "admin"
+                      }
                       className="ml-auto font-semibold text-[16px] text-[#0b78e5c8] border-2 px-[3px]"
-                      value={selectedValue}
-                      onChange={handleSelectChange}
                     >
                       {/* Map over the options and create an option for each */}
                       {options.map((option) => (
