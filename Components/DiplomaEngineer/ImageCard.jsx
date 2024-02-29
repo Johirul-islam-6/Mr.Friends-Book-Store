@@ -4,7 +4,7 @@ import Image from "next/image";
 import book1 from "@/app/Assets/allBook/Math.jpg";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaPhabricator, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -51,7 +51,7 @@ export const ImageCard = ({ ResultBooks, reloadFunction }) => {
     <>
       {ResultBooks?.map(
         (singelbook) =>
-          singelbook?.status === "success" && (
+          singelbook?.status !== "panding" && (
             <>
               <div
                 // onChange={() => getTimes(singelbook?.createdAt)}
@@ -59,7 +59,7 @@ export const ImageCard = ({ ResultBooks, reloadFunction }) => {
                 className="hover:border-[#573BA2] duration-150 overflow-hidden bg-[#fff] rounded-md p-2 border-b-4 border-t-4 bookCard"
               >
                 <div className="image relative">
-                  <div className="bg-[#00000029] bg-color w-[100%] h-[100%]  absolute rounded-t-md">
+                  <div className="bg-[#00000029] bg-color w-[100%] h-[100%] absolute rounded-t-md">
                     {userInfo?.ruler === "superAdmin" && (
                       <>
                         <button
@@ -71,6 +71,7 @@ export const ImageCard = ({ ResultBooks, reloadFunction }) => {
                       </>
                     )}
                   </div>
+
                   <Image
                     width={1424}
                     height={450}
@@ -84,12 +85,19 @@ export const ImageCard = ({ ResultBooks, reloadFunction }) => {
                 </div>
                 <div className="px-2 pb-1">
                   <div className="all-button-courses flex flex-wrap justify-start items-center mt-5 gap-2 ">
+                    <p className="bg-[#0000] flex gap-x-[3px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
+                      <FaPhabricator className="text-[#573BA2]" />{" "}
+                      {singelbook?.view?.slice(0, 10)}
+                    </p>
+
                     <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
                       {singelbook?.department}
                     </p>
+
                     <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2]">
                       {singelbook?.createdAt?.slice(0, 10)}
                     </p>
+
                     <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#573BA2] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#573BA2] ">
                       {singelbook?.location?.slice(0, 12)}
                     </p>

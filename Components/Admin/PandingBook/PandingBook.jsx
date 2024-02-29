@@ -6,7 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Link from "next/link";
 
-export const PandingBook = ({ reloase }) => {
+export const PandingBook = ({ reloase, cookiesInfo }) => {
   const [Loding, setLoding] = useState(true);
   const [searchingValue, setSearchingValue] = useState("");
   const [ResultBooks, setResultBooks] = useState([]);
@@ -37,7 +37,7 @@ export const PandingBook = ({ reloase }) => {
 
     if (ResultBooks) {
       const pendingBooks = ResultBooks.filter(
-        (item) => item?.status !== "success"
+        (item) => item?.status === "panding"
       );
       const result = pendingBooks?.slice(0, 6);
       setPendingBook(result);
@@ -52,7 +52,7 @@ export const PandingBook = ({ reloase }) => {
   // ----- post update success ----
   useEffect(() => {
     const data = {
-      status: "success",
+      status: cookiesInfo?.email,
     };
 
     async function fetchData() {

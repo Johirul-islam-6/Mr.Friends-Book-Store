@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -12,10 +13,22 @@ const PandingPost = () => {
   const [reloades, setReload] = useState(false);
   const [buttonHidden, setHidden] = useState(false);
 
+  const [cookiesInfo, setCookiesInfo] = useState();
+  const accessToken = Cookies.get("accessToken");
+
   // --------------- reload all book ------------
   const reloadButton = (e) => {
     setReload(e);
   };
+
+  useEffect(() => {
+    if (!accessToken) {
+      return navigate.push("/login");
+    }
+    const getCookiesData = Cookies.get("CookieYouserData");
+    const cookiesInfos = JSON.parse(getCookiesData);
+    setCookiesInfo(cookiesInfos);
+  }, []);
 
   useEffect(() => {
     //  ------------------ searching field -----------
@@ -37,7 +50,7 @@ const PandingPost = () => {
 
     if (ResultBooks) {
       const pendingBooks = ResultBooks.filter(
-        (item) => item?.status !== "success"
+        (item) => item?.status === "panding"
       );
       const result = pendingBooks;
       setPendingBook(result);
@@ -48,7 +61,7 @@ const PandingPost = () => {
   const [updateStatus, setStatus] = useState();
   useEffect(() => {
     const data = {
-      status: "success",
+      status: cookiesInfo?.email,
     };
 
     async function fetchData() {

@@ -124,8 +124,18 @@ export const CreateBook = ({
     ,
   ];
 
-  // const BookObject = [bookName,bookImage,subjectCode,department,mejor-subject, buy-price , sell-price];
+  // Date genarate---
+  const today = new Date();
+  const padZero = (num) => {
+    return num < 10 ? "0" + num : num;
+  };
 
+  // Format the date to DD/MM/YYYY
+  const formattedDate = `${padZero(today.getDate())}/${padZero(
+    today.getMonth() + 1
+  )}/${today.getFullYear()}`;
+
+  //  =============== handel data submit ===============
   const HandleSubmite = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -145,6 +155,8 @@ export const CreateBook = ({
     const discription = formData.get("discription");
     const userId = userInfo?.id;
     const status = "panding";
+    const view = "0";
+    const adminInfo = "Panding";
 
     if (publication === "select") {
       return alert("Please select publication Cetagory !");
@@ -175,6 +187,9 @@ export const CreateBook = ({
       location,
       discription,
       status,
+      view,
+      adminInfo,
+      creatDate: formattedDate,
     };
     setHidden(true);
     console.log("madarchod", bookData);
@@ -218,6 +233,7 @@ export const CreateBook = ({
         text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
         icon: "error",
       });
+      setHidden(false);
     }
   };
   const [uploadeImages, setuploade] = useState();

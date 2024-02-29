@@ -1,16 +1,45 @@
 "use client";
 import { SingelBookInf } from "@/Components/DetailEachBook/SingelBookInfo/SingelBookInf";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const EachBookInfo = () => {
+  const accessToken = Cookies.get("accessToken");
+
   const { id } = useParams();
 
   const [Loding, setLoding] = useState(true);
   const [ResultBooks, setResultBooks] = useState();
 
   useEffect(() => {
+    if (accessToken) {
+      async function viewCount() {
+        try {
+          const response = await axios.patch(
+            `https://resell-book-store-server.vercel.app/api/v1/books/view/${id}`
+          );
+          const result = response.data;
+
+          // if get the data then save
+          if (result?.success) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `${result?.message}`,
+              text: "Thank you",
+              showConfirmButton: false,
+              timer: 2500,
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+      viewCount();
+    }
+
     //  ------------------ searching field -----------
     async function fetchData() {
       try {

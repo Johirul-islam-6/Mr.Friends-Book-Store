@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "./Image.css";
 import Link from "next/link";
 import Image from "next/image";
+import { FaPhabricator } from "react-icons/fa";
 
 const DiplomaBookSlider = ({ ResultBooks, Loding }) => {
   const settings = {
@@ -85,7 +86,7 @@ const DiplomaBookSlider = ({ ResultBooks, Loding }) => {
         {Array.isArray(ResultBooks) &&
           ResultBooks.map(
             (item, index) =>
-              item?.status === "success" && (
+              item?.status !== "panding" && (
                 <div key={item?._id} className="card ">
                   <div class="shadow-card-slider pe-20">
                     <div className="w-[100%] flex justify-start items-center mx-auto ">
@@ -108,8 +109,9 @@ const DiplomaBookSlider = ({ ResultBooks, Loding }) => {
                         <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
                           {item?.createdAt?.slice(0, 10)}
                         </p>
-                        <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff] ">
-                          {item?.subjectCode?.slice(0, 5)}
+                        <p className="bg-[#0000] flex gap-1  items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff] ">
+                          <FaPhabricator className="text-[#ffffff]" />{" "}
+                          {item?.view?.slice(0, 10)}
                         </p>
 
                         <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">

@@ -5,6 +5,7 @@ import book1 from "@/app/Assets/Product/Diploma/1st/one.webp";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ConvertToBase64 } from "../CreateBook/CreateBook";
+import { FaPhabricator } from "react-icons/fa";
 
 export const AllSellingBooks = ({ createdBookInfo, createdBooks }) => {
   const [EditebookModel, setEditebookModel] = useState(false);
@@ -42,7 +43,20 @@ export const AllSellingBooks = ({ createdBookInfo, createdBooks }) => {
             className="course-Card-shadow  overflow-hidden bg-[#fff] rounded-md p-5 border-2"
           >
             <div className="image relative">
-              <div className="bg-[#0000007b] w-[100%] h-[100%]  absolute rounded-t-md"></div>
+              <div className="bg-[#0000007b] w-[100%] h-[100%]  absolute rounded-t-md">
+                <div className="flex flex-col h-[100%] items-center justify-center text-white gap-1 text-[18px]">
+                  {book?.status !== "panding" && (
+                    <span className="flex items-center justify-center gap-1">
+                      <FaPhabricator className="text-[#fcfcfc]" />{" "}
+                      {book?.view?.slice(0, 10)}
+                    </span>
+                  )}
+
+                  {book?.status === "panding" && (
+                    <p className="text-whtie">{book?.status}</p>
+                  )}
+                </div>
+              </div>
               <Image
                 width={1424}
                 height={450}

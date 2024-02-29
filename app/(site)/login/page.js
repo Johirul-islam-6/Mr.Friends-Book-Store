@@ -75,6 +75,7 @@ const Login = () => {
         text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
         icon: "error",
       });
+      setHidden(false);
     }
   };
 

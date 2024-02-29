@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import img01 from "../../../app/Assets/Product/Diploma/1st/one.webp";
 import "./SingelBookDetail.css";
-import { FaRegCheckCircle } from "react-icons/fa";
+import { FaPhabricator, FaRegCheckCircle } from "react-icons/fa";
 
 import { SellerProfile } from "@/Components/SellerProfile/SellerProfile";
 import closeIcon from "@/app/Assets/Icons/close.png";
@@ -54,6 +54,12 @@ export const SingelBookInf = ({ ResultBooks }) => {
             <h1 className="md:text-start text-center DetailsBook-heading GT text-[30px] md:text-[40px] font-[400]  text-[#2c293b]">
               {ResultBooks?.bookName}
             </h1>
+
+            <p className="pt-3 md:text-start flex items-center gap-2 text-center text-[16px] md:text-[14px] text-[#433782] IBM font-[600]">
+              সর্বমোট দেখেছে :-{" "}
+              <FaPhabricator className="text-[#0b0b0b] text-[20px]" />{" "}
+              {ResultBooks?.view?.slice(0, 10)} জন
+            </p>
             <p className="pt-3 md:text-start text-center text-[16px] md:text-[18px] text-[#433782] IBM font-[600]">
               বিষয় কোড :-{" "}
               <span className="text-[#000000a7]">

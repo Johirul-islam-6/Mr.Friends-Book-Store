@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 
 import "./admin.css";
-import Image from "next/image";
 
 import { PandingBook } from "@/Components/Admin/PandingBook/PandingBook";
 import { AdminUser } from "@/Components/Admin/AdminUser/AdminUser";
 import axios from "axios";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 const Admin = () => {
   const [allUser, setUser] = useState("");
@@ -17,6 +17,17 @@ const Admin = () => {
   const [pandingBook, setpandingPost] = useState("");
   const [avarage, setAvarage] = useState("");
   const [Loading, setLoading] = useState(true);
+  const [cookiesInfo, setCookiesInfo] = useState();
+  const accessToken = Cookies.get("accessToken");
+
+  useEffect(() => {
+    if (!accessToken) {
+      return navigate.push("/login");
+    }
+    const getCookiesData = Cookies.get("CookieYouserData");
+    const cookiesInfos = JSON.parse(getCookiesData);
+    setCookiesInfo(cookiesInfos);
+  }, []);
 
   const Url = `https://resell-book-store-server.vercel.app/api/v1/users/?searchTerm=&page=1&limit=100000&sort=createdAt&sortOrder=desc`;
   const Url2 = `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=&page=1&limit=100000&sort=createdAt&sortOrder=desc`;
@@ -66,7 +77,7 @@ const Admin = () => {
   useEffect(() => {
     if (avaragePostget) {
       const pendingBooks = avaragePostget.filter(
-        (item) => item?.status !== "success"
+        (item) => item?.status === "panding"
       );
       const result = pendingBooks;
       setpandingPost(result);
@@ -86,8 +97,6 @@ const Admin = () => {
   }, [avaragePostget, allUser, reloaseStart]);
 
   // ---- get avarage post---------
-
-  console.log("admin usera", adminUser);
 
   return (
     <>
@@ -286,7 +295,7 @@ const Admin = () => {
             {/* ===================== showin user Panding Book list start ====================== */}
             <section class="grid md:grid-cols-1 xl:grid-cols-1 xl:grid-rows-3 xl:grid-flow-col gap-6">
               {/* ------------------ panding book list------------- */}
-              <PandingBook reloase={reloase} />
+              <PandingBook cookiesInfo={cookiesInfo} reloase={reloase} />
 
               {/* ------------------- all users------------- */}
               <AdminUser adminUser={adminUser} />

@@ -27,7 +27,7 @@ const SingelUsers = () => {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `http://localhost:8080/api/v1/users/${id}`
+          `https://resell-book-store-server.vercel.app/api/v1/users/${id}`
         );
 
         setSingelUser(result?.data?.data);
@@ -85,7 +85,7 @@ const SingelUsers = () => {
     };
     try {
       const response = await axios.patch(
-        `http://localhost:8080/api/v1/users/${id}`,
+        `https://resell-book-store-server.vercel.app/api/v1/users/${id}`,
         rulerUpdateData
       );
 

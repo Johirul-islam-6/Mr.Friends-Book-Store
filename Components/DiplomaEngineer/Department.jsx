@@ -285,7 +285,7 @@ export const DepartmentBanner = ({ department }) => {
               <div className="grid grid-cols-1 md:grid-cols-3 justify-center md:justify-start lg:grid-cols-4 gap-3 gap-y-6 gap-x-5  mt-2">
                 {ResultBooks?.map(
                   (singelbook) =>
-                    singelbook?.status === "success" && (
+                    singelbook?.status !== "panding" && (
                       <div
                         // onChange={() => getTimes(singelbook?.createdAt)}
                         key={singelbook?._id}
