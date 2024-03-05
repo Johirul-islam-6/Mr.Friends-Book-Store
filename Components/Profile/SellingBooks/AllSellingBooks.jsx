@@ -16,7 +16,7 @@ export const AllSellingBooks = ({ createdBookInfo, createdBooks }) => {
       const response = await axios.delete(
         `https://resell-book-store-server.vercel.app/api/v1/books/${bookId}`
       );
-      console.log("Book deleted successfully:", response.data);
+
       if (response?.data?.success) {
         Swal.fire({
           title: ` বই : ${name}`,

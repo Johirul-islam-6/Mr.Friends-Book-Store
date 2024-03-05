@@ -14,10 +14,12 @@ export const WriteReview = () => {
   const [Loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getCookiesData = Cookies.get("CookieYouserData");
-    const cookiesInfos = JSON.parse(getCookiesData);
+    if (accessToken) {
+      const getCookiesData = Cookies.get("CookieYouserData");
+      const cookiesInfos = JSON.parse(getCookiesData);
 
-    setCookiesInfo(cookiesInfos);
+      setCookiesInfo(cookiesInfos);
+    }
   }, [setCookiesInfo, accessToken]);
 
   const openFrom = () => {
