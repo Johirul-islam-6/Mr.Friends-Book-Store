@@ -192,7 +192,7 @@ export const CreateBook = ({
       creatDate: formattedDate,
     };
     setHidden(true);
-    console.log("madarchod", bookData);
+
     if (createdBookInfo?.length >= 3) {
       return Swal.fire({
         title: `আপনি সর্বোচ্চ ৩ টি বই পাবলিশ করার ‍Store পাবেন।`,

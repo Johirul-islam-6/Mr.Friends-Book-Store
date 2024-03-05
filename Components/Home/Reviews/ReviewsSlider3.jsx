@@ -15,7 +15,7 @@ export default class ReviewsSlider3 extends Component {
       vertical: true,
       verticalSwiping: true,
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed: 3100,
       pauseOnHover: true,
 
       beforeChange: function (currentSlide, nextSlide) {

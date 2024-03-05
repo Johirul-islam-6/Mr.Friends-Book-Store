@@ -103,15 +103,15 @@ const DiplomaBookSlider = ({ ResultBooks, Loding }) => {
                         {item?.bookName?.slice(0, 20)}
                       </h2>
                       <div className="all-button-courses flex flex-wrap justify-center items-center mt-5 gap-2 ">
+                        <p className="bg-[#0000] flex gap-1  items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff] ">
+                          <FaPhabricator className="text-[#ffffff]" />{" "}
+                          {item?.view?.slice(0, 10)}
+                        </p>
                         <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
                           {item?.publication}
                         </p>
                         <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">
                           {item?.createdAt?.slice(0, 10)}
-                        </p>
-                        <p className="bg-[#0000] flex gap-1  items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff] ">
-                          <FaPhabricator className="text-[#ffffff]" />{" "}
-                          {item?.view?.slice(0, 10)}
                         </p>
 
                         <p className="bg-[#0000] flex gap-[2px] items-center px-2 py-[4px] border-2 border-[#fff] rounded-md text-[10px] lg:text-[12px] font-[700] text-[#fff]">

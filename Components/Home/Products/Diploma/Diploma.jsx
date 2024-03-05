@@ -51,7 +51,7 @@ export const Diploma = () => {
             alt="diploma image"
           />
           <h1 className="text-cetegory-heading ps-1">
-            Diploma Engineer Resell Book
+            Polytechnic Category Resell Book
           </h1>
         </div>
         {/* --- category body--- */}

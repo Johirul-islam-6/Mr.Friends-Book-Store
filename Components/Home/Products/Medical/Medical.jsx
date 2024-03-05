@@ -1,12 +1,39 @@
+"use client";
+import "./Medical.css";
 import Image from "next/image";
-import React from "react";
 import cetegoryImage from "../../../../app/Assets/Product/Diploma/book.webp";
-import MedicalBookSlider from "./MedicalBookSlider";
 import Link from "next/link";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import MedicalBookSlider from "./MedicalBookSlider";
+
 export const Medical = () => {
+  const [Loding, setLoding] = useState(true);
+  const [filteringValue, setfilterValue] = useState("কারিগরি");
+  const [ResultBooks, setResultBooks] = useState("");
+
+  useEffect(() => {
+    //  ------------------ searching field -----------
+    async function fetchData() {
+      try {
+        const result = await axios.get(
+          `https://resell-book-store-server.vercel.app/api/v1/books/?department=${filteringValue}&page=1&limit=20&sort=createdAt&sortOrder=desc`
+        );
+
+        setResultBooks(result?.data?.data);
+
+        setLoding(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+  }, [filteringValue]);
+
   return (
     <>
-      <div className="Medical-store ">
+      <div className="diploma-engineer pt-[40px]">
         <div className="flex justify-center md:justify-start border-2 items-center gap-1 md:ms-5">
           <Image
             width={50}
@@ -16,17 +43,17 @@ export const Medical = () => {
             alt="diploma image"
           />
           <h1 className="text-cetegory-heading ps-1">
-            Medical Doctors Resell Book
+            Medical Posted Resell Book
           </h1>
         </div>
 
-        <div className="div mt-5">
+        <div className="mt-6">
           <Link className="cursor-pointer" href={"/allBooks"}>
             <h1 className=" md:ps-12 pb-2 ps-2 text-[20px] text-[#563a9f] IBM font-bold underline">
               New Book lists
             </h1>
           </Link>
-          <MedicalBookSlider />
+          <MedicalBookSlider ResultBooks={ResultBooks} Loding={Loding} />
         </div>
       </div>
     </>

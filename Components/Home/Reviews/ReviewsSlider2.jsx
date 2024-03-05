@@ -15,8 +15,9 @@ export default class ReviewsSlider2 extends Component {
       vertical: true,
       verticalSwiping: true,
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed: 4000,
       pauseOnHover: true,
+      reverse: true,
 
       beforeChange: function (currentSlide, nextSlide) {
         // console.log("before change", currentSlide, nextSlide);

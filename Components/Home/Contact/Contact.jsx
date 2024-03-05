@@ -9,7 +9,7 @@ export const Contact = () => {
             Contack Us{" "}
           </h1>
           <p className="text-[16px] text-[#00000070] text-center pb-5">
-            যে কোন সমস্যার জন্যে জানাতে পারেন ।
+            যে কোন সমস্যার হলে জানাতে পারেন ।
           </p>{" "}
           <div className="w-[120px] mx-auto h-[5px] bg-[#573BA2]"></div>
         </div>

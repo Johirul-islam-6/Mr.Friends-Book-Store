@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./registration.css";
 import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
@@ -92,6 +92,30 @@ const Registration = () => {
     "Radiology",
     "Others..",
   ];
+
+  // ======== get location =====
+  const [locationLoading, setLocation] = useState(true);
+  const [add, setAdd] = useState("");
+  // `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+  const IpaddressTown = add?.county;
+  const IpaddressCity = add?.city;
+  const Ipaddress =
+    (IpaddressTown ? IpaddressTown + ", " : "") +
+    (IpaddressCity ? IpaddressCity : "");
+
+  console.log(Ipaddress); // This will print the joined text
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords;
+      console.log(latitude, longitude);
+      const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => setAdd(data?.address));
+      setLocation(false);
+    });
+  }, []);
 
   const [ss, sets] = useState();
   // -------------------- Back end intregrate ------------------
@@ -363,7 +387,8 @@ const Registration = () => {
                   Current address*
                 </label>
                 <input
-                  required
+                  defaultValue={Ipaddress}
+                  disabled
                   id="address"
                   name="address"
                   type="text"
