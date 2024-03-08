@@ -62,7 +62,7 @@ export const Navbar = () => {
             <div className="w-3/12 top-hidden-div"></div>
 
             <h1 className="top-discount-text ">
-              Take Action this Banned Books Week and Get 15% off . Shop here!
+              আপনার পড়ার টেবিলে পড়ে থাকা বইটি হয়তো কারো ভবিষ্যৎ গড়ার হাতিয়ার
             </h1>
             <h1 className="sm-top-discount-text  ">
               Mr.Friends book Store Get 15% off. Shop here!
