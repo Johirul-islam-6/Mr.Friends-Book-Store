@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import { Navbar } from "@/Components/Layout/Navbar/Navbar";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import "../../node_modules/swiper/swiper-bundle.min.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

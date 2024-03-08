@@ -7,6 +7,7 @@ import { Contact } from "@/Components/Home/Contact/Contact";
 import { Genaral } from "@/Components/Home/Products/Genaral/Genaral";
 import { Medical } from "@/Components/Home/Products/Medical/Medical";
 import { WriteReview } from "@/Components/Home/WriteReview/WriteReview";
+import CompnaySlier from "@/Components/Home/companySlider/CompnaySlier";
 
 export default function Home() {
   return (
@@ -29,6 +30,9 @@ export default function Home() {
       </div>
       <div className="max-w-screen-xl mx-auto mt-20  md:px-5">
         <Contact />
+      </div>
+      <div className="max-w-screen-xl mx-auto mt-10  md:px-5">
+        <CompnaySlier />
       </div>
     </div>
   );

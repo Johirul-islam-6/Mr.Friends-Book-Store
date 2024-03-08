@@ -19,7 +19,17 @@ export const CreateBook = ({
   const [postImage, setPostImage] = useState();
   const [buttonHidden, setHidden] = useState(false);
 
-  const publication = ["হক প্রকাশনী", "এস আর প্রকাশনী", "অন্যান্য"];
+  const publication = [
+    "হক পাবলিকেশন",
+    "এস আর প্রকাশনী",
+    "টেকনিক্যাল প্রকাশনী",
+    "পাঞ্জেরী প্রকাশনা",
+    "জুপিটার পাবলিকেশন",
+    "প্রথম আলো প্রকাশন",
+    "তাম্রলিপি প্রকাশনী",
+    "চারুলিপি প্রকাশন",
+    "অন্যান্য",
+  ];
   const departmental = ["কারিগরি", "জেনারেল", "মেডিকেল", "অন্যান্য"];
   const semester = [
     "1st Semester",

@@ -62,7 +62,8 @@ export const Navbar = () => {
             <div className="w-3/12 top-hidden-div"></div>
 
             <h1 className="top-discount-text ">
-              আপনার পড়ার টেবিলে পড়ে থাকা বইটি হয়তো কারো ভবিষ্যৎ গড়ার হাতিয়ার
+              আপনার পড়ার টেবিলে পড়ে থাকা বইটি হয়তো কারো ভবিষ্যৎ গড়ার
+              হাতিয়ার।
             </h1>
             <h1 className="sm-top-discount-text  ">
               Mr.Friends book Store Get 15% off. Shop here!
