@@ -13,7 +13,7 @@ import Link from "next/link";
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <div className="mt-[10px] bg-[#0f0f0f]">
+    <div className="mt-[10px] bg-[#ffffff] border-t-2">
       <div className=" mx-auto mt-5  md:p-2  flex flex-col  md:gap-10  max-w-screen-xl ">
         <div>
           <div className="md:mt-8">
@@ -23,7 +23,7 @@ const Footer = () => {
                   <div className="gradient-rounded-div-bottom  bottom-[-180px] left-[110px] rounded-blur"></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+              <div className="grid grid-cols-2 gap-2 px-4  md:grid-cols-4">
                 {/* -------- col-1 ---------- */}
                 <div
                   className="mx-auto"
@@ -31,31 +31,83 @@ const Footer = () => {
                     zIndex: "10",
                   }}
                 >
-                  <h2 className="mb-6 text-[13px] sm:text-base font-[500] leading-[14px] text-[white] uppercase">
+                  <h2 className="mb-3 text-[13px] sm:text-base font-[500] leading-[14px] text-black uppercase">
                     Our Book List
                   </h2>
+
                   <ul className="text-[#9B9B9B] text-[11px] sm:text-sm font-light">
-                    <li>Diploma Engineer</li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Diploma Resel Book
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Genaral Resel Book
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Medical Resel Book
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Academic Resell Books
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Children Resell Books
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Fiction Resell Books
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      University Books Resell
+                    </li>
                   </ul>
                 </div>
                 {/* -------- col-2 ---------- */}
                 <div className="mx-auto">
-                  <a href="https://mocdt.com/about">
-                    <h2 className="mb-6 text-[13px] sm:text-base font-[500] leading-[14px] text-[white] uppercase">
-                      Publishar
+                  <a href="">
+                    <h2 className="mb-2 text-[13px] sm:text-base font-[500] leading-[14px] text-black uppercase">
+                      Publication
                     </h2>
                   </a>
                   <ul className="text-[#9B9B9B] text-[11px] sm:text-sm font-light">
-                    <li>Diploma Engineer</li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Haq Publication
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      RS Publication
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Panjeree Publication
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Jupiter Publication
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      National Book Foundation
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Macmillan Publication
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Online Retailers Publication
+                    </li>
                   </ul>
                 </div>
                 {/* -------- col-3 ---------- */}
                 <div className="mx-auto">
-                  <h2 className="mb-6 text-[13px] sm:text-base font-[500] leading-[14px] text-[white] uppercase">
-                    Development
+                  <h2 className="mb-2 text-[13px] sm:text-base font-[500] leading-[14px] text-black uppercase">
+                    Policies
                   </h2>
                   <ul className="text-[#9B9B9B] text-[11px] sm:text-sm font-light">
-                    <li>Diploma Engineer</li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Terms of Use
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Privacy Policy
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Refund Policy
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] hover:underline cursor-pointer">
+                      Happy Return Policy
+                    </li>
                   </ul>
                 </div>
                 {/* -------- col-4 ---------- */}
@@ -65,11 +117,21 @@ const Footer = () => {
                     zIndex: "10",
                   }}
                 >
-                  <h2 className="mb-6 text-[13px] sm:text-base font-[500] leading-[14px] text-[white] uppercase">
+                  <h2 className="mb-2 text-[13px] sm:text-base font-[500] leading-[14px] text-black uppercase">
                     Contact
                   </h2>
                   <ul className="text-[#9B9B9B] text-[11px] sm:text-sm font-light">
-                    <li>Facbook</li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px] cursor-pointer ">
+                      Email: reselstore@gamil.com
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px]  cursor-pointer">
+                      Phone : 01824842336{" "}
+                      <span className="text-[10px]">(Whatsapp Message)</span>
+                    </li>
+                    <li className="py-1 text-[#000] font-[550] IBM text-[16px]  cursor-pointer">
+                      Location: CST Department
+                      <span className="text-[14px]"> (MPI)</span>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -84,7 +146,7 @@ const Footer = () => {
               </div>
 
               <div
-                className="flex justify-center sm:justify-end relative bottom-5 md:bottom-16 sm:right-20 "
+                className="flex justify-center sm:justify-end relative bottom-5 mt-8 md:bottom-16 sm:right-20  "
                 style={{
                   zIndex: "10",
                 }}

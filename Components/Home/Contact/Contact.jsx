@@ -14,7 +14,7 @@ export const Contact = () => {
           <div className="w-[120px] mx-auto h-[5px] bg-[#573BA2]"></div>
         </div>
         {/* ------- message ---- */}
-        <div class="max-w-screen-xl  mx-auto p-5">
+        <div class="md:max-w-screen-xl  mx-auto md:p-5">
           <div class="flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-12 border">
             <div class="bg-[#563A9F] md:h-[75vh] rounded-lg md:col-span-4 p-1 text-white">
               <iframe
@@ -31,7 +31,7 @@ export const Contact = () => {
               class="md:col-span-8 p-10"
             >
               <div class="flex flex-wrap -mx-3 ">
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="w-full md:w-1/2 md:px-3 mb-6 md:mb-0">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                     for="grid-first-name"
@@ -39,6 +39,7 @@ export const Contact = () => {
                     Full Name
                   </label>
                   <input
+                    required
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="name"
                     name="name"
@@ -46,7 +47,7 @@ export const Contact = () => {
                     placeholder="Md.Johirul Islam (rasel)"
                   />
                 </div>
-                <div class="w-full md:w-1/2 px-3">
+                <div class="w-full md:w-1/2 md:px-3 mt-3 md:mt-0">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                     for="grid-last-name"
@@ -54,6 +55,7 @@ export const Contact = () => {
                     Location
                   </label>
                   <input
+                    required
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-last-name"
                     type="text"
@@ -62,7 +64,7 @@ export const Contact = () => {
                 </div>
               </div>
               <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
+                <div class="w-full md:px-3 mt-5">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                     for="grid-password"
@@ -70,6 +72,7 @@ export const Contact = () => {
                     Email Address
                   </label>
                   <input
+                    required
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="email"
                     name="email"
@@ -80,7 +83,7 @@ export const Contact = () => {
               </div>
 
               <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
+                <div class="w-full md:px-3">
                   <label
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                     for="grid-password"
@@ -88,14 +91,15 @@ export const Contact = () => {
                     Your Message
                   </label>
                   <textarea
+                    required
                     id="message"
                     name="message"
                     rows="10"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   ></textarea>
                 </div>
-                <div class="flex justify-between w-full px-3">
-                  <div class="md:flex md:items-center">
+                <div class="flex justify-center md:justify-between w-full px-3 mt-2">
+                  <div class="hidden md:flex md:items-center">
                     <label class="block text-gray-500 font-bold">
                       <input class="mr-2 leading-tight" type="checkbox" />
                       <span class="text-sm">

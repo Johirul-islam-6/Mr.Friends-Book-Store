@@ -45,7 +45,7 @@ const BannerSlider = ({ datas }) => {
                   // placeholder="blur"
                   src={item?.image}
                   alt={`Slide ${index + 1}`}
-                  className=" object-cover h-[80vh] md:h-[72vh]"
+                  className=" object-cover flex justify-center items-center h-[80vh] md:h-[72vh]"
                 />
               </div>
             </div>

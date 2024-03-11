@@ -143,7 +143,7 @@ export default function RootLayout({ children }) {
                         users
                       </Link>
                       <a
-                        href="#"
+                        href="/admin/review"
                         class="flex flex-col items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
                       >
                         {/* <span class="sr-only">Post</span> */}

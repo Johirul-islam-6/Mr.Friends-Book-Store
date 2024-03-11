@@ -97,7 +97,15 @@ const UserAdmin = () => {
                 </th>
                 <th></th>
               </tr>
-
+              {Loading && (
+                <div class="h-screen w-[100%] bg-white flex justify-center mt-40">
+                  <img
+                    class="h-16 w-16 absolute left-[50%]"
+                    src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
+                    alt=""
+                  />
+                </div>
+              )}
               {allUser?.map((user, index) => (
                 <>
                   <tr class="border-b hover:bg-orange-100 bg-gray-100">

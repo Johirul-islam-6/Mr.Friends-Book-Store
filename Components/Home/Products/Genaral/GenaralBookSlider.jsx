@@ -41,7 +41,7 @@ const GenaralBookSlider = ({ ResultBooks, Loding }) => {
       },
     ],
   };
-  console.log(ResultBooks);
+
   return (
     <div className="md:px-10">
       {Loding && (

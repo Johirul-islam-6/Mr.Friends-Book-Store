@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,7 +13,8 @@ export const WriteReview = () => {
   const accessToken = Cookies.get("accessToken");
   const [cookiesInfo, setCookiesInfo] = useState();
   const [Loading, setLoading] = useState(false);
-
+  const [Loding, setLoding] = useState(true);
+  const [ResultBooks, setResultBooks] = useState([]);
   useEffect(() => {
     if (accessToken) {
       const getCookiesData = Cookies.get("CookieYouserData");
@@ -32,53 +34,58 @@ export const WriteReview = () => {
   const HandleSubmite = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const name = formData.get("userName");
-    const institute = formData.get("institute");
     const message = formData.get("message");
+    const email = cookiesInfo?.email;
 
     const reviewData = {
-      name,
-      institute,
+      name: cookiesInfo?.name,
+      department: cookiesInfo?.institute,
       message,
+      email,
     };
+
+    console.log(reviewData);
+
     setHidden(true);
 
-    // try {
-    //   const response = await axios.post(
-    //     "https://resell-book-store-server.vercel.app/api/v1/books/create-book",
-    //     reviewData,
-    //     {
-    //       maxContentLength: 1000000000,
-    //     }
-    //   );
-    //   const result = response.data;
+    try {
+      const response = await axios.post(
+        "https://resell-book-store-server.vercel.app/api/v1/review/create",
+        reviewData,
+        {
+          maxContentLength: 1000000000,
+        }
+      );
+      const result = response.data;
 
-    //   // if get the data then save
-    //   if (result?.success) {
-    //     Swal.fire({
-    //       position: "center",
-    //       icon: "success",
-    //       title: `${result?.message}`,
-    //       text: "Thank you",
-    //       showConfirmButton: false,
-    //       timer: 2500,
-    //     });
-    //     createdBook(true);
-    //     closeModal(false);
-    //   }
-    // } catch (error) {
-    //   console.error("Error fetching data:", error);
+      // if get the data then save
+      if (result?.success) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `${result?.message}`,
+          text: "Thank you",
+          showConfirmButton: false,
+          timer: 2500,
+        });
 
-    //   Swal.fire({
-    //     title: `${error?.response?.data?.errorMessages[0]?.message}`,
-    //     text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
-    //     icon: "error",
-    //   });
-    //   setHidden(false);
-    // }
-    setTimeout(() => {
+        setHidden(false);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+
+      Swal.fire({
+        title: `${
+          error?.response?.data?.errorMessages[0]?.message.slice(0, 6) ===
+          "E11000"
+            ? "Already Review Send"
+            : "Max 350 word message"
+        }`,
+        text: ` Field : ${error?.response?.data?.errorMessages[0]?.path}`,
+        icon: "error",
+      });
       setHidden(false);
-    }, 5000);
+    }
   };
 
   return (
@@ -98,8 +105,8 @@ export const WriteReview = () => {
             class="mx-1 md:mx-14 mt-10 border-2 border-blue-400 rounded-lg w-full md:w-[80%]"
           >
             {accessToken && (
-              <div class="mt-3 text-center text-[14px] md:text-2xl font-[500] pt-2">
-                Write student use website feadback
+              <div class="mt-3 text-center text-[18px] md:text-2xl font-[500] pt-2">
+                Student website Visite feadback
               </div>
             )}
             {!accessToken && (
@@ -121,13 +128,13 @@ export const WriteReview = () => {
             )}
             {accessToken && (
               <div class="p-8 ">
-                <div class="flex gap-4">
+                <div class="flex flex-col md:flex-row  gap-4">
                   <input
                     defaultValue={cookiesInfo?.name}
                     disabled
                     type="Name"
-                    name="name"
-                    class="mt-1 block w-1/2 font-bold text-[16px] text-[#000000b1] rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                    name="userName"
+                    class="mt-1 block md:w-1/2 font-bold text-[16px] text-[#000000b1] rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                     placeholder="Full Name *"
                   />
                   <input
@@ -135,19 +142,19 @@ export const WriteReview = () => {
                     disabled
                     type="text"
                     name="department"
-                    class="mt-1 block w-1/2 font-bold text-[16px] text-[#000000b1]  rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+                    class="mt-1 block md:w-1/2 font-bold text-[16px] text-[#000000b1]  rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
                     placeholder="Email *"
                   />
                 </div>
 
                 <div class="mt-6">
                   <textarea
-                    placeholder="Write you content . . ."
-                    name="textarea"
+                    placeholder=""
+                    name="message"
                     id="text"
                     cols="30"
                     rows="10"
-                    class="mb-10 h-40 w-full text-[16px] text-[#000000b1]  resize-none rounded-md border border-slate-300 p-5 font-semibold text-gray-300"
+                    class="mb-10 h-40 w-full text-[16px] text-[#000000b1] placeholder:text-[#313131] resize-none rounded-md border border-slate-300 p-5 font-semibold "
                   ></textarea>
                 </div>
                 <div class="text-center flex justify-center">

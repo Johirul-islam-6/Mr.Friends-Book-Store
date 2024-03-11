@@ -155,7 +155,9 @@ const Profile = () => {
               <div class="bg-white shadow rounded-lg p-6">
                 <div class="flex flex-col items-center">
                   <div className="bg-[#563A9F] p-10 rounded-full">
-                    <p className="text-[22px] text-white font-bold">RA</p>
+                    <p className="text-[22px] text-white font-bold">
+                      {cookiesInfo?.name?.slice(0, 2)}
+                    </p>
                   </div>
 
                   <h1 class="text-xl font-bold pt-5">{cookiesInfo?.name}</h1>
@@ -167,7 +169,7 @@ const Profile = () => {
                         <div class="mt-2 flex flex-wrap gap-4 justify-center">
                           <a
                             href={"/admin"}
-                            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 font-[600] text-[14px] rounded bttn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 font-[600] text-[14px] rounded bttn IN"
                           >
                             Admin panel
                           </a>
@@ -178,7 +180,7 @@ const Profile = () => {
                         <div class="mt-2 flex flex-wrap gap-4 justify-center">
                           <a
                             href={"#"}
-                            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 font-[600] text-[14px] rounded bttn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 font-[600] text-[14px] rounded bttn IN"
                           >
                             Student
                           </a>
@@ -189,7 +191,7 @@ const Profile = () => {
                     <div class="mt-2 flex flex-wrap gap-4 justify-center">
                       <a
                         href="#"
-                        class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-[14px] font-[600] rounded bttn"
+                        class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-[14px] font-[600] rounded bttn IN"
                       >
                         Edite Profile
                       </a>
@@ -203,16 +205,27 @@ const Profile = () => {
                     information
                   </span>
                   <ul>
-                    <li class="mb-2">
-                      joining date :{" "}
-                      {UserInformation[0]?.createdAt?.slice(0, 10)}
+                    <li class="mb-2 text-[#181717e9] font-[600] GT">
+                      joining date : {cookiesInfo?.joinginDate}
                     </li>
-                    <li class="mb-2">Roll : {cookiesInfo?.studentRoll}</li>
-                    <li class="mb-2">Institute : {cookiesInfo?.institute}</li>
-                    <li class="mb-2">Department : {cookiesInfo?.department}</li>
-                    <li class="mb-2">Gender : {cookiesInfo?.gender}</li>
-                    <li class="mb-2">Phone : {cookiesInfo?.phone}</li>
-                    <li class="mb-2">Email : {cookiesInfo?.email}</li>
+                    <li class="mb-2 GT text-[#181717e9] font-[600] ">
+                      Roll : {cookiesInfo?.studentRoll}
+                    </li>
+                    <li class="mb-2 GT text-[#181717e9] font-[600]">
+                      Gender : {cookiesInfo?.gender}
+                    </li>
+                    <li class="mb-2 GT text-[#181717e9] font-[600]">
+                      Phone : {cookiesInfo?.phone}
+                    </li>
+                    <li class="mb-2 GT text-[#181717e9] font-[600]">
+                      Email : {cookiesInfo?.email}
+                    </li>
+                    <li class="mb-2 GT text-[#181717e9] font-[600]">
+                      Institute : {cookiesInfo?.institute}
+                    </li>
+                    <li class="mb-2 GT text-[#181717e9] font-[600]">
+                      Department : {cookiesInfo?.department}
+                    </li>
                   </ul>
                 </div>
                 <div

@@ -22,62 +22,54 @@ const ProductSlider = () => {
   const products = [
     {
       image: img1,
-      title: "Explore",
+      title: "হক প্রকাশনী",
       link: "https://explore.mocdt.com/",
     },
     {
       image: img2,
-      title: "DNS Flow",
+      title: "তাম্রলিপি প্রকাশনী",
       link: "https://dns.mocdt.com/",
     },
     {
       image: img3,
-      title: "Authenticator",
+      title: "চারুলিপি প্রকাশনী",
       link: "https://authenticator.mocdt.com/",
     },
     {
       image: img4,
-      title: "Mail",
+      title: "পাঞ্জেরী প্রকাশনী",
       link: "https://email.mocdt.com/",
     },
     {
       image: img5,
-      title: "Calendar",
+      title: "পুষ্প প্রকাশনী",
       link: "https://calendar.mocdt.com/",
     },
     {
       image: img6,
-      title: "Calendar",
+      title: "ভেনিস প্রকাশনী",
       link: "https://calendar.mocdt.com/",
     },
     {
       image: img7,
-      title: "Calendar",
+      title: "দূর প্রকাশনী",
       link: "https://calendar.mocdt.com/",
     },
-    {
-      image: img8,
-      title: "Calendar",
-      link: "https://calendar.mocdt.com/",
-    },
+
     {
       image: img9,
-      title: "Calendar",
+      title: "টেকনিক্যাল প্রকাশনী",
       link: "https://calendar.mocdt.com/",
     },
     {
       image: img10,
-      title: "Calendar",
+      title: "জুপিটার প্রকাশনী",
       link: "https://calendar.mocdt.com/",
     },
-    {
-      image: img11,
-      title: "Calendar",
-      link: "https://calendar.mocdt.com/",
-    },
+
     {
       image: img12,
-      title: "Calendar",
+      title: "পেনটিস প্রকাশনী",
       link: "https://calendar.mocdt.com/",
     },
   ];
@@ -121,15 +113,16 @@ const ProductSlider = () => {
       >
         {products?.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-[#fff] border-t-2 border-b-2 border-[#414548]  xl:w-[150px] 2xl:w-[200px] sm:h-[150px] h-[90px] rounded-[10px] flex gap-2 items-center justify-center mt-2">
+            <div className="bg-[#fff] border-t-2 border-b-2 border-[#414548]   md:w-[320px] h-[80px] overflow-hidden rounded-[10px] flex gap-2 items-center justify-center mt-2 mx-2">
               <Image
                 src={item?.image}
                 alt="Picture of product"
-                // width={180}
-                // height={106}
+                width={100}
+                height={106}
                 objectFit="cover"
-                className="product_image p-1 rounded-md w-[100%] h-[100%]"
+                className="product_image p-1 rounded-lg "
               />
+              <p className="text-[#000000d2] font-bold">{item?.title}</p>
             </div>
           </SwiperSlide>
         ))}

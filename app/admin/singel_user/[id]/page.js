@@ -116,7 +116,69 @@ const SingelUsers = () => {
             <p className=" bg-green-800 px-2 mt-2">{singelUser?.ruler}</p>
           </span>
           <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
+          {Loading && (
+            <div class="h-screen w-[100%] bg-white flex justify-center mt-40">
+              <img
+                class="h-16 w-16 "
+                src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
+                alt=""
+              />
+            </div>
+          )}
+
           <div className="md:ps-8">
+            {/* <div class="grid md:grid-cols-3 justify-center text-sm md:w-[80%] mx-auto">
+              <div class="grid grid-cols-1">
+                <div class="px-4 py-2 font-bold text-[#000]">
+                  Name : <span className="font-[400]">{cookiesInfo?.name}</span>
+                </div>
+                <div class="px-4 py-2 font-semibold">
+                  Roll :{" "}
+                  <span className="font-[400]">{cookiesInfo?.studentRoll}</span>{" "}
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1">
+                <div class="px-4 py-2 font-semibold">
+                  Gender :{" "}
+                  <span className="font-[400]">{cookiesInfo?.gender}</span>{" "}
+                </div>
+                <div class="px-4 py-2 font-semibold">
+                  Join Date:{" "}
+                  <span className="font-[400]">{cookiesInfo?.joinginDate}</span>{" "}
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1">
+                <div class="px-4 py-2 font-semibold">
+                  institute :{" "}
+                  <span className="font-[400]">{cookiesInfo?.institute}</span>{" "}
+                </div>
+                <div class="px-4 py-2 font-semibold">
+                  Contact No :{" "}
+                  <span className="font-[400]">{cookiesInfo?.department}</span>{" "}
+                </div>
+              </div>
+              <div class="grid grid-cols-1">
+                <div class="px-4 py-2 font-semibold">
+                  Address:{" "}
+                  <span className="font-[400]">{cookiesInfo?.address}</span>{" "}
+                </div>
+              </div>
+              <div class="grid grid-cols-1">
+                <div class="px-4 py-2 font-semibold">
+                  Email:{" "}
+                  <span className="font-[400]">{cookiesInfo?.email}</span>{" "}
+                </div>
+              </div>
+              <div class="grid grid-cols-1">
+                <div class="px-4 py-2 font-semibold">
+                  Phone:{" "}
+                  <span className="font-[400]">{cookiesInfo?.phone}</span>{" "}
+                </div>
+              </div>
+            </div> */}
+
             <p class="pt-4 text-base  flex items-center justify-center lg:justify-start text-center">
               <FaRegDotCircle className="me-2 text-[#9333EA]" />
               <span className="font-bold pe-2">Department : </span>{" "}
@@ -128,6 +190,7 @@ const SingelUsers = () => {
               <span className="font-bold pe-2">Inistitute : </span>{" "}
               {singelUser?.institute}
             </p>
+
             <p class="pt-4 text-base  flex items-center justify-center lg:justify-start text-center">
               <FaRegDotCircle className="me-2 text-[#9333EA]" />
               <span className="font-bold pe-2">Student Roll : </span>{" "}
@@ -194,14 +257,8 @@ const SingelUsers = () => {
             </div>
           </div>
         </div>
+
         <div className=" py-8 mt-10 singel-user md:ms-5">
-          {Loading2 && (
-            <>
-              <h1 className="text-[18px] font-[600] text-center text-black">
-                Loading
-              </h1>
-            </>
-          )}
           <div className="d">
             <div className="pb-5">
               <h1 class="text-2xl font-bold lg:pt-0 text-center">
@@ -211,6 +268,16 @@ const SingelUsers = () => {
 
               <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
             </div>
+            {Loading2 && (
+              <div class="h-screen w-[100%] bg-white flex justify-center mt-40">
+                <img
+                  class="h-16 w-16 "
+                  src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
+                  alt=""
+                />
+              </div>
+            )}
+
             <div className="md:px-3 grid items-center gap-3 justify-center md:justify-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {Array.isArray(createdbookUser) &&
                 createdbookUser.map((book) => (
@@ -220,11 +287,15 @@ const SingelUsers = () => {
                       className=" overflow-hidden bg-[#fff] rounded-md border-2"
                     >
                       <div className=" relative">
-                        <div className="bg-[#0000007b] w-[100%] h-[100%]  absolute rounded-t-md"></div>
+                        <div className="bg-[#0000007b] w-[100%] items-center flex justify-center h-[100%]  absolute rounded-t-md">
+                          <div className="text-white text-center bg-[#000000b0] px-2 rounded-full">
+                            {book?.view?.slice(0, 10)}
+                          </div>
+                        </div>
                         <Image
                           width={1424}
                           height={450}
-                          className="rounded-t-md  w-[100%] h-[350px]"
+                          className="rounded-t-md  w-[100%] h-[300px]"
                           src={book?.bookImage}
                           alt=""
                         />

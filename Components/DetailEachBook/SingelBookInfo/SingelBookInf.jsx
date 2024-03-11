@@ -45,7 +45,7 @@ export const SingelBookInf = ({ ResultBooks }) => {
               width={290}
               height={200}
               src={ResultBooks?.bookImage}
-              className="md:w-[80%] w-[80%] h-[70vh] md:h-[65vh] border-2 p-5"
+              className="md:w-[80%] w-[80%] h-[60vh] md:h-[55vh] border-2 p-5"
               alt=""
             />
           </div>
@@ -55,10 +55,10 @@ export const SingelBookInf = ({ ResultBooks }) => {
               {ResultBooks?.bookName}
             </h1>
 
-            <p className="pt-3 md:text-start flex items-center gap-2 text-center text-[16px] md:text-[14px] text-[#433782] IBM font-[600]">
-              সর্বমোট দেখেছে :-{" "}
-              <FaPhabricator className="text-[#0b0b0b] text-[20px]" />{" "}
-              {ResultBooks?.view?.slice(0, 10)} জন
+            <p className="pt-3 md:text-start flex items-center gap-2 text-center text-[16px] md:text-[16px] text-[#433782] IBM font-[600]">
+              Viewers :{" "}
+              {/* <FaPhabricator className="text-[#0b0b0b] text-[20px]" />{" "} */}
+              {ResultBooks?.view?.slice(0, 10)}
             </p>
             <p className="pt-3 md:text-start text-center text-[16px] md:text-[18px] text-[#433782] IBM font-[600]">
               বিষয় কোড :-{" "}

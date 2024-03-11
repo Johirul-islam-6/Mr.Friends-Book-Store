@@ -15,6 +15,7 @@ const Admin = () => {
   const [avaragePostget, setAvaragePostget] = useState("");
   const [avaragePost, setAvaragePost] = useState("");
   const [pandingBook, setpandingPost] = useState("");
+  const [totalSiteView, settotalSiteView] = useState("");
   const [avarage, setAvarage] = useState("");
   const [Loading, setLoading] = useState(true);
   const [cookiesInfo, setCookiesInfo] = useState();
@@ -36,6 +37,26 @@ const Admin = () => {
   const reloase = (e) => {
     setReload(e);
   };
+
+  // ------------ total site visitor ---------
+
+  useEffect(() => {
+    // ---- view show----
+    async function viewCount() {
+      try {
+        const response = await axios.get(
+          `https://resell-book-store-server.vercel.app/api/v1/siteView`
+        );
+        const result = response?.data?.data[0];
+        console.log(result, "ress");
+        settotalSiteView(result);
+        // if get the data then save
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    viewCount();
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -286,8 +307,10 @@ const Admin = () => {
                   </svg>
                 </div>
                 <div>
-                  <span class="block text-2xl font-bold">83%</span>
-                  <span class="block text-gray-500">Finished homeworks</span>
+                  <span class="block text-2xl font-bold">
+                    {totalSiteView?.totalView}
+                  </span>
+                  <span class="block text-gray-500">Total Visite Site</span>
                 </div>
               </div>
             </section>

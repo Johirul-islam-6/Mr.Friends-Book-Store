@@ -74,8 +74,6 @@ const EachBookInfo = () => {
     );
   }
 
-  console.log("get rusult=>", ResultBooks);
-
   return (
     <>
       <div className="mt-2 w-[100%] md:w-[80%] mx-auto ">

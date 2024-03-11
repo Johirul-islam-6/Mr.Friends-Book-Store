@@ -1,13 +1,33 @@
 "use client";
 import "./FounderStory.css";
-import image01 from "../../../app/Assets/Banner/background-2.webp";
-import image02 from "../../../app/Assets/Banner/background.jpg";
+import image01 from "../../../app/Assets/Banner/banner-1.png";
+import image02 from "../../../app/Assets/Banner/banner-2.png";
+import image03 from "../../../app/Assets/Banner/banner-3.jpg";
 import BannerSlider from "./BannerSlider";
+import { useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export const Banner = () => {
+  useEffect(() => {
+    async function viewCount() {
+      try {
+        const response = await axios.patch(
+          `https://resell-book-store-server.vercel.app/api/v1/siteView/view/65ed5c027abd2d8d377ddd83`
+        );
+        const result = response.data;
+
+        // if get the data then save
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    viewCount();
+  }, []);
+
   const datas = [
     {
-      image: image01,
+      image: image03,
       datetitle: "2.5 year fardin sheikh image",
       link: "mrfriends.com",
     },
