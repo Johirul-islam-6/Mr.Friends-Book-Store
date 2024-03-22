@@ -21,6 +21,7 @@ const PandingPost = () => {
     setReload(e);
   };
 
+  // ----- cookies infor ----
   useEffect(() => {
     if (!accessToken) {
       return navigate.push("/login");
@@ -71,8 +72,6 @@ const PandingPost = () => {
           data
         );
 
-        console.log(result);
-
         if (result?.status === 200) {
           Swal.fire({
             position: "center",
@@ -96,7 +95,7 @@ const PandingPost = () => {
 
   // ----------- delete panding book -------------
 
-  async function fetchData(bookId, name) {
+  async function DeleteItem(bookId, name) {
     try {
       const response = await axios.delete(
         `https://resell-book-store-server.vercel.app/api/v1/books/${bookId}`
@@ -256,7 +255,7 @@ const PandingPost = () => {
                         </button>
                         <button
                           onClick={() =>
-                            fetchData(singelbook?._id, singelbook?.bookName)
+                            DeleteItem(singelbook?._id, singelbook?.bookName)
                           }
                           type="button"
                           class={`text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline 
