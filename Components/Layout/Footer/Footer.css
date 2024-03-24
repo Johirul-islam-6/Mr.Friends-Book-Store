@@ -3,9 +3,6 @@
 .footer {
   background: linear-gradient(to right, #2e056e, #0b0415);
   color: white;
-  width: 100%;
-  bottom: 0;
-  left: 0;
   font-family: "Poppins", sans-serif !important;
 }
 

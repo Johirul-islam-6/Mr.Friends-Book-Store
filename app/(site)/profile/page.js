@@ -13,6 +13,22 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const Profile = () => {
   const navigate = useRouter();
+
+  // ---scroll bar ------
+  const [buttonHidden, setHidden] = useState(false);
+  const [userEmail, setEmailFieldValu] = useState("");
+  const [passValue, setPassValue] = useState({
+    password: "",
+    showPassword: false,
+  });
+  const handlePasswordChange = (prop) => (event) => {
+    setPassValue({ ...passValue, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setPassValue({ ...passValue, showPassword: !passValue.showPassword });
+  };
+
   const [Loding, setLoding] = useState(false);
   const [loding2, setLoding2] = useState(true);
   const [loding3, setLoding3] = useState(true);
@@ -91,6 +107,27 @@ const Profile = () => {
   const closeModal = (e) => {
     setModal1(e);
   };
+
+  //  =============   Edite profile ===============
+
+  const [editProfile, setEditProfile] = useState(false);
+
+  const editeUserInfo = (userInfomation) => {
+    setEditProfile(!editProfile);
+
+    console.log(userInfomation);
+  };
+
+  // -----change password ----
+  const [changepasswordfield, setchangepasswordfield] = useState(false);
+  const NewPassword = () => {
+    console.log("first");
+  };
+  const changepasswordfieldbtn = () => {
+    setchangepasswordfield(!changepasswordfield);
+    console.log("first");
+  };
+
   // ======== when User block ======
   if (UserInformation[0]?.ruler === "block") {
     return (
@@ -189,12 +226,12 @@ const Profile = () => {
                     )}
 
                     <div class="mt-2 flex flex-wrap gap-4 justify-center">
-                      <a
-                        href="#"
+                      <button
+                        onClick={() => editeUserInfo(cookiesInfo)}
                         class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-[14px] font-[600] rounded bttn IN"
                       >
                         Edite Profile
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -240,7 +277,7 @@ const Profile = () => {
             </div>
 
             {/* ------------- Your store ------------- */}
-            <div class="col-span-4 sm:col-span-9">
+            <div class="col-span-4 sm:col-span-9 relative ">
               <div class="bg-white shadow rounded-lg p-6">
                 <div className="flex items-center justify-between mb-5">
                   <div className="block">
@@ -379,6 +416,323 @@ const Profile = () => {
                   </p>
                 </div>
               </div>
+              {/* ===================== Edit Profile Modal ================== */}
+              {editProfile && (
+                <>
+                  <div class=" mx-auto bg-white md:h-[92vh] shadow-md rounded-2xl w-[100%]  absolute top-0 left-0 ">
+                    <div class="relative flex h-32 max-w-[100%] justify-center bg-cover ">
+                      <img
+                        class="absolute flex h-32 w-full justify-center rounded-xl bg-cover"
+                        src="https://plus.unsplash.com/premium_photo-1675127366598-f6c344e5233b?q=80&w=3216&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      />
+                      <div class="mx-auto flex justify-center mt-[1px] z-[50] w-[141px] h-[141px] rounded-full bg-[url('https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxwZW9wbGV8ZW58MHwwfHx8MTcxMTExMTM4N3ww&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat">
+                        <div class="bg-white rounded-full w-6 h-6 text-center ml-28 mt-4">
+                          <input
+                            type="file"
+                            name="profile"
+                            id="upload_profile"
+                            hidden
+                            required
+                          />
+
+                          <label
+                            for="upload_profile"
+                            class="inline-flex items-center"
+                          >
+                            <svg
+                              data-slot="icon"
+                              class="w-5 h-5 text-blue-700"
+                              fill="none"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                              aria-hidden="true"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
+                              ></path>
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
+                              ></path>
+                            </svg>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <form className="md:px-20 ">
+                      {/* <h1 className="text-black text-[30px] font-[600] text-center pt-12">
+                        Hi Rasel
+                      </h1> */}
+
+                      <div className="flex pb-5 justify-center items-center mt-7">
+                        <div
+                          onClick={changepasswordfieldbtn}
+                          className="px-3 cursor-pointer text-white py-1 bg-[#2563EB] text-[12px] font-[600]"
+                        >
+                          Change Password
+                        </div>
+                      </div>
+
+                      {/* -------- password change --------- */}
+
+                      {changepasswordfield && (
+                        <div className="md:px-20 mt-5 box-shadow-field pt-2">
+                          <div class="grid gap-6 mb-6 lg:grid-cols-3 w-[100%] px-5  items-center">
+                            <div className="password_2 block  relative">
+                              <label class="text-[#2C293B] md:text-[14px] text-[14px] ps-[2px] font-[550]  md:ps-1 IN">
+                                New Password*
+                              </label>
+                              <div className="eye_div">
+                                <input
+                                  name="new_password"
+                                  placeholder="new password"
+                                  className="input block border  border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm placeholder:font-normal text-[15px]"
+                                  type={
+                                    passValue.showPassword ? "text" : "password"
+                                  }
+                                  onChange={handlePasswordChange("password")}
+                                  value={passValue.password}
+                                />
+
+                                <div
+                                  className="icon_button absolute right-4 top-11 cursor-pointer"
+                                  onClick={handleClickShowPassword}
+                                >
+                                  {passValue.showPassword ? (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      height="16"
+                                      width="18"
+                                      viewBox="0 0 576 512"
+                                    >
+                                      <path d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z" />
+                                    </svg>
+                                  ) : (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      height="16"
+                                      width="20"
+                                      viewBox="0 0 640 512"
+                                    >
+                                      <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zm151 118.3C226 97.7 269.5 80 320 80c65.2 0 118.8 29.6 159.9 67.7C518.4 183.5 545 226 558.6 256c-12.6 28-36.6 66.8-70.9 100.9l-53.8-42.2c9.1-17.6 14.2-37.5 14.2-58.7c0-70.7-57.3-128-128-128c-32.2 0-61.7 11.9-84.2 31.5l-46.1-36.1zM394.9 284.2l-81.5-63.9c4.2-8.5 6.6-18.2 6.6-28.3c0-5.5-.7-10.9-2-16c.7 0 1.3 0 2 0c44.2 0 80 35.8 80 80c0 9.9-1.8 19.4-5.1 28.2zm51.3 163.3l-41.9-33C378.8 425.4 350.7 432 320 432c-65.2 0-118.8-29.6-159.9-67.7C121.6 328.5 95 286 81.4 256c8.3-18.4 21.5-41.5 39.4-64.8L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5zm-88-69.3L302 334c-23.5-5.4-43.1-21.2-53.7-42.3l-56.1-44.2c-.2 2.8-.3 5.6-.3 8.5c0 70.7 57.3 128 128 128c13.3 0 26.1-2 38.2-5.8z" />
+                                    </svg>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* ------setp----- */}
+                            <div>
+                              <label
+                                for="nombre"
+                                class="block mb-2 text-sm text-gray-600 font-[600]"
+                              >
+                                Old Password*
+                              </label>
+                              <input
+                                placeholder="*********"
+                                type="text"
+                                id="oldpassword"
+                                name="nombre"
+                                class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                required
+                              />
+                            </div>
+
+                            {/* ------setp----- */}
+                            <div className="flex pb-5 justify-start items-center md:mt-10">
+                              <button
+                                onClick={NewPassword}
+                                className="px-5 text-white py-[6px]   bg-[#2563EB] text-[14px] font-[600]"
+                              >
+                                Confirm Password
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      <div className="px-5 box-shadow-field2 pt-5 md:py-16 pb-8 md:pb-4 ">
+                        <div class="grid gap-6  lg:grid-cols-3 w-[100%] ">
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Full Name*
+                            </label>
+                            <input
+                              onChange={() => setchangepasswordfield(false)}
+                              defaultValue={cookiesInfo?.name}
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              required
+                            />
+                          </div>
+                          {/* ------setp----- */}
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Student Roll*
+                            </label>
+                            <input
+                              defaultValue={cookiesInfo?.studentRoll}
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              required
+                            />
+                          </div>
+                          {/* ------setp----- */}
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Joing Date*
+                            </label>
+                            <input
+                              defaultValue={cookiesInfo?.joinginDate}
+                              disabled
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              required
+                            />
+                          </div>
+                          {/* ------setp----- */}
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Phone*
+                            </label>
+                            <input
+                              defaultValue={cookiesInfo?.phone}
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              required
+                            />
+                          </div>
+                          {/* ------setp----- */}
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Email*
+                            </label>
+                            <input
+                              defaultValue={cookiesInfo?.email}
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              required
+                            />
+                          </div>
+                          {/* ------setp----- */}
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Address*
+                            </label>
+                            <input
+                              defaultValue={cookiesInfo?.address}
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              required
+                            />
+                          </div>
+                          {/* ------setp----- */}
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Institute *
+                            </label>
+                            <input
+                              defaultValue={cookiesInfo?.institute}
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              required
+                            />
+                          </div>
+                          {/* ------setp----- */}
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Department *
+                            </label>
+                            <input
+                              defaultValue={cookiesInfo?.department}
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                              required
+                            />
+                          </div>
+                          {/* ------setp----- */}
+                          <div>
+                            <label
+                              for="nombre"
+                              class="block mb-2 text-sm text-gray-600 font-[600]"
+                            >
+                              Department *
+                            </label>
+                            <select
+                              // onChange={(e) => setSubject(e?.target?.value)}
+                              required
+                              name="institute_name"
+                              class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm"
+                            >
+                              <option className="bg-[#E8F0FE]" value="select">
+                                select
+                              </option>
+                              <option>Male</option>
+                              <option>Female</option>
+                              <option>Others</option>
+                            </select>
+                          </div>
+                          {/* ------setp----- */}
+                        </div>
+                        <div className="flex justify-center items-center mt-8">
+                          <button
+                            type="submit"
+                            className="px-8 text-white py-2 bg-[#2563EB] text-[16px] font-[600]"
+                          >
+                            update Profile
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

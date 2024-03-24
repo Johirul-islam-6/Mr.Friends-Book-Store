@@ -14,7 +14,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <>
-      <div className="mt-[10px] footer border-t-2 relative">
+      <div className="mt-[10px] footer border-t-2  ">
         <div className=" mx-auto mt-5  md:p-2  flex flex-col  md:gap-10  max-w-screen-xl ">
           <div>
             <div className="md:mt-8">

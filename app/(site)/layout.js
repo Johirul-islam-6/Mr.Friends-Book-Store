@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <ToastContainer />
         <Navbar />
         <div>{children}</div>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
