@@ -15,6 +15,7 @@ const Profile = () => {
   const navigate = useRouter();
 
   // ---scroll bar ------
+
   const [buttonHidden, setHidden] = useState(false);
   const [userEmail, setEmailFieldValu] = useState("");
   const [passValue, setPassValue] = useState({
@@ -126,6 +127,37 @@ const Profile = () => {
   const changepasswordfieldbtn = () => {
     setchangepasswordfield(!changepasswordfield);
     console.log("first");
+  };
+
+  // ================ Edite Profile API ============
+
+  const heldelEditProfile = (e) => {
+    e.preventDefault();
+
+    const name = e.target.elements.name.value;
+    const studentRoll = e.target.elements.roll.value;
+    const institute = e.target.elements.institute_name.value;
+    const department = e.target.elements.department.value;
+    const address = e.target.elements.address.value;
+    const phone = e.target.elements.phone.value;
+    const email = e.target.elements.email.value;
+    // const password = e.target.elements.password.value;
+    const gender = e.target.elements.gender.value;
+
+    const userData = {
+      name,
+      studentRoll,
+      institute,
+      department,
+      address,
+      phone,
+      email,
+      gender,
+    };
+
+    setHidden(true);
+
+    console.log(userData);
   };
 
   // ======== when User block ======
@@ -465,7 +497,7 @@ const Profile = () => {
                       </div>
                     </div>
 
-                    <form className="md:px-20 ">
+                    <form onSubmit={heldelEditProfile} className="md:px-20 ">
                       {/* <h1 className="text-black text-[30px] font-[600] text-center pt-12">
                         Hi Rasel
                       </h1> */}
@@ -571,7 +603,7 @@ const Profile = () => {
                               defaultValue={cookiesInfo?.name}
                               type="text"
                               id="nombre"
-                              name="nombre"
+                              name="name"
                               class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                               required
                             />
@@ -588,7 +620,7 @@ const Profile = () => {
                               defaultValue={cookiesInfo?.studentRoll}
                               type="text"
                               id="nombre"
-                              name="nombre"
+                              name="roll"
                               class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                               required
                             />
@@ -623,7 +655,7 @@ const Profile = () => {
                               defaultValue={cookiesInfo?.phone}
                               type="text"
                               id="nombre"
-                              name="nombre"
+                              name="phone"
                               class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                               required
                             />
@@ -640,7 +672,7 @@ const Profile = () => {
                               defaultValue={cookiesInfo?.email}
                               type="text"
                               id="nombre"
-                              name="nombre"
+                              name="email"
                               class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                               required
                             />
@@ -657,7 +689,7 @@ const Profile = () => {
                               defaultValue={cookiesInfo?.address}
                               type="text"
                               id="nombre"
-                              name="nombre"
+                              name="address"
                               class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                               required
                             />
@@ -674,7 +706,7 @@ const Profile = () => {
                               defaultValue={cookiesInfo?.institute}
                               type="text"
                               id="nombre"
-                              name="nombre"
+                              name="institute_name"
                               class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                               required
                             />
@@ -691,7 +723,7 @@ const Profile = () => {
                               defaultValue={cookiesInfo?.department}
                               type="text"
                               id="nombre"
-                              name="nombre"
+                              name="department"
                               class="w-full px-4 py-2 border text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                               required
                             />
@@ -702,16 +734,16 @@ const Profile = () => {
                               for="nombre"
                               class="block mb-2 text-sm text-gray-600 font-[600]"
                             >
-                              Department *
+                              Gender *
                             </label>
                             <select
                               // onChange={(e) => setSubject(e?.target?.value)}
                               required
-                              name="institute_name"
+                              name="gender"
                               class="input block border border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm"
                             >
-                              <option className="bg-[#E8F0FE]" value="select">
-                                select
+                              <option className="bg-[#E8F0FE]">
+                                {cookiesInfo?.gender}
                               </option>
                               <option>Male</option>
                               <option>Female</option>
