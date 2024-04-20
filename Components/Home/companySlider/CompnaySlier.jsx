@@ -4,7 +4,7 @@ import ProductSlider from "./ProductSlider";
 const CompnaySlier = () => {
   return (
     <div className=" mb-14 md:mb-28">
-      <h1 className="text-cetegory-heading ps-1 md:text-[40px]  text-center">
+      <h1 className="text-cetegory-heading ps-1 md:text-[38px]  text-center">
         All Publication
       </h1>
       <p className="text-[16px] text-[#00000070] text-center pb-10">

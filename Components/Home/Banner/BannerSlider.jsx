@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import "./FounderStory.css";
 import Image from "next/image";
 import Link from "next/link";
+import smbanner from "@/app/Assets/Banner/institute.png";
 
 const BannerSlider = ({ datas }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,13 +20,13 @@ const BannerSlider = ({ datas }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    const interval = setInterval(nextSlide, 5000); // Change slide every 3 seconds
 
     return () => clearInterval(interval);
   }, [datas]);
 
   return (
-    <div className=" ">
+    <div>
       {datas.map((item, index) => (
         <>
           <Link href={item?.link}>
@@ -37,7 +38,7 @@ const BannerSlider = ({ datas }) => {
               }  `}
             >
               {/* --------------- body slider ------ */}
-              <div className=" w-[100%]  mx-auto flex justify-center items-center">
+              <div className=" w-[100%] h-[78vh]  mx-auto flex justify-center items-center">
                 <Image
                   width={1500}
                   height={1450}
@@ -45,7 +46,16 @@ const BannerSlider = ({ datas }) => {
                   // placeholder="blur"
                   src={item?.image}
                   alt={`Slide ${index + 1}`}
-                  className=" object-cover flex justify-center items-center h-[80vh] md:h-[72vh]"
+                  className="md:flex object-fill hidden justify-center items-center h-[80vh] md:h-[78vh]"
+                />
+                <Image
+                  width={1500}
+                  height={1450}
+                  quality={100}
+                  // placeholder="blur"
+                  src={smbanner}
+                  alt={`Slide ${index + 1}`}
+                  className="flex md:hidden object-cover  justify-center items-center h-[80vh] md:h-[78vh]"
                 />
               </div>
             </div>

@@ -121,12 +121,19 @@ const Profile = () => {
 
   // -----change password ----
   const [changepasswordfield, setchangepasswordfield] = useState(false);
+  const [OldPassword, setOldPassword] = useState();
+  const [NewPasswordvalue, setNewPassword] = useState();
+
   const NewPassword = () => {
-    console.log("first");
+    const passwordChange = {
+      OldPassword,
+      NewPasswordvalue,
+    };
+    console.log(passwordChange);
   };
+
   const changepasswordfieldbtn = () => {
     setchangepasswordfield(!changepasswordfield);
-    console.log("first");
   };
 
   // ================ Edite Profile API ============
@@ -274,26 +281,47 @@ const Profile = () => {
                     information
                   </span>
                   <ul>
-                    <li class="mb-2 text-[#181717e9] font-[600] GT">
-                      joining date : {cookiesInfo?.joinginDate}
+                    <li class="mb-2 text-[#181717e9] font-[600] singIN">
+                      joining date :{" "}
+                      <span className="text-[#3f3f3fe9] font-[500]">
+                        {cookiesInfo?.joinginDate}
+                      </span>{" "}
                     </li>
-                    <li class="mb-2 GT text-[#181717e9] font-[600] ">
-                      Roll : {cookiesInfo?.studentRoll}
+                    <li class="mb-2 singIN text-[#181717e9] font-[600] ">
+                      Roll :{" "}
+                      <span className="text-[#3f3f3fe9] font-[500]">
+                        {cookiesInfo?.studentRoll}
+                      </span>{" "}
                     </li>
-                    <li class="mb-2 GT text-[#181717e9] font-[600]">
-                      Gender : {cookiesInfo?.gender}
+                    <li class="mb-2 singIN text-[#181717e9] font-[600]">
+                      Gender :{" "}
+                      <span className="text-[#3f3f3fe9] font-[500]">
+                        {cookiesInfo?.gender}
+                      </span>{" "}
                     </li>
-                    <li class="mb-2 GT text-[#181717e9] font-[600]">
-                      Phone : {cookiesInfo?.phone}
+                    <li class="mb-2 singIN text-[#181717e9] font-[600]">
+                      Phone :{" "}
+                      <span className="text-[#3f3f3fe9] font-[500]">
+                        {cookiesInfo?.phone}
+                      </span>{" "}
                     </li>
-                    <li class="mb-2 GT text-[#181717e9] font-[600]">
-                      Email : {cookiesInfo?.email}
+                    <li class="mb-2 singIN text-[#181717e9] font-[600]">
+                      Email :{" "}
+                      <span className="text-[#3f3f3fe9] font-[500]">
+                        {cookiesInfo?.email}
+                      </span>{" "}
                     </li>
-                    <li class="mb-2 GT text-[#181717e9] font-[600]">
-                      Institute : {cookiesInfo?.institute}
+                    <li class="mb-2 singIN text-[#181717e9] font-[600]">
+                      Institute :{" "}
+                      <span className="text-[#3f3f3fe9] font-[500]">
+                        {cookiesInfo?.institute}
+                      </span>{" "}
                     </li>
-                    <li class="mb-2 GT text-[#181717e9] font-[600]">
-                      Department : {cookiesInfo?.department}
+                    <li class="mb-2 singIN text-[#181717e9] font-[600]">
+                      Department :{" "}
+                      <span className="text-[#3f3f3fe9] font-[500]">
+                        {cookiesInfo?.department}
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -301,7 +329,7 @@ const Profile = () => {
                   onClick={logout}
                   class="mt-6 flex flex-wrap gap-4 justify-center cursor-pointer"
                 >
-                  <span class="bg-red-600 hover:bg-red-800 text-white py-2 px-6 rounded">
+                  <span class="bg-red-600 uppercase hover:bg-red-800 text-[14px] singIN text-white py-2 px-6 rounded">
                     log out
                   </span>
                 </div>
@@ -497,7 +525,10 @@ const Profile = () => {
                       </div>
                     </div>
 
-                    <form onSubmit={heldelEditProfile} className="md:px-20 ">
+                    <form
+                      onSubmit={heldelEditProfile}
+                      className="md:px-20 bg-white"
+                    >
                       {/* <h1 className="text-black text-[30px] font-[600] text-center pt-12">
                         Hi Rasel
                       </h1> */}
@@ -522,14 +553,15 @@ const Profile = () => {
                               </label>
                               <div className="eye_div">
                                 <input
-                                  name="new_password"
-                                  placeholder="new password"
+                                  required
+                                  name="password"
                                   className="input block border  border-gray-300 focus:border-pitch-black  py-2 px-3 w-full focus:outline-none mt-1 IN rounded-sm placeholder:font-normal text-[15px]"
                                   type={
                                     passValue.showPassword ? "text" : "password"
                                   }
                                   onChange={handlePasswordChange("password")}
                                   value={passValue.password}
+                                  placeholder="minimum 6 characters"
                                 />
 
                                 <div
@@ -568,6 +600,9 @@ const Profile = () => {
                                 Old Password*
                               </label>
                               <input
+                                onChange={(e) =>
+                                  setOldPassword(e?.target?.value)
+                                }
                                 placeholder="*********"
                                 type="text"
                                 id="oldpassword"

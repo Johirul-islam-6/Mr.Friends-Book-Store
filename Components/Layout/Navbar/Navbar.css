@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@1,300&family=Inter:wght@500&family=Raleway:wght@100;300;600&family=Roboto:ital,wght@0,300;0,400;1,100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rosenheim&display=swap");
 
 .navbar {
   background-color: #ffffff;
@@ -14,9 +15,9 @@
 .top-discount-text {
   color: #363636;
   line-height: 20px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Rosenheim", sans-serif;
 }
 
 .hover-menu {
@@ -36,7 +37,9 @@
   transition: 0.3s var(--_s, 0s) linear,
     background-size 0.3s calc(0.3s - var(--_s, 0s));
 }
-
+.singIN {
+  font-family: "Rosenheim", sans-serif !important;
+}
 .hover-menu:hover {
   --_p: 100%;
   --_s: 0.3s;
@@ -46,7 +49,7 @@
   line-height: 22px;
   font-size: 16px;
   font-weight: 600;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Rosenheim", sans-serif;
 }
 .color-a-tag:hover {
   color: #009bd6 !important;
@@ -56,7 +59,7 @@
   line-height: 22px;
   font-size: 16px;
   font-weight: 400;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Rosenheim", sans-serif;
 }
 
 .title-department {

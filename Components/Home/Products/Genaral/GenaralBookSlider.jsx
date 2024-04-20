@@ -93,7 +93,7 @@ const GenaralBookSlider = ({ ResultBooks, Loding }) => {
                       <Image
                         width={0}
                         height={0}
-                        className="w-[100%] h-[100%] absolute top-5 pe-10 "
+                        className="w-[100%] h-[100%] absolute top-0 left-0 px-10 py-2 "
                         src={item?.bookImage} // Use item.bookImage instead of ResultBooks?.bookImage
                         alt=""
                       />

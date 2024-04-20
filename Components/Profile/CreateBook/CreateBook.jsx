@@ -215,12 +215,10 @@ export const CreateBook = ({
         "https://resell-book-store-server.vercel.app/api/v1/books/create-book",
         bookData,
         {
-          maxContentLength: 1000000000,
+          maxContentLength: 100000000000000,
         }
       );
       const result = response.data;
-
-      console.log(result, "laste");
 
       // if get the data then save
       if (result?.success) {

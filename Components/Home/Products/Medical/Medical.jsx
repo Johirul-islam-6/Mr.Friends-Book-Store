@@ -42,9 +42,7 @@ export const Medical = () => {
             src={cetegoryImage}
             alt="diploma image"
           />
-          <h1 className="text-cetegory-heading ps-1">
-            Medical Posted Resell Book
-          </h1>
+          <h1 className="text-cetegory-heading ps-1">Medical Resell Book</h1>
         </div>
 
         <div className="mt-6">

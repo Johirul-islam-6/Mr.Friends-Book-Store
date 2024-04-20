@@ -89,3 +89,8 @@ body,
     font-size: 22px !important;
   }
 }
+
+.shadow_box {
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgb(204, 219, 232) -3px -3px 6px 1px inset;
+}

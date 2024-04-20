@@ -1,15 +1,23 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import image01 from "@/app/Assets/Product/Diploma/Civil/civil.webp";
+import image01 from "@/app/Assets/Product/Diploma/cetagorydiploma.png";
 import cetegoryImage from "@/app/Assets/Product/Diploma/book.webp";
+import all from "@/app/Assets/Product/Diploma/all.png";
 import semester1 from "@/app/Assets/Product/Diploma/1st.png";
+import semester2 from "@/app/Assets/Product/Diploma/2st.png";
+import semester3 from "@/app/Assets/Product/Diploma/3st.png";
+import semester4 from "@/app/Assets/Product/Diploma/4st.png";
+import semester5 from "@/app/Assets/Product/Diploma/5st.png";
+import semester6 from "@/app/Assets/Product/Diploma/6st.png";
+import semester7 from "@/app/Assets/Product/Diploma/7st.png";
+import semester8 from "@/app/Assets/Product/Diploma/8st.png";
 import "./Department.css";
 import axios from "axios";
 import Link from "next/link";
 
 const allSemesterNumber = [
   {
-    image: semester1,
+    image: all,
     name: "All semester",
     cetagoryValue: "",
   },
@@ -19,37 +27,37 @@ const allSemesterNumber = [
     cetagoryValue: "1st Semester",
   },
   {
-    image: semester1,
+    image: semester2,
     name: "semester",
     cetagoryValue: "2nd Semester",
   },
   {
-    image: semester1,
+    image: semester3,
     name: "semester",
     cetagoryValue: "3rd Semester",
   },
   {
-    image: semester1,
+    image: semester4,
     name: "semester",
     cetagoryValue: "4th Semester",
   },
   {
-    image: semester1,
+    image: semester5,
     name: "semester",
     cetagoryValue: "5th Semester",
   },
   {
-    image: semester1,
+    image: semester6,
     name: "semester",
     cetagoryValue: "6th Semester",
   },
   {
-    image: semester1,
+    image: semester7,
     name: "semester",
     cetagoryValue: "7th Semester",
   },
   {
-    image: semester1,
+    image: semester8,
     name: "semester",
     cetagoryValue: "8th Semester",
   },
@@ -110,10 +118,10 @@ export const DepartmentBanner = ({ department }) => {
           // placeholder="blur"
           src={image01}
           alt=""
-          className=" object-cover h-[50vh] w-[100%]  "
+          className=" object-fill h-[40vh] w-[100%]  "
         />
-        <h1 className="absolute text-[20px] z-50 text-white">
-          Welcome Student
+        <h1 className="bg-[#000000c0] absolute text-center text-[20px] md:text-[25px] font-bold  z-50 text-[#fff] px-6 py-3">
+          স্বাগতম, {department}
         </h1>
       </div>
 
@@ -143,8 +151,8 @@ export const DepartmentBanner = ({ department }) => {
               >
                 <Image
                   width={100}
-                  height={60}
-                  className={`rounded-full border-2 object-cover ${
+                  height={150}
+                  className={`rounded-full object-cover ${
                     activeborder === item?.cetagoryValue
                       ? "activeBorder"
                       : "hello"

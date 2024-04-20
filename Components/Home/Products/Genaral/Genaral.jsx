@@ -51,9 +51,7 @@ export const Genaral = () => {
             src={cetegoryImage}
             alt="diploma image"
           />
-          <h1 className="text-cetegory-heading ps-1">
-            Genaral Posted Resell Book
-          </h1>
+          <h1 className="text-cetegory-heading ps-1">Genaral Resell Book</h1>
         </div>
 
         <div className="mt-6">

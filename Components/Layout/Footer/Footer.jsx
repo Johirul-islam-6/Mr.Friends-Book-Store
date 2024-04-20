@@ -1,5 +1,5 @@
 import "./Footer.css";
-import logo from "@/app/Assets/Navbar/ssl.png";
+import logo from "@/app/Assets/Navbar/footerlogo.png";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -161,7 +161,7 @@ const Footer = () => {
                 {/* ----------- logo --------- */}
 
                 <div
-                  className="flex justify-end  sm:justify-end relative bottom-5 right-0  md:bottom-5 sm:right-20  "
+                  className="flex  justify-end sm:justify-end relative  right-0  md:bottom-5 sm:right-20  "
                   style={{
                     zIndex: "10",
                   }}
@@ -169,10 +169,10 @@ const Footer = () => {
                   <div className=" ">
                     <Link href="#">
                       <Image
-                        width={330}
-                        height={300}
+                        width={150}
+                        height={150}
                         src={logo}
-                        className=" rounded-md border-2 border-white"
+                        className=" rounded-md absolute bottom-0 right-0"
                         alt=""
                       />
                     </Link>

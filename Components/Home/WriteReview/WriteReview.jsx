@@ -93,7 +93,7 @@ export const WriteReview = () => {
       <div className="flex flex-col justify-center items-center">
         <button
           onClick={openFrom}
-          className="text-[18px] rounded-md font-[600] text-white px-5 py-[10px] bg-[#573BA2]"
+          className="text-[18px] rounded-md font-[600] text-white px-5 py-[10px] bg-[#573BA2] mt-8 md:mt-0"
         >
           Write review
         </button>
@@ -102,12 +102,15 @@ export const WriteReview = () => {
         {openFromdiv && (
           <form
             onSubmit={HandleSubmite}
-            class="mx-1 md:mx-14 mt-10 border-2 border-blue-400 rounded-lg w-full md:w-[80%]"
+            class=" md:w-[600px] mt-5 border-blue-400 rounded-lg shadow_box md:p-10 w-[100%] mx-auto p-5"
           >
             {accessToken && (
-              <div class="mt-3 text-center text-[18px] md:text-2xl font-[500] pt-2">
-                Student website Visite feadback
-              </div>
+              <>
+                <div class="mt-3 ps-1 text-center text-[#5e5e5e] text-[18px] md:text-[22px] font-[600] pt-2 singIN">
+                  Write Student Review
+                </div>
+                <span className="w-[80px] mx-auto h-[3px] flex bg-[#3090EB] mb-5"></span>
+              </>
             )}
             {!accessToken && (
               <div class="mt-3 text-center text-[14px] md:text-2xl font-[500] pt-2">
@@ -127,40 +130,21 @@ export const WriteReview = () => {
               </div>
             )}
             {accessToken && (
-              <div class="p-8 ">
-                <div class="flex flex-col md:flex-row  gap-4">
-                  <input
-                    defaultValue={cookiesInfo?.name}
-                    disabled
-                    type="Name"
-                    name="userName"
-                    class="mt-1 block md:w-1/2 font-bold text-[16px] text-[#000000b1] rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                    placeholder="Full Name *"
-                  />
-                  <input
-                    defaultValue={cookiesInfo?.institute}
-                    disabled
-                    type="text"
-                    name="department"
-                    class="mt-1 block md:w-1/2 font-bold text-[16px] text-[#000000b1]  rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-                    placeholder="Email *"
-                  />
-                </div>
-
-                <div class="mt-6">
+              <div class=" ">
+                <div class="mt-1">
                   <textarea
-                    placeholder=""
+                    placeholder="আপনার মূলবান মন্তব্য টি লিখুন.."
                     name="message"
                     id="text"
                     cols="30"
                     rows="10"
-                    class="mb-10 h-40 w-full text-[16px] text-[#000000b1] placeholder:text-[#313131] resize-none rounded-md border border-slate-300 p-5 font-semibold "
+                    class=" h-40 w-full text-[16px] text-[#000000b1] placeholder:text-[#c4c4c4] resize-none rounded-md border border-slate-300 p-5 font-semibold "
                   ></textarea>
                 </div>
-                <div class="text-center flex justify-center">
+                <div class="text-center flex justify-end">
                   <button
                     type="submit"
-                    className={`text-[16px] flex gap-1 justify-center  rounded-md font-[600] text-white px-5 py-[10px] bg-[#573BA2] ${
+                    className={`text-[16px] flex gap-1 justify-center  rounded-md font-[600] text-white px-5 py-[10px] singIN bg-[#3090EB] ${
                       buttonHidden ? "disabled-button" : ""
                     }`}
                   >

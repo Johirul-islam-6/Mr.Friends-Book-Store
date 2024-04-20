@@ -1,8 +1,8 @@
 "use client";
 import "./FounderStory.css";
-import image01 from "../../../app/Assets/Banner/banner-1.png";
-import image02 from "../../../app/Assets/Banner/banner-2.png";
-import image03 from "../../../app/Assets/Banner/banner-3.jpg";
+import image01 from "@/app/Assets/Banner/Banner1.png";
+import image02 from "@/app/Assets/Banner/Banner3.png";
+import image03 from "@/app/Assets/Banner/Banner2.png";
 import BannerSlider from "./BannerSlider";
 import { useEffect } from "react";
 import axios from "axios";
@@ -27,7 +27,7 @@ export const Banner = () => {
 
   const datas = [
     {
-      image: image03,
+      image: image01,
       datetitle: "2.5 year fardin sheikh image",
       link: "mrfriends.com",
     },
@@ -37,7 +37,7 @@ export const Banner = () => {
       link: "mrfriends.com",
     },
     {
-      image: image01,
+      image: image03,
       datetitle: "2.5 year fardin sheikh image",
       link: "mrfriends.com",
     },
