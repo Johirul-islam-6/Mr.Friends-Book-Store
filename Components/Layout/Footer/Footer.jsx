@@ -1,7 +1,7 @@
 import "./Footer.css";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/app/Assets/Navbar/footerlogo.png";
+// import logo from "@/app/Assets/Navbar/footerlogo.png";
 import {
   FaAngleDoubleRight,
   FaDiscord,
@@ -168,13 +168,13 @@ const Footer = () => {
                 >
                   <div className=" ">
                     <Link href="#">
-                      <Image
+                      {/* <Image
                         width={150}
                         height={150}
                         src={logo}
                         className=" rounded-md absolute bottom-0 right-0"
                         alt=""
-                      />
+                      /> */}
                     </Link>
                   </div>
                 </div>
