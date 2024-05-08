@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Image.css";
 import Image from "next/image";
-import book1 from "@/app/Assets/allBook/Math.jpg";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { FaPhabricator, FaTrashAlt } from "react-icons/fa";

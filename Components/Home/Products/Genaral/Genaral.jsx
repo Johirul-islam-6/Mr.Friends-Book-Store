@@ -2,14 +2,6 @@
 import "./Genaral.css";
 import Image from "next/image";
 import cetegoryImage from "../../../../app/Assets/Product/Diploma/book.webp";
-import semester1 from "../../../../app/Assets/Product/Diploma/mechanical/mecanical.gif";
-import civil from "@/app/Assets/Product/Diploma/Civil/civil-logo.jpg";
-import Electical from "@/app/Assets/Product/Diploma/Electical/electical.png";
-import electronic from "@/app/Assets/Product/Diploma/electronic/electronic.jpg";
-import computer from "@/app/Assets/Product/Diploma/Computer/computer.png";
-
-import power from "@/app/Assets/Product/Diploma/Power/power.png";
-import Electromedical from "@/app/Assets/Product/Diploma/Electromedical/Electromedical.jpg";
 
 import Link from "next/link";
 import axios from "axios";
@@ -18,7 +10,7 @@ import GenaralBookSlider from "./GenaralBookSlider";
 
 export const Genaral = () => {
   const [Loding, setLoding] = useState(true);
-  const [filteringValue, setfilterValue] = useState("কারিগরি");
+  const [filteringValue, setfilterValue] = useState("জেনারেল");
   const [ResultBooks, setResultBooks] = useState("");
 
   useEffect(() => {
@@ -26,7 +18,7 @@ export const Genaral = () => {
     async function fetchData() {
       try {
         const result = await axios.get(
-          `https://resell-book-store-server.vercel.app/api/v1/books/?department=${filteringValue}&page=1&limit=20&sort=createdAt&sortOrder=desc`
+          `https://resell-book-store-server.vercel.app/api/v1/books/?searchTerm=জেনারেল&page=1&limit=20&sort=createdAt&sortOrder=desc`
         );
 
         setResultBooks(result?.data?.data);
