@@ -6,11 +6,10 @@
 }
 
 .fixed {
-  position: fixed !important;
+  position: fixed;
   top: 0px;
   z-index: 1000;
   transition: all 1s ease-in-out;
-  width: 100%;
 }
 .top-discount-text {
   color: #363636;

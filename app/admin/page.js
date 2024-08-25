@@ -8,6 +8,9 @@ import { AdminUser } from "@/Components/Admin/AdminUser/AdminUser";
 import axios from "axios";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import Chat3d from "./chat/Chat3D";
+import { PiChat } from "./piChat/PiChat";
+import { ColumPicat } from "./piChat/ColumPicat";
 
 const Admin = () => {
   const [allUser, setUser] = useState("");
@@ -121,9 +124,9 @@ const Admin = () => {
 
   return (
     <>
-      <div class="flex bg-gray-100 min-h-screen overflow-y-auto">
+      <div class="flex bg-gray-100  overflow-y-auto">
         <div class="flex-grow text-gray-800">
-          <main class="p-6 sm:p-10 space-y-6">
+          <main class="p-6 sm:p-10 space-y-6 ">
             <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
               <div class="mr-6">
                 <h1 class="text-4xl font-semibold mb-2 text-center md:text-start">
@@ -316,13 +319,17 @@ const Admin = () => {
             </section>
 
             {/* ===================== showin user Panding Book list start ====================== */}
-            <section class="grid md:grid-cols-1 xl:grid-cols-1 xl:grid-rows-3 xl:grid-flow-col gap-6">
+            <section class="border-4 grid md:grid-cols-1 xl:grid-cols-1 xl:grid-rows-2 xl:grid-flow-col gap-6">
               {/* ------------------ panding book list------------- */}
               <PandingBook cookiesInfo={cookiesInfo} reloase={reloase} />
 
               {/* ------------------- all users------------- */}
               <AdminUser adminUser={adminUser} />
             </section>
+            <div className="grid gap-5 md:grid-cols-2">
+              <PiChat />
+              <ColumPicat />
+            </div>
             {/* ===================== showin user Panding Book list end ====================== */}
           </main>
         </div>

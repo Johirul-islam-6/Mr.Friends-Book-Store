@@ -159,50 +159,8 @@ const Footer = () => {
                 </div>
 
                 {/* ----------- logo --------- */}
-
-                <div
-                  className="flex  justify-end sm:justify-end relative  right-0  md:bottom-5 sm:right-20  "
-                  style={{
-                    zIndex: "10",
-                  }}
-                >
-                  <div className=" ">
-                    <Link href="#">
-                      <Image
-                        width={150}
-                        height={150}
-                        src={logo}
-                        className=" rounded-md absolute bottom-0 right-0"
-                        alt=""
-                      />
-                    </Link>
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-white w-[100%] h-[40px] flex justify-between items-center px-5">
-        <p className="IN ">Copyright © 2024 @mrfriends.com</p>
-        <div className="socal-midiya flex justify-end items-center gap-3">
-          {/* <div className="">
-            <FaEye />
-          </div> */}
-          <Link href={"https://www.facebook.com/rasel2023boss"} className="">
-            <FaFacebook className="text-[20px] cursor-pointer text-[#2055c9]" />
-          </Link>
-          <Link
-            href={"https://www.linkedin.com/in/johirul-islam99"}
-            className=""
-          >
-            <FaLinkedin className="text-[20px] cursor-pointer text-[#2055c9]" />
-          </Link>
-          <div className="">
-            <FaYoutube className="text-[25px] cursor-pointer text-[#b72b2b]" />
-          </div>
-          <div className="">
-            <FaDiscord className="text-[25px] cursor-pointer text-[#2e26a4]" />
           </div>
         </div>
       </div>

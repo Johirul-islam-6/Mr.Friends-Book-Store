@@ -74,7 +74,7 @@ export const ImageCard = ({ ResultBooks, reloadFunction }) => {
                   <Image
                     width={1424}
                     height={450}
-                    className="rounded-t-md d-image w-[100%] h-[230px] "
+                    className="rounded-t-md d-image w-[100%] h-[300px] object-fill p-2 md:p-0 md:h-[230px] "
                     src={singelbook?.bookImage}
                     alt=""
                   />

@@ -27,6 +27,13 @@ export default function RootLayout({ children }) {
     setLoading(false);
   }, [accessToken]);
 
+  // ----------- menubar open --------
+  const [menuBarOpen, setMenubar] = useState(false);
+
+  const menubarOpen = () => {
+    setMenubar(!menuBarOpen);
+  };
+  console.log(menuBarOpen, "hello");
   return (
     <html lang="en">
       <body className="">
@@ -84,13 +91,13 @@ export default function RootLayout({ children }) {
           </>
         ) : (
           <>
-            <div className="flex w-[100%] mx-auto">
-              <div className="flex  h-[100vh]">
+            <div className="flex w-[100%] relative z-10  mx-auto">
+              <div className="flex ">
                 {/* ----- left site nav---- */}
-                <aside class="hidden sm:flex sm:flex-col">
+                <aside class="hidden sm:flex sm:flex-col ">
                   <Link
                     href="/admin"
-                    class="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500"
+                    class="inline-flex items-center justify-center h-20 w-[86px] bg-purple-600 hover:bg-purple-500 focus:bg-purple-500"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +111,7 @@ export default function RootLayout({ children }) {
                       />
                     </svg>
                   </Link>
-                  <div class="flex-grow flex flex-col justify-between text-gray-500 bg-gray-800">
+                  <div class="flex-grow flex flex-col justify-between text-gray-500 h-[100vh] bg-gray-800">
                     <nav class="flex flex-col mx-4 my-6 space-y-4">
                       <Link
                         href="/admin/panding_post"
@@ -158,7 +165,7 @@ export default function RootLayout({ children }) {
                             d="M215.4 96H144 107.8 96v8.8V144v40.4 89L.2 202.5c1.6-18.1 10.9-34.9 25.7-45.8L48 140.3V96c0-26.5 21.5-48 48-48h76.6l49.9-36.9C232.2 3.9 243.9 0 256 0s23.8 3.9 33.5 11L339.4 48H416c26.5 0 48 21.5 48 48v44.3l22.1 16.4c14.8 10.9 24.1 27.7 25.7 45.8L416 273.4v-89V144 104.8 96H404.2 368 296.6 215.4zM0 448V242.1L217.6 403.3c11.1 8.2 24.6 12.7 38.4 12.7s27.3-4.4 38.4-12.7L512 242.1V448v0c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64v0zM176 160H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
                           />
                         </svg>
-                        review
+                        reviews
                       </a>
                     </nav>
                     <div class="inline-flex items-center justify-center h-20 w-20 border-t border-gray-700">
@@ -193,6 +200,7 @@ export default function RootLayout({ children }) {
                     <button class="block sm:hidden relative flex-shrink-0 p-2 mr-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800 focus:bg-gray-100 focus:text-gray-800 rounded-full">
                       <span class="sr-only">Menu</span>
                       <svg
+                        onClick={menubarOpen}
                         aria-hidden="true"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -216,6 +224,114 @@ export default function RootLayout({ children }) {
                         alt=""
                       />
                     </div>
+                    {menuBarOpen && (
+                      <div class="md:hidden w-[100%] absolute left-0 flex flex-col top-[80px] ">
+                        <div className="flex w-[100%] ">
+                          <aside class="md:hidden  ">
+                            <Link
+                              href="/admin"
+                              onClick={menubarOpen}
+                              class="inline-flex items-center justify-center h-20 w-[86px] bg-purple-600 hover:bg-purple-500 focus:bg-purple-500"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width={35}
+                                hanging={35}
+                                viewBox="0 0 640 512"
+                              >
+                                <path
+                                  fill="#f7f7f7"
+                                  d="M320.7 352c8.1-89.7 83.5-160 175.3-160c8.9 0 17.6 .7 26.1 1.9L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1h32v69.7c-.1 .9-.1 1.8-.1 2.8V472c0 22.1 17.9 40 40 40h16c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2H160h24c22.1 0 40-17.9 40-40V448 384c0-17.7 14.3-32 32-32h64l.7 0zM640 368a144 144 0 1 0 -288 0 144 144 0 1 0 288 0zm-76.7-43.3c6.2 6.2 6.2 16.4 0 22.6l-72 72c-6.2 6.2-16.4 6.2-22.6 0l-40-40c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L480 385.4l60.7-60.7c6.2-6.2 16.4-6.2 22.6 0z"
+                                />
+                              </svg>
+                            </Link>
+                            <div class="flex-grow flex flex-col justify-between text-gray-500 h-[100vh] bg-gray-800">
+                              <nav class="flex flex-col mx-4 my-6 space-y-4">
+                                <Link
+                                  href="/admin/panding_post"
+                                  onClick={menubarOpen}
+                                  class="flex flex-col items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
+                                >
+                                  {/* <span class="sr-only">Post</span> */}
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"
+                                    width={20}
+                                    height={20}
+                                  >
+                                    <path
+                                      fill="#ffffff"
+                                      d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"
+                                    />
+                                  </svg>
+                                  posts
+                                </Link>
+                                <Link
+                                  onClick={menubarOpen}
+                                  href="/admin/userAdmin"
+                                  class="flex flex-col items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
+                                >
+                                  {/* <span class="sr-only">Post</span> */}
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512"
+                                    width={20}
+                                    height={20}
+                                  >
+                                    <path
+                                      fill="#ffffff"
+                                      d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7H162.5c0 0 0 0 .1 0H168 280h5.5c0 0 0 0 .1 0H417.3c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2H224 204.3c-12.4 0-20.1 13.6-13.7 24.2z"
+                                    />
+                                  </svg>
+                                  users
+                                </Link>
+                                <a
+                                  href="/admin/review"
+                                  class="flex flex-col items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
+                                >
+                                  {/* <span class="sr-only">Post</span> */}
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"
+                                    width={20}
+                                    height={20}
+                                  >
+                                    <path
+                                      fill="#ffffff"
+                                      d="M215.4 96H144 107.8 96v8.8V144v40.4 89L.2 202.5c1.6-18.1 10.9-34.9 25.7-45.8L48 140.3V96c0-26.5 21.5-48 48-48h76.6l49.9-36.9C232.2 3.9 243.9 0 256 0s23.8 3.9 33.5 11L339.4 48H416c26.5 0 48 21.5 48 48v44.3l22.1 16.4c14.8 10.9 24.1 27.7 25.7 45.8L416 273.4v-89V144 104.8 96H404.2 368 296.6 215.4zM0 448V242.1L217.6 403.3c11.1 8.2 24.6 12.7 38.4 12.7s27.3-4.4 38.4-12.7L512 242.1V448v0c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64v0zM176 160H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
+                                    />
+                                  </svg>
+                                  reviews
+                                </a>
+                              </nav>
+                              <div class="inline-flex items-center justify-center h-20 w-20 border-t border-gray-700">
+                                <button class="p-3   rounded-lg">
+                                  <Link
+                                    href="/"
+                                    class="flex flex-col items-center justify-center py-3 hover:text-gray-400  rounded-lg"
+                                  >
+                                    {/* <span class="sr-only">Post</span> */}
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width={15}
+                                      hanging={15}
+                                      viewBox="0 0 576 512"
+                                    >
+                                      <path
+                                        fill="#ffffff"
+                                        d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
+                                      />
+                                    </svg>
+                                    Exit
+                                  </Link>
+                                </button>
+                              </div>
+                            </div>
+                          </aside>
+                        </div>
+                      </div>
+                    )}
+
                     <div class="flex flex-shrink-0 items-center ml-auto">
                       <Link href={`/profile`}>
                         <button class="inline-flex items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
@@ -237,6 +353,11 @@ export default function RootLayout({ children }) {
                   </header>
                 </div>
                 {children}
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Est,
+                  eligendi tempora nihil repellat velit beatae unde temporibus
+                  rem at vero?
+                </p>
               </div>
             </div>
           </>

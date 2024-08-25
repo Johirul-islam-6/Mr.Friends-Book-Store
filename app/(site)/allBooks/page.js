@@ -65,11 +65,13 @@ const AllBooks = () => {
 
   return (
     <>
-      <div className="max-w-screen-xl mx-auto">
+      <div className="max-w-screen-xl flex flex-col mx-auto overflow-hidden">
         <div
           className={`${
-            isFixed ? "search-fixed  bg-white w-full py-4 px-2" : ""
-          } flex mx-auto  justify-between items-center  mt-12 mb-2 border-t-2 border-b-2  py-3`}
+            isFixed
+              ? "search-fixeds  bg-white xs:w-[100%] py-4 px-2  mt-12"
+              : ""
+          } flex flex-wrap  justify-between items-center  mb-2 border-t-2 border-b-2  py-3`}
         >
           <div className="flex gap-2 md:ms-2">
             <select
@@ -226,7 +228,7 @@ const AllBooks = () => {
 
         {ResultBooks?.length > 0 && (
           <>
-            <div className="All-Card grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-6 gap-x-5  mt-2">
+            <div className="All-Card  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-6 gap-x-5  mt-2">
               <ImageCard
                 reloadFunction={reloadFunction}
                 ResultBooks={ResultBooks}

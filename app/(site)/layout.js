@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ToastContainer />
+        {/* <div className="max-w-screen-xl mx-auto"> */}
         <Navbar />
+        {/* </div> */}
         <div>{children}</div>
         <Footer />
       </body>

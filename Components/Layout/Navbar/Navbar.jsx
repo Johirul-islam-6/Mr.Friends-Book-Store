@@ -82,8 +82,12 @@ export const Navbar = () => {
           </nav>
         </div>
         {/* ----------------- min navbar ------------ */}
-        <div className={`${isFixed ? "fixed py-3" : ""} navbar  `}>
-          <navbar className=" flex   max-w-screen-xl mx-auto ">
+        <div
+          className={`${
+            isFixed ? "fixed py-3" : ""
+          } navbar xs:w-[100%] mx-auto`}
+        >
+          <navbar className=" flex max-w-screen-xl mx-auto relative">
             <ul className=" w-[100%] flex h-[60px] items-center justify-between">
               {/* <!-- logo --> */}
               <div className="md:w-3/12">
