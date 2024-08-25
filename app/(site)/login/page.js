@@ -95,7 +95,6 @@ const Login = () => {
         { email }
       );
       const result = response.data.message;
-      console.log(result, "res=>");
       if (response?.data?.success) {
         Swal.fire({
           position: "center",

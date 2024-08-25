@@ -29,7 +29,7 @@ const BannerSlider = ({ datas }) => {
     <div>
       {datas.map((item, index) => (
         <>
-          <Link href={item?.link}>
+          <Link href={""}>
             {/* // --------- only lg size ------- */}
             <div
               key={index}

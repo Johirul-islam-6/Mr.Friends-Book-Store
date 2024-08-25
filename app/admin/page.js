@@ -48,7 +48,7 @@ const Admin = () => {
           `https://resell-book-store-server.vercel.app/api/v1/siteView`
         );
         const result = response?.data?.data[0];
-        console.log(result, "ress");
+
         settotalSiteView(result);
         // if get the data then save
       } catch (error) {
